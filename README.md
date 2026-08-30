@@ -107,6 +107,316 @@ machine-readable results under `build/quality-assurance/`.
 Whole-tree language validation defaults to four parallel workers. Override it
 with `CMOTIVE_VALIDATE_JOBS=<count>`.
 
+## C and C++ interoperability
+
+CMotive interoperates with native code through the platform C ABI. Direct C
+interoperability is supported in both directions. C++ interoperability is
+supported through `extern "C"` wrapper functions; CMotive does not directly
+consume or expose the implementation-specific native C++ ABI.
+
+| Direction | Supported path |
+|---|---|
+| CMotive to C | Include a C declaration with `NativeInclude`, then link a C object or library |
+| C to CMotive | Compile CMotive with `-c`, declare the generated package-qualified C symbol, and link the object |
+| CMotive to C++ | Export the required C++ behavior through an `extern "C"` wrapper |
+| C++ to CMotive | Declare the CMotive-generated symbol inside `extern "C"` and link the CMotive object |
+| CMotive to native C++ classes/templates | Not directly supported; use C ABI wrappers and opaque handles |
+
+### Calling a C library from CMotive
+
+Declare the native API in a C header:
+
+```c
+#ifndef C_MATH_H
+#define C_MATH_H
+
+#include <stdint.h>
+
+int32_t c_add_i32(int32_t left, int32_t right);
+
+#endif
+```
+
+Implement and compile the C library normally:
+
+```c
+#include "c_math.h"
+
+int32_t c_add_i32(int32_t left, int32_t right)
+{
+    return left + right;
+}
+```
+
+```sh
+cc -std=c11 -c c_math.c -o c_math.o
+```
+
+Expose the declaration to CMotive with `NativeInclude`:
+
+```text
+NativeInclude "c_math.h";
+
+Package Demo;
+
+I32
+main
+()
+{
+    result : I32 = c_add_i32(20, 22);
+    Return result == 42 ? 0 : 1;
+}
+```
+
+Compile and link the native object with the CMotive program:
+
+```sh
+build/bin/cmotive \
+  -I . \
+  application.CMOT \
+  c_math.o \
+  -o application
+```
+
+A C static or shared library understood by the selected host toolchain can be
+linked with the normal library search options:
+
+```sh
+build/bin/cmotive \
+  -I include \
+  -L lib \
+  application.CMOT \
+  -lcmath \
+  -o application
+```
+
+The current driver accepts `.o` and `.obj` files as native positional inputs.
+Compile `.c` and `.cpp` sources separately before invoking `cmotive`. Use
+`-L`/`-l` for native libraries, or perform the final native link externally;
+full `.a`, `.so`, `.dylib`, `.dll`, and `.lib` paths are not currently treated
+as native positional inputs by the CMotive driver.
+
+### Calling CMotive from C
+
+Compile a CMotive module to an object file:
+
+```text
+Package Demo;
+
+I32
+AddPair
+left : I32
+right : I32
+()
+{
+    Return left + right;
+}
+```
+
+```sh
+build/bin/cmotive -c module.CMOT -o module.o
+```
+
+Non-member CMotive functions are emitted with package-qualified C symbols. The
+example above is exported as `Demo__AddPair`. A C caller can declare and call
+that symbol directly:
+
+```c
+#include <stdint.h>
+#include <stdio.h>
+
+extern int32_t Demo__AddPair(int32_t left, int32_t right);
+
+int main(void)
+{
+    int32_t result = Demo__AddPair(19, 23);
+    printf("%d\n", (int)result);
+    return result == 42 ? 0 : 1;
+}
+```
+
+On a POSIX host, a typical external link is:
+
+```sh
+cc caller.c module.o -pthread -lm -o caller
+```
+
+Use the equivalent system libraries for the selected Windows or macOS
+compiler. Package separators become double underscores, so
+`Company::Product::Execute` is emitted as `Company__Product__Execute`. A
+function with no explicit package uses the `StartPackage__` prefix. `main` is
+the exception and remains the ordinary C symbol `main`.
+
+Generated names can be inspected with either of these commands:
+
+```sh
+build/bin/cmotive --emit-c module.CMOT -o module.c
+nm -g module.o
+```
+
+There is not yet an automatic public C-header generator, so public C
+prototypes must currently be maintained manually. Package-qualified symbol
+names and CMotive class layouts should be regarded as compiler ABI until a
+formal CMotive ABI version is frozen.
+
+### Calling a C++ library from CMotive
+
+Do not expose C++ overloads, references, templates, standard-library classes,
+or C++ object layouts directly. Provide a C-compatible wrapper header:
+
+```c
+#ifndef CPP_BRIDGE_H
+#define CPP_BRIDGE_H
+
+#include <stdint.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+int32_t cpp_string_size_plus(const char *text, int32_t extra);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+```
+
+Implement the wrapper in C++. Catch exceptions inside the wrapper so no C++
+exception crosses the C ABI boundary:
+
+```cpp
+#include "cpp_bridge.h"
+
+#include <string>
+
+extern "C" int32_t cpp_string_size_plus(
+    const char *text,
+    int32_t extra)
+{
+    try {
+        const std::string value = text ? text : "";
+        return static_cast<int32_t>(value.size()) + extra;
+    } catch (...) {
+        return -1;
+    }
+}
+```
+
+Call the wrapper from CMotive exactly as a C function:
+
+```text
+NativeInclude "cpp_bridge.h";
+
+Package Demo;
+
+I32
+main
+()
+{
+    result : I32 = cpp_string_size_plus("CMotive", 35);
+    Return result == 42 ? 0 : 1;
+}
+```
+
+Build the wrapper and link the matching C++ runtime. For a GCC/libstdc++
+toolchain:
+
+```sh
+c++ -std=c++20 -c cpp_bridge.cpp -o cpp_bridge.o
+
+build/bin/cmotive \
+  -I . \
+  application.CMOT \
+  cpp_bridge.o \
+  -lstdc++ \
+  -o application
+```
+
+When the wrapper is built with Clang and libc++, use the matching libc++ link
+option, normally `-lc++`, instead of `-lstdc++`.
+
+For native C++ objects, expose an opaque handle rather than the C++ object
+layout:
+
+```c
+typedef void *CppWidgetHandle;
+
+CppWidgetHandle cpp_widget_create(void);
+int32_t cpp_widget_execute(CppWidgetHandle handle);
+void cpp_widget_destroy(CppWidgetHandle handle);
+```
+
+CMotive can carry such a handle as `Void*`. The create, operation, and destroy
+functions remain implemented by the C++ wrapper.
+
+### Calling CMotive from C++
+
+C++ callers must suppress C++ name mangling for CMotive-generated symbols:
+
+```cpp
+#include <cstdint>
+#include <iostream>
+
+extern "C" std::int32_t Demo__AddPair(
+    std::int32_t left,
+    std::int32_t right);
+
+int main()
+{
+    const auto result = Demo__AddPair(30, 12);
+    std::cout << result << '\n';
+    return result == 42 ? 0 : 1;
+}
+```
+
+Link the C++ caller with the CMotive object:
+
+```sh
+c++ -std=c++20 caller.cpp module.o -pthread -lm -o caller
+```
+
+### Recommended ABI type mappings
+
+Use fixed-width types at public language boundaries whenever possible:
+
+| CMotive type | C/C++ ABI type |
+|---|---|
+| `I16` / `Int16` | `int16_t` |
+| `I32` / `Int32` | `int32_t` |
+| `I64` / `Int` | `int64_t` |
+| `U16` / `Uint16` | `uint16_t` |
+| `U32` / `Uint32` | `uint32_t` |
+| `U64` / `Uint` | `uint64_t` |
+| `Float` | `float` |
+| `Double` | `double` |
+| `Ldouble` | `long double` |
+| `Boolean` / `Bool` | `int` |
+| `Char` | `char` |
+| `Char*` | `char *` |
+| `Char16` | `uint16_t` |
+| `Char32` | `uint32_t` |
+| `Void*` | `void *` |
+
+At a public ABI boundary, prefer fixed-width integers, pointers plus explicit
+lengths, plain C structures with documented layout, and opaque handles. Memory
+allocated by one library should normally be released by an exported function
+from that same library, especially across Windows C runtime boundaries.
+
+The current `Extern` keyword is accepted as a language decorator, but it is not
+yet a complete foreign-function declaration mechanism: it does not currently
+provide declaration-only imports, unmangled external-name selection, C versus
+C++ linkage selection, or calling-convention control. Use `NativeInclude` for
+foreign declarations.
+
+CMotive classes lower to C structures and package-qualified functions, but
+their field layout, construction rules, virtual dispatch representation, and
+lifecycle ABI are not yet frozen for direct cross-language object sharing.
+Expose primitive-value wrapper functions or opaque handles instead of passing
+CMotive class instances directly to C or C++.
+
+
 ## C to CMotive conversion
 
 `c2cmotive` converts portable C function definitions into CMotive `func`
