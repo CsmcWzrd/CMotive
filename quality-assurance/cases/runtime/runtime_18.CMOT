@@ -1,0 +1,521 @@
+Plugin Sys::IO
+
+I32
+QaFunc0
+a: I32
+b: I32
+()
+{
+    Return a * 1 + b;
+}
+
+I32
+QaFunc1
+a: I32
+b: I32
+()
+{
+    Return a * 2 + b;
+}
+
+I32
+QaFunc2
+a: I32
+b: I32
+()
+{
+    Return a * 3 + b;
+}
+
+I32
+QaFunc3
+a: I32
+b: I32
+()
+{
+    Return a * 4 + b;
+}
+
+I32
+QaFunc4
+a: I32
+b: I32
+()
+{
+    Return a * 5 + b;
+}
+
+I32
+QaFunc5
+a: I32
+b: I32
+()
+{
+    Return a * 1 + b;
+}
+
+I32
+QaFunc6
+a: I32
+b: I32
+()
+{
+    Return a * 2 + b;
+}
+
+I32
+QaFunc7
+a: I32
+b: I32
+()
+{
+    Return a * 3 + b;
+}
+
+I32
+QaFunc8
+a: I32
+b: I32
+()
+{
+    Return a * 4 + b;
+}
+
+I32
+QaFunc9
+a: I32
+b: I32
+()
+{
+    Return a * 5 + b;
+}
+
+I32
+QaFunc10
+a: I32
+b: I32
+()
+{
+    Return a * 1 + b;
+}
+
+I32
+QaFunc11
+a: I32
+b: I32
+()
+{
+    Return a * 2 + b;
+}
+
+I32
+QaFunc12
+a: I32
+b: I32
+()
+{
+    Return a * 3 + b;
+}
+
+I32
+QaFunc13
+a: I32
+b: I32
+()
+{
+    Return a * 4 + b;
+}
+
+I32
+QaFunc14
+a: I32
+b: I32
+()
+{
+    Return a * 5 + b;
+}
+
+I32
+QaFunc15
+a: I32
+b: I32
+()
+{
+    Return a * 1 + b;
+}
+
+I32
+QaFunc16
+a: I32
+b: I32
+()
+{
+    Return a * 2 + b;
+}
+
+I32
+QaFunc17
+a: I32
+b: I32
+()
+{
+    Return a * 3 + b;
+}
+
+I32
+QaFunc18
+a: I32
+b: I32
+()
+{
+    Return a * 4 + b;
+}
+
+I32
+QaFunc19
+a: I32
+b: I32
+()
+{
+    Return a * 5 + b;
+}
+
+I32
+QaFunc20
+a: I32
+b: I32
+()
+{
+    Return a * 1 + b;
+}
+
+I32
+QaFunc21
+a: I32
+b: I32
+()
+{
+    Return a * 2 + b;
+}
+
+I32
+QaFunc22
+a: I32
+b: I32
+()
+{
+    Return a * 3 + b;
+}
+
+I32
+QaFunc23
+a: I32
+b: I32
+()
+{
+    Return a * 4 + b;
+}
+
+I32
+QaFunc24
+a: I32
+b: I32
+()
+{
+    Return a * 5 + b;
+}
+
+I32
+QaFunc25
+a: I32
+b: I32
+()
+{
+    Return a * 1 + b;
+}
+
+I32
+QaFunc26
+a: I32
+b: I32
+()
+{
+    Return a * 2 + b;
+}
+
+I32
+QaFunc27
+a: I32
+b: I32
+()
+{
+    Return a * 3 + b;
+}
+
+I32
+QaFunc28
+a: I32
+b: I32
+()
+{
+    Return a * 4 + b;
+}
+
+I32
+QaFunc29
+a: I32
+b: I32
+()
+{
+    Return a * 5 + b;
+}
+
+I32
+QaFunc30
+a: I32
+b: I32
+()
+{
+    Return a * 1 + b;
+}
+
+I32
+QaFunc31
+a: I32
+b: I32
+()
+{
+    Return a * 2 + b;
+}
+
+I32
+main
+()
+{
+    v0: I32 = QaFunc0(2, 1);
+    // QA-TEST: LANG-0545
+    If ( !(v0 == 3) )
+    {
+        Sys::IO::println("FAIL LANG-0545");
+        Return 1;
+    }
+    v1: I32 = QaFunc1(3, 2);
+    // QA-TEST: LANG-0546
+    If ( !(v1 == 8) )
+    {
+        Sys::IO::println("FAIL LANG-0546");
+        Return 1;
+    }
+    v2: I32 = QaFunc2(4, 3);
+    // QA-TEST: LANG-0547
+    If ( !(v2 == 15) )
+    {
+        Sys::IO::println("FAIL LANG-0547");
+        Return 1;
+    }
+    v3: I32 = QaFunc3(5, 4);
+    // QA-TEST: LANG-0548
+    If ( !(v3 == 24) )
+    {
+        Sys::IO::println("FAIL LANG-0548");
+        Return 1;
+    }
+    v4: I32 = QaFunc4(6, 5);
+    // QA-TEST: LANG-0549
+    If ( !(v4 == 35) )
+    {
+        Sys::IO::println("FAIL LANG-0549");
+        Return 1;
+    }
+    v5: I32 = QaFunc5(7, 6);
+    // QA-TEST: LANG-0550
+    If ( !(v5 == 13) )
+    {
+        Sys::IO::println("FAIL LANG-0550");
+        Return 1;
+    }
+    v6: I32 = QaFunc6(8, 7);
+    // QA-TEST: LANG-0551
+    If ( !(v6 == 23) )
+    {
+        Sys::IO::println("FAIL LANG-0551");
+        Return 1;
+    }
+    v7: I32 = QaFunc7(2, 8);
+    // QA-TEST: LANG-0552
+    If ( !(v7 == 14) )
+    {
+        Sys::IO::println("FAIL LANG-0552");
+        Return 1;
+    }
+    v8: I32 = QaFunc8(3, 9);
+    // QA-TEST: LANG-0553
+    If ( !(v8 == 21) )
+    {
+        Sys::IO::println("FAIL LANG-0553");
+        Return 1;
+    }
+    v9: I32 = QaFunc9(4, 10);
+    // QA-TEST: LANG-0554
+    If ( !(v9 == 30) )
+    {
+        Sys::IO::println("FAIL LANG-0554");
+        Return 1;
+    }
+    v10: I32 = QaFunc10(5, 11);
+    // QA-TEST: LANG-0555
+    If ( !(v10 == 16) )
+    {
+        Sys::IO::println("FAIL LANG-0555");
+        Return 1;
+    }
+    v11: I32 = QaFunc11(6, 1);
+    // QA-TEST: LANG-0556
+    If ( !(v11 == 13) )
+    {
+        Sys::IO::println("FAIL LANG-0556");
+        Return 1;
+    }
+    v12: I32 = QaFunc12(7, 2);
+    // QA-TEST: LANG-0557
+    If ( !(v12 == 23) )
+    {
+        Sys::IO::println("FAIL LANG-0557");
+        Return 1;
+    }
+    v13: I32 = QaFunc13(8, 3);
+    // QA-TEST: LANG-0558
+    If ( !(v13 == 35) )
+    {
+        Sys::IO::println("FAIL LANG-0558");
+        Return 1;
+    }
+    v14: I32 = QaFunc14(2, 4);
+    // QA-TEST: LANG-0559
+    If ( !(v14 == 14) )
+    {
+        Sys::IO::println("FAIL LANG-0559");
+        Return 1;
+    }
+    v15: I32 = QaFunc15(3, 5);
+    // QA-TEST: LANG-0560
+    If ( !(v15 == 8) )
+    {
+        Sys::IO::println("FAIL LANG-0560");
+        Return 1;
+    }
+    v16: I32 = QaFunc16(4, 6);
+    // QA-TEST: LANG-0561
+    If ( !(v16 == 14) )
+    {
+        Sys::IO::println("FAIL LANG-0561");
+        Return 1;
+    }
+    v17: I32 = QaFunc17(5, 7);
+    // QA-TEST: LANG-0562
+    If ( !(v17 == 22) )
+    {
+        Sys::IO::println("FAIL LANG-0562");
+        Return 1;
+    }
+    v18: I32 = QaFunc18(6, 8);
+    // QA-TEST: LANG-0563
+    If ( !(v18 == 32) )
+    {
+        Sys::IO::println("FAIL LANG-0563");
+        Return 1;
+    }
+    v19: I32 = QaFunc19(7, 9);
+    // QA-TEST: LANG-0564
+    If ( !(v19 == 44) )
+    {
+        Sys::IO::println("FAIL LANG-0564");
+        Return 1;
+    }
+    v20: I32 = QaFunc20(8, 10);
+    // QA-TEST: LANG-0565
+    If ( !(v20 == 18) )
+    {
+        Sys::IO::println("FAIL LANG-0565");
+        Return 1;
+    }
+    v21: I32 = QaFunc21(2, 11);
+    // QA-TEST: LANG-0566
+    If ( !(v21 == 15) )
+    {
+        Sys::IO::println("FAIL LANG-0566");
+        Return 1;
+    }
+    v22: I32 = QaFunc22(3, 1);
+    // QA-TEST: LANG-0567
+    If ( !(v22 == 10) )
+    {
+        Sys::IO::println("FAIL LANG-0567");
+        Return 1;
+    }
+    v23: I32 = QaFunc23(4, 2);
+    // QA-TEST: LANG-0568
+    If ( !(v23 == 18) )
+    {
+        Sys::IO::println("FAIL LANG-0568");
+        Return 1;
+    }
+    v24: I32 = QaFunc24(5, 3);
+    // QA-TEST: LANG-0569
+    If ( !(v24 == 28) )
+    {
+        Sys::IO::println("FAIL LANG-0569");
+        Return 1;
+    }
+    v25: I32 = QaFunc25(6, 4);
+    // QA-TEST: LANG-0570
+    If ( !(v25 == 10) )
+    {
+        Sys::IO::println("FAIL LANG-0570");
+        Return 1;
+    }
+    v26: I32 = QaFunc26(7, 5);
+    // QA-TEST: LANG-0571
+    If ( !(v26 == 19) )
+    {
+        Sys::IO::println("FAIL LANG-0571");
+        Return 1;
+    }
+    v27: I32 = QaFunc27(8, 6);
+    // QA-TEST: LANG-0572
+    If ( !(v27 == 30) )
+    {
+        Sys::IO::println("FAIL LANG-0572");
+        Return 1;
+    }
+    v28: I32 = QaFunc28(2, 7);
+    // QA-TEST: LANG-0573
+    If ( !(v28 == 15) )
+    {
+        Sys::IO::println("FAIL LANG-0573");
+        Return 1;
+    }
+    v29: I32 = QaFunc29(3, 8);
+    // QA-TEST: LANG-0574
+    If ( !(v29 == 23) )
+    {
+        Sys::IO::println("FAIL LANG-0574");
+        Return 1;
+    }
+    v30: I32 = QaFunc30(4, 9);
+    // QA-TEST: LANG-0575
+    If ( !(v30 == 13) )
+    {
+        Sys::IO::println("FAIL LANG-0575");
+        Return 1;
+    }
+    v31: I32 = QaFunc31(5, 10);
+    // QA-TEST: LANG-0576
+    If ( !(v31 == 20) )
+    {
+        Sys::IO::println("FAIL LANG-0576");
+        Return 1;
+    }
+    Sys::IO::println("PASS LANG-GROUP-18 32");
+    Return 0;
+}

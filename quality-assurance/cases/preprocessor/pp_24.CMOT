@@ -1,0 +1,25 @@
+Plugin plugins::QA::Plugin24;
+Plugin Sys::IO
+
+I32
+main
+()
+{
+    // QA-TEST: PP-0185
+    If ( QaPluginValue0 != 2400 ) { Return 1; }
+    // QA-TEST: PP-0186
+    If ( QaPluginValue1 != 2401 ) { Return 2; }
+    // QA-TEST: PP-0187
+    If ( QaPluginValue2 != 2402 ) { Return 3; }
+    // QA-TEST: PP-0188
+    If ( QaPluginValue3 != 2403 ) { Return 4; }
+    // QA-TEST: PP-0189
+    If ( QaPluginValue4 != 2404 ) { Return 5; }
+    // QA-TEST: PP-0190
+    If ( QaPluginValue5 != 2405 ) { Return 6; }
+    // QA-TEST: PP-0191
+    If ( QaPluginValue6 != 2406 ) { Return 7; }
+    // QA-TEST: PP-0192
+    If ( QaPluginValue7 != 2407 ) { Return 8; }
+    Return 0;
+}

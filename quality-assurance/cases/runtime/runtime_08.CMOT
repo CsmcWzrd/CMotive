@@ -1,0 +1,233 @@
+Plugin Sys::IO
+
+I32
+main
+()
+{
+    v0: I32 = 17 & 3;
+    // QA-TEST: LANG-0225
+    If ( !(v0 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0225");
+        Return 1;
+    }
+    v1: I32 = 18 | 4;
+    // QA-TEST: LANG-0226
+    If ( !(v1 == 22) )
+    {
+        Sys::IO::println("FAIL LANG-0226");
+        Return 1;
+    }
+    v2: I32 = 19 ^ 5;
+    // QA-TEST: LANG-0227
+    If ( !(v2 == 22) )
+    {
+        Sys::IO::println("FAIL LANG-0227");
+        Return 1;
+    }
+    v3: I32 = 20 & 6;
+    // QA-TEST: LANG-0228
+    If ( !(v3 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0228");
+        Return 1;
+    }
+    v4: I32 = 21 | 7;
+    // QA-TEST: LANG-0229
+    If ( !(v4 == 23) )
+    {
+        Sys::IO::println("FAIL LANG-0229");
+        Return 1;
+    }
+    v5: I32 = 22 ^ 8;
+    // QA-TEST: LANG-0230
+    If ( !(v5 == 30) )
+    {
+        Sys::IO::println("FAIL LANG-0230");
+        Return 1;
+    }
+    v6: I32 = 23 & 9;
+    // QA-TEST: LANG-0231
+    If ( !(v6 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0231");
+        Return 1;
+    }
+    v7: I32 = 24 | 10;
+    // QA-TEST: LANG-0232
+    If ( !(v7 == 26) )
+    {
+        Sys::IO::println("FAIL LANG-0232");
+        Return 1;
+    }
+    v8: I32 = 25 ^ 11;
+    // QA-TEST: LANG-0233
+    If ( !(v8 == 18) )
+    {
+        Sys::IO::println("FAIL LANG-0233");
+        Return 1;
+    }
+    v9: I32 = 26 & 12;
+    // QA-TEST: LANG-0234
+    If ( !(v9 == 8) )
+    {
+        Sys::IO::println("FAIL LANG-0234");
+        Return 1;
+    }
+    v10: I32 = 27 | 13;
+    // QA-TEST: LANG-0235
+    If ( !(v10 == 31) )
+    {
+        Sys::IO::println("FAIL LANG-0235");
+        Return 1;
+    }
+    v11: I32 = 28 ^ 3;
+    // QA-TEST: LANG-0236
+    If ( !(v11 == 31) )
+    {
+        Sys::IO::println("FAIL LANG-0236");
+        Return 1;
+    }
+    v12: I32 = 29 & 4;
+    // QA-TEST: LANG-0237
+    If ( !(v12 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0237");
+        Return 1;
+    }
+    v13: I32 = 30 | 5;
+    // QA-TEST: LANG-0238
+    If ( !(v13 == 31) )
+    {
+        Sys::IO::println("FAIL LANG-0238");
+        Return 1;
+    }
+    v14: I32 = 31 ^ 6;
+    // QA-TEST: LANG-0239
+    If ( !(v14 == 25) )
+    {
+        Sys::IO::println("FAIL LANG-0239");
+        Return 1;
+    }
+    v15: I32 = 32 & 7;
+    // QA-TEST: LANG-0240
+    If ( !(v15 == 0) )
+    {
+        Sys::IO::println("FAIL LANG-0240");
+        Return 1;
+    }
+    v16: I32 = 33 | 8;
+    // QA-TEST: LANG-0241
+    If ( !(v16 == 41) )
+    {
+        Sys::IO::println("FAIL LANG-0241");
+        Return 1;
+    }
+    v17: I32 = 34 ^ 9;
+    // QA-TEST: LANG-0242
+    If ( !(v17 == 43) )
+    {
+        Sys::IO::println("FAIL LANG-0242");
+        Return 1;
+    }
+    v18: I32 = 35 & 10;
+    // QA-TEST: LANG-0243
+    If ( !(v18 == 2) )
+    {
+        Sys::IO::println("FAIL LANG-0243");
+        Return 1;
+    }
+    v19: I32 = 36 | 11;
+    // QA-TEST: LANG-0244
+    If ( !(v19 == 47) )
+    {
+        Sys::IO::println("FAIL LANG-0244");
+        Return 1;
+    }
+    v20: I32 = 37 ^ 12;
+    // QA-TEST: LANG-0245
+    If ( !(v20 == 41) )
+    {
+        Sys::IO::println("FAIL LANG-0245");
+        Return 1;
+    }
+    v21: I32 = 38 & 13;
+    // QA-TEST: LANG-0246
+    If ( !(v21 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0246");
+        Return 1;
+    }
+    v22: I32 = 39 | 3;
+    // QA-TEST: LANG-0247
+    If ( !(v22 == 39) )
+    {
+        Sys::IO::println("FAIL LANG-0247");
+        Return 1;
+    }
+    v23: I32 = 40 ^ 4;
+    // QA-TEST: LANG-0248
+    If ( !(v23 == 44) )
+    {
+        Sys::IO::println("FAIL LANG-0248");
+        Return 1;
+    }
+    v24: I32 = 41 & 5;
+    // QA-TEST: LANG-0249
+    If ( !(v24 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0249");
+        Return 1;
+    }
+    v25: I32 = 42 | 6;
+    // QA-TEST: LANG-0250
+    If ( !(v25 == 46) )
+    {
+        Sys::IO::println("FAIL LANG-0250");
+        Return 1;
+    }
+    v26: I32 = 43 ^ 7;
+    // QA-TEST: LANG-0251
+    If ( !(v26 == 44) )
+    {
+        Sys::IO::println("FAIL LANG-0251");
+        Return 1;
+    }
+    v27: I32 = 44 & 8;
+    // QA-TEST: LANG-0252
+    If ( !(v27 == 8) )
+    {
+        Sys::IO::println("FAIL LANG-0252");
+        Return 1;
+    }
+    v28: I32 = 45 | 9;
+    // QA-TEST: LANG-0253
+    If ( !(v28 == 45) )
+    {
+        Sys::IO::println("FAIL LANG-0253");
+        Return 1;
+    }
+    v29: I32 = 46 ^ 10;
+    // QA-TEST: LANG-0254
+    If ( !(v29 == 36) )
+    {
+        Sys::IO::println("FAIL LANG-0254");
+        Return 1;
+    }
+    v30: I32 = 47 & 11;
+    // QA-TEST: LANG-0255
+    If ( !(v30 == 11) )
+    {
+        Sys::IO::println("FAIL LANG-0255");
+        Return 1;
+    }
+    v31: I32 = 48 | 12;
+    // QA-TEST: LANG-0256
+    If ( !(v31 == 60) )
+    {
+        Sys::IO::println("FAIL LANG-0256");
+        Return 1;
+    }
+    Sys::IO::println("PASS LANG-GROUP-08 32");
+    Return 0;
+}

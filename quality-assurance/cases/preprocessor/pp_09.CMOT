@@ -1,0 +1,54 @@
+#define QA_D_9_0 90
+#define QA_D_9_1 91
+#define QA_D_9_2 92
+#define QA_D_9_3 93
+#define QA_U_9_4 94
+#undef QA_U_9_4
+Replace QA_U_9_4 95;
+#define QA_U_9_5 95
+#undef QA_U_9_5
+Replace QA_U_9_5 96;
+
+Plugswitch
+Plugcase DEFINED: QA_CMD_9_6 > 0
+// command-line definition retained
+Plugdefault
+Replace QA_CMD_9_6 96;
+Plugend
+Plugswitch
+Plugcase DEFINED: QA_CMD_9_7 > 0
+// command-line definition retained
+Plugdefault
+Replace QA_CMD_9_7 97;
+Plugend
+
+I32
+main
+()
+{
+    // QA-TEST: PP-0065
+    p0: I32 = QA_D_9_0;
+    If ( p0 != 90 ) { Return 1; }
+    // QA-TEST: PP-0066
+    p1: I32 = QA_D_9_1;
+    If ( p1 != 91 ) { Return 2; }
+    // QA-TEST: PP-0067
+    p2: I32 = QA_D_9_2;
+    If ( p2 != 92 ) { Return 3; }
+    // QA-TEST: PP-0068
+    p3: I32 = QA_D_9_3;
+    If ( p3 != 93 ) { Return 4; }
+    // QA-TEST: PP-0069
+    p4: I32 = QA_U_9_4;
+    If ( p4 != 95 ) { Return 5; }
+    // QA-TEST: PP-0070
+    p5: I32 = QA_U_9_5;
+    If ( p5 != 96 ) { Return 6; }
+    // QA-TEST: PP-0071
+    p6: I32 = QA_CMD_9_6;
+    If ( p6 != 96 ) { Return 7; }
+    // QA-TEST: PP-0072
+    p7: I32 = QA_CMD_9_7;
+    If ( p7 != 97 ) { Return 8; }
+    Return 0;
+}

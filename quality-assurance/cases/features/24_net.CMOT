@@ -1,0 +1,45 @@
+Plugin Sys::Net
+
+Int32
+main
+()
+{
+    // QA-TEST: FEATURE-0093
+    n : Net;
+    // QA-TEST: FEATURE-0094
+    tcp : Int32 = n.TcpIPv4();
+    If ( tcp >= 0 )
+    {
+        n.Close(tcp);
+    }
+    // QA-TEST: FEATURE-0095
+    udp : Int32 = n.UdpIPv4();
+    If ( udp >= 0 )
+    {
+        n.Close(udp);
+    }
+    // QA-TEST: FEATURE-0096
+    s : Socket;
+    fd : Int32 = s.OpenTcpIPv4();
+    If ( fd >= 0 )
+    {
+        If ( s.IsOpen() == False )
+        {
+            Return 1;
+        }
+        If ( s.Close() != 0 )
+        {
+            Return 2;
+        }
+        If ( s.IsOpen() )
+        {
+            Return 3;
+        }
+    }
+    fd2 : Int32 = s.OpenUdpIPv4();
+    If ( fd2 >= 0 )
+    {
+        s.Close();
+    }
+    Return 0;
+}

@@ -1,0 +1,233 @@
+Plugin Sys::IO
+
+I32
+main
+()
+{
+    v0: Boolean = (10 == 10);
+    // QA-TEST: LANG-0161
+    If ( !(v0 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0161");
+        Return 1;
+    }
+    v1: Boolean = (11 != 12);
+    // QA-TEST: LANG-0162
+    If ( !(v1 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0162");
+        Return 1;
+    }
+    v2: Boolean = (12 < 13);
+    // QA-TEST: LANG-0163
+    If ( !(v2 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0163");
+        Return 1;
+    }
+    v3: Boolean = (13 > 12);
+    // QA-TEST: LANG-0164
+    If ( !(v3 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0164");
+        Return 1;
+    }
+    v4: Boolean = (10 <= 10);
+    // QA-TEST: LANG-0165
+    If ( !(v4 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0165");
+        Return 1;
+    }
+    v5: Boolean = (11 >= 11);
+    // QA-TEST: LANG-0166
+    If ( !(v5 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0166");
+        Return 1;
+    }
+    v6: Boolean = (12 == 13);
+    // QA-TEST: LANG-0167
+    If ( !(v6 == 0) )
+    {
+        Sys::IO::println("FAIL LANG-0167");
+        Return 1;
+    }
+    v7: Boolean = (13 != 13);
+    // QA-TEST: LANG-0168
+    If ( !(v7 == 0) )
+    {
+        Sys::IO::println("FAIL LANG-0168");
+        Return 1;
+    }
+    v8: Boolean = (10 == 10);
+    // QA-TEST: LANG-0169
+    If ( !(v8 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0169");
+        Return 1;
+    }
+    v9: Boolean = (11 != 12);
+    // QA-TEST: LANG-0170
+    If ( !(v9 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0170");
+        Return 1;
+    }
+    v10: Boolean = (12 < 13);
+    // QA-TEST: LANG-0171
+    If ( !(v10 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0171");
+        Return 1;
+    }
+    v11: Boolean = (13 > 12);
+    // QA-TEST: LANG-0172
+    If ( !(v11 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0172");
+        Return 1;
+    }
+    v12: Boolean = (10 <= 10);
+    // QA-TEST: LANG-0173
+    If ( !(v12 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0173");
+        Return 1;
+    }
+    v13: Boolean = (11 >= 11);
+    // QA-TEST: LANG-0174
+    If ( !(v13 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0174");
+        Return 1;
+    }
+    v14: Boolean = (12 == 13);
+    // QA-TEST: LANG-0175
+    If ( !(v14 == 0) )
+    {
+        Sys::IO::println("FAIL LANG-0175");
+        Return 1;
+    }
+    v15: Boolean = (13 != 13);
+    // QA-TEST: LANG-0176
+    If ( !(v15 == 0) )
+    {
+        Sys::IO::println("FAIL LANG-0176");
+        Return 1;
+    }
+    v16: Boolean = (10 == 10);
+    // QA-TEST: LANG-0177
+    If ( !(v16 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0177");
+        Return 1;
+    }
+    v17: Boolean = (11 != 12);
+    // QA-TEST: LANG-0178
+    If ( !(v17 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0178");
+        Return 1;
+    }
+    v18: Boolean = (12 < 13);
+    // QA-TEST: LANG-0179
+    If ( !(v18 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0179");
+        Return 1;
+    }
+    v19: Boolean = (13 > 12);
+    // QA-TEST: LANG-0180
+    If ( !(v19 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0180");
+        Return 1;
+    }
+    v20: Boolean = (10 <= 10);
+    // QA-TEST: LANG-0181
+    If ( !(v20 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0181");
+        Return 1;
+    }
+    v21: Boolean = (11 >= 11);
+    // QA-TEST: LANG-0182
+    If ( !(v21 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0182");
+        Return 1;
+    }
+    v22: Boolean = (12 == 13);
+    // QA-TEST: LANG-0183
+    If ( !(v22 == 0) )
+    {
+        Sys::IO::println("FAIL LANG-0183");
+        Return 1;
+    }
+    v23: Boolean = (13 != 13);
+    // QA-TEST: LANG-0184
+    If ( !(v23 == 0) )
+    {
+        Sys::IO::println("FAIL LANG-0184");
+        Return 1;
+    }
+    v24: Boolean = (10 == 10);
+    // QA-TEST: LANG-0185
+    If ( !(v24 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0185");
+        Return 1;
+    }
+    v25: Boolean = (11 != 12);
+    // QA-TEST: LANG-0186
+    If ( !(v25 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0186");
+        Return 1;
+    }
+    v26: Boolean = (12 < 13);
+    // QA-TEST: LANG-0187
+    If ( !(v26 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0187");
+        Return 1;
+    }
+    v27: Boolean = (13 > 12);
+    // QA-TEST: LANG-0188
+    If ( !(v27 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0188");
+        Return 1;
+    }
+    v28: Boolean = (10 <= 10);
+    // QA-TEST: LANG-0189
+    If ( !(v28 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0189");
+        Return 1;
+    }
+    v29: Boolean = (11 >= 11);
+    // QA-TEST: LANG-0190
+    If ( !(v29 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0190");
+        Return 1;
+    }
+    v30: Boolean = (12 == 13);
+    // QA-TEST: LANG-0191
+    If ( !(v30 == 0) )
+    {
+        Sys::IO::println("FAIL LANG-0191");
+        Return 1;
+    }
+    v31: Boolean = (13 != 13);
+    // QA-TEST: LANG-0192
+    If ( !(v31 == 0) )
+    {
+        Sys::IO::println("FAIL LANG-0192");
+        Return 1;
+    }
+    Sys::IO::println("PASS LANG-GROUP-06 32");
+    Return 0;
+}

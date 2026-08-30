@@ -32,7 +32,7 @@ C2CMOTIVE := $(BIN_DIR)/c2cmotive$(EXEEXT)
 TOOL_BINS := $(CMOTIVE) $(CMOTIVEPP) $(CMOTIVEPLUS) $(CMOTIVESYMS) $(C2CMOTIVE)
 
 .PHONY: all bootstrap stage1 clean install test full-test selfhost-check \
-        converter-test examples language verify-all package
+        converter-test examples language qa qa-all verify-all package
 
 all: $(TOOL_BINS)
 
@@ -104,7 +104,19 @@ examples: all
 language: all
 	sh scripts/validate_language_files.sh $(BIN_DIR) "$(EXEEXT)"
 
-verify-all: full-test examples language
+qa: all
+	sh quality-assurance/run_qa.sh $(BIN_DIR) "$(EXEEXT)"
+
+# Complete release-validation pass.  Keep the commands explicit so all suites
+# execute even on make implementations that do not preserve prerequisite order.
+qa-all: all selfhost-check
+	sh quality-assurance/run_qa.sh $(BIN_DIR) "$(EXEEXT)"
+	sh scripts/run_tests.sh $(BIN_DIR) "$(EXEEXT)" --full
+	sh scripts/run_converter_tests.sh $(BIN_DIR) "$(EXEEXT)"
+	sh scripts/run_examples.sh $(BIN_DIR) "$(EXEEXT)"
+	sh scripts/validate_language_files.sh $(BIN_DIR) "$(EXEEXT)"
+
+verify-all: qa-all
 
 package: all
 	sh scripts/package_release.sh --root . --out dist

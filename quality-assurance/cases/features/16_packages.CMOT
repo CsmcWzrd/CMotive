@@ -1,0 +1,35 @@
+Package Qa::One
+Class AddBox
+{
+    Public
+    {
+        AddBox() { }
+        I32 Apply a: I32 b: I32 () { Return a + b; }
+    }
+};
+Package Qa::Two
+Class MulBox
+{
+    Public
+    {
+        MulBox() { }
+        I32 Apply a: I32 b: I32 () { Return a * b; }
+    }
+};
+Package StartPackage
+I32 main()
+{
+    add: AddBox* = New AddBox();
+    mul: MulBox* = New MulBox();
+    // QA-TEST: FEATURE-0061
+    If ( add == Null || mul == Null ) { Return 1; }
+    // QA-TEST: FEATURE-0062
+    If ( add->Apply(2,3) != 5 ) { Return 2; }
+    // QA-TEST: FEATURE-0063
+    If ( mul->Apply(4,5) != 20 ) { Return 3; }
+    // QA-TEST: FEATURE-0064
+    If ( add->Apply(1, mul->Apply(2,3)) != 7 ) { Return 4; }
+    Delete add;
+    Delete mul;
+    Return 0;
+}

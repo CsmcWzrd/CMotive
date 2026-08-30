@@ -1,0 +1,94 @@
+Replace QA_SW_19_0 5;
+Plugswitch
+Plugcase DEFINED: QA_SW_19_0 >= 5
+QaSwitch0: I32 = 1;
+Plugdefault
+QaSwitch0: I32 = 0;
+Plugend
+
+Replace QA_SW_19_1 4;
+Plugswitch
+Plugcase DEFINED: QA_SW_19_1 <= 5
+QaSwitch1: I32 = 1;
+Plugdefault
+QaSwitch1: I32 = 0;
+Plugend
+
+Replace QA_SW_19_2 7;
+Plugswitch
+Plugcase DEFINED: QA_SW_19_2 == 7
+QaSwitch2: I32 = 1;
+Plugdefault
+QaSwitch2: I32 = 0;
+Plugend
+
+Replace QA_SW_19_3 7;
+Plugswitch
+Plugcase DEFINED: QA_SW_19_3 != 8
+QaSwitch3: I32 = 1;
+Plugdefault
+QaSwitch3: I32 = 0;
+Plugend
+
+Replace QA_SW_19_4 9;
+Plugswitch
+Plugcase DEFINED: QA_SW_19_4 > 2
+QaSwitch4: I32 = 1;
+Plugdefault
+QaSwitch4: I32 = 0;
+Plugend
+
+Replace QA_SW_19_5 1;
+Plugswitch
+Plugcase DEFINED: QA_SW_19_5 < 3
+QaSwitch5: I32 = 1;
+Plugdefault
+QaSwitch5: I32 = 0;
+Plugend
+
+Replace QA_SW_19_6 10;
+Plugswitch
+Plugcase DEFINED: QA_SW_19_6 >= 9
+QaSwitch6: I32 = 1;
+Plugdefault
+QaSwitch6: I32 = 0;
+Plugend
+
+Replace QA_SW_19_7 2;
+Plugswitch
+Plugcase DEFINED: QA_SW_19_7 <= 3
+QaSwitch7: I32 = 1;
+Plugdefault
+QaSwitch7: I32 = 0;
+Plugend
+
+I32
+main
+()
+{
+    // QA-TEST: PP-0145
+    p0: I32 = QaSwitch0;
+    If ( p0 != 1 ) { Return 1; }
+    // QA-TEST: PP-0146
+    p1: I32 = QaSwitch1;
+    If ( p1 != 1 ) { Return 2; }
+    // QA-TEST: PP-0147
+    p2: I32 = QaSwitch2;
+    If ( p2 != 1 ) { Return 3; }
+    // QA-TEST: PP-0148
+    p3: I32 = QaSwitch3;
+    If ( p3 != 1 ) { Return 4; }
+    // QA-TEST: PP-0149
+    p4: I32 = QaSwitch4;
+    If ( p4 != 1 ) { Return 5; }
+    // QA-TEST: PP-0150
+    p5: I32 = QaSwitch5;
+    If ( p5 != 1 ) { Return 6; }
+    // QA-TEST: PP-0151
+    p6: I32 = QaSwitch6;
+    If ( p6 != 1 ) { Return 7; }
+    // QA-TEST: PP-0152
+    p7: I32 = QaSwitch7;
+    If ( p7 != 1 ) { Return 8; }
+    Return 0;
+}

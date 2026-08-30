@@ -77,7 +77,7 @@ typedef struct Func {
     int param_n, param_cap;
     Tok *body;
     int body_n;
-    int ctor, dtor, pure, fptr;
+    int ctor, dtor, pure, fptr, overridable;
     char *op;
     char *hit_sender, *hit_id;
 } Func;

@@ -1,0 +1,2 @@
+NativeInclude "quality-assurance/cases/tools/multi_helper_native.h";
+I32 main() { If ( QaMultiHelper(7) != 12 ) { Return 1; } Return 0; }

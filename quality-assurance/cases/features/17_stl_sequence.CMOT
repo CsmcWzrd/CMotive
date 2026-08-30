@@ -1,0 +1,16 @@
+Plugin Sys::STL
+I32 main()
+{
+    v: Vector<Int>; v.PushBack(4); v.PushBack(1); v.PushBack(3); v.Sort();
+    // QA-TEST: FEATURE-0065
+    If ( v.At(0) != 1 ) { Return 1; }
+    l: List<Int>; l.PushBack(8); l.PushBack(2); l.Sort();
+    // QA-TEST: FEATURE-0066
+    If ( l.At(0) != 2 ) { Return 2; }
+    d: Dlist<Int>; d.PushBack(9); d.PushBack(5); d.Sort();
+    // QA-TEST: FEATURE-0067
+    If ( d.At(0) != 5 ) { Return 3; }
+    // QA-TEST: FEATURE-0068
+    If ( v.Size() != 3 ) { Return 4; }
+    Return 0;
+}

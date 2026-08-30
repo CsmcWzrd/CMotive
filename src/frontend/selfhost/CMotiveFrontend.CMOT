@@ -136,8 +136,162 @@ func tv_push(a : TokVec*, k : TokKind, s : Char*, n : size_t, line : I32, col : 
 func is_multi_op(p : Char*, op : Char**) : I32
 { static  char *ops[] = {">>>","<<<","==","!=","<=",">=","->","::","++","--","&&","||","<<",">>","+=","-=","*=","/=","%=","&=","|=","^=","##","...",NULL}; int i; for (i=0; ops[i]; ++i) if (starts_with(p, ops[i])) { *op = ops[i]; return 1; } return 0; }
 
+func contains_literal(text : Char*, n : size_t) : Char*
+{
+    Str out;
+    size_t i;
+    sb_init(&out);
+    sb_ch(&out, '"');
+    for (i = 0; i < n; ++i) {
+        unsigned char c = (unsigned char)text[i];
+        if (c == '/' && i + 1 < n && (text[i+1] == '{' || text[i+1] == '}' || text[i+1] == '/')) {
+            c = (unsigned char)text[++i];
+        }
+        if (c == '"') sb_add(&out, "\\\"");
+        else if (c == '\\') sb_add(&out, "\\\\");
+        else if (c == '\n') sb_add(&out, "\\n");
+        else if (c == '\r') sb_add(&out, "\\r");
+        else if (c == '\t') sb_add(&out, "\\t");
+        else if (c < 32 || c == 127) sb_printf(&out, "\\%03o", (unsigned)c);
+        else sb_ch(&out, (char)c);
+    }
+    sb_ch(&out, '"');
+    return sb_take(&out);
+}
+
 func lex_text(text : Char*) : TokVec
-{ TokVec tv = {0}; int line = 1, col = 1;  char *p = text; while (*p) {  char *start = p; int sc = col; if (*p == '\r' || *p == '\n') { if (*p == '\r' && p[1] == '\n') p++; tv_push(&tv, TK_EOL, "\n", 1, line, col); p++; line++; col = 1; continue; } if (isspace((unsigned char)*p)) { while (*p && *p != '\n' && *p != '\r' && isspace((unsigned char)*p)) { p++; col++; } continue; } if (starts_with(p, "//")) { while (*p && *p != '\n' && *p != '\r') { p++; col++; } continue; } if (starts_with(p, "/*")) { p += 2; col += 2; while (*p && !starts_with(p, "*/")) { if (*p == '\n') { line++; col = 1; p++; } else { p++; col++; } } if (*p) { p += 2; col += 2; } continue; } if (*p == '"' || *p == '\'') { char quote = *p++; col++; while (*p) { if (*p == '\\' && p[1]) { p += 2; col += 2; continue; } if (*p == quote) { p++; col++; break; } if (*p == '\n') { line++; col = 1; p++; } else { p++; col++; } } tv_push(&tv, quote == '"' ? TK_STR : TK_CHAR, start, (size_t)(p-start), line, sc); continue; } if (is_ident_start((unsigned char)*p)) { p++; col++; while (is_ident_part((unsigned char)*p)) { p++; col++; } tv_push(&tv, TK_ID, start, (size_t)(p-start), line, sc); continue; } if (isdigit((unsigned char)*p)) { p++; col++; while (isalnum((unsigned char)*p) || *p == '.' || *p == '_' || *p == '+' || *p == '-') { if ((*p == '+' || *p == '-') && !(p[-1] == 'e' || p[-1] == 'E')) break; p++; col++; } tv_push(&tv, TK_NUM, start, (size_t)(p-start), line, sc); continue; } {  char *op = NULL; if (is_multi_op(p, &op)) { tv_push(&tv, TK_OP, op, strlen(op), line, col); p += strlen(op); col += (int)strlen(op); } else { tv_push(&tv, TK_OP, p, 1, line, col); p++; col++; } } } tv_push(&tv, TK_EOF, "", 0, line, col); return tv; }
+{
+    TokVec tv = {0};
+    int line = 1, col = 1;
+    char *p = text;
+    while (*p) {
+        char *start = p;
+        int sl = line, sc = col;
+        if (*p == '\r' || *p == '\n') {
+            if (*p == '\r' && p[1] == '\n') p++;
+            tv_push(&tv, TK_EOL, "\n", 1, line, col);
+            p++;
+            line++;
+            col = 1;
+            continue;
+        }
+        if (isspace((unsigned char)*p)) {
+            while (*p && *p != '\n' && *p != '\r' && isspace((unsigned char)*p)) { p++; col++; }
+            continue;
+        }
+        if (starts_with(p, "//")) {
+            while (*p && *p != '\n' && *p != '\r') { p++; col++; }
+            continue;
+        }
+        if (starts_with(p, "/*")) {
+            p += 2;
+            col += 2;
+            while (*p && !starts_with(p, "*/")) {
+                if (*p == '\r' || *p == '\n') {
+                    if (*p == '\r' && p[1] == '\n') p++;
+                    p++;
+                    line++;
+                    col = 1;
+                } else {
+                    p++;
+                    col++;
+                }
+            }
+            if (*p) { p += 2; col += 2; }
+            continue;
+        }
+        if (*p == '"' || *p == '\'') {
+            char quote = *p++;
+            col++;
+            while (*p) {
+                if (*p == '\\' && p[1]) { p += 2; col += 2; continue; }
+                if (*p == quote) { p++; col++; break; }
+                if (*p == '\r' || *p == '\n') {
+                    if (*p == '\r' && p[1] == '\n') p++;
+                    p++;
+                    line++;
+                    col = 1;
+                } else {
+                    p++;
+                    col++;
+                }
+            }
+            tv_push(&tv, quote == '"' ? TK_STR : TK_CHAR, start, (size_t)(p-start), sl, sc);
+            continue;
+        }
+        if (is_ident_start((unsigned char)*p)) {
+            p++;
+            col++;
+            while (is_ident_part((unsigned char)*p)) { p++; col++; }
+            if ((size_t)(p-start) == 8u && strncmp(start, "Contains", 8u) == 0) {
+                char *open = p;
+                while (*open && isspace((unsigned char)*open)) open++;
+                if (*open == '{') {
+                    char *q = open + 1;
+                    int depth = 1;
+                    while (*q && depth > 0) {
+                        if (*q == '/' && q[1] && (q[1] == '{' || q[1] == '}' || q[1] == '/')) {
+                            q += 2;
+                            continue;
+                        }
+                        if (*q == '{') depth++;
+                        else if (*q == '}') {
+                            depth--;
+                            if (depth == 0) break;
+                        }
+                        q++;
+                    }
+                    if (depth == 0) {
+                        char *literal = contains_literal(open + 1, (size_t)(q - open - 1));
+                        char *scan = p;
+                        tv_push(&tv, TK_STR, literal, strlen(literal), sl, sc);
+                        free(literal);
+                        while (scan <= q) {
+                            if (*scan == '\r' || *scan == '\n') {
+                                if (*scan == '\r' && scan < q && scan[1] == '\n') scan++;
+                                scan++;
+                                line++;
+                                col = 1;
+                            } else {
+                                scan++;
+                                col++;
+                            }
+                        }
+                        p = scan;
+                        continue;
+                    }
+                }
+            }
+            tv_push(&tv, TK_ID, start, (size_t)(p-start), sl, sc);
+            continue;
+        }
+        if (isdigit((unsigned char)*p)) {
+            p++;
+            col++;
+            while (isalnum((unsigned char)*p) || *p == '.' || *p == '_' || *p == '+' || *p == '-') {
+                if ((*p == '+' || *p == '-') && !(p[-1] == 'e' || p[-1] == 'E')) break;
+                p++;
+                col++;
+            }
+            tv_push(&tv, TK_NUM, start, (size_t)(p-start), sl, sc);
+            continue;
+        }
+        {
+            char *op = NULL;
+            if (is_multi_op(p, &op)) {
+                tv_push(&tv, TK_OP, op, strlen(op), line, col);
+                p += strlen(op);
+                col += (int)strlen(op);
+            } else {
+                tv_push(&tv, TK_OP, p, 1, line, col);
+                p++;
+                col++;
+            }
+        }
+    }
+    tv_push(&tv, TK_EOF, "", 0, line, col);
+    return tv;
+}
 
 func add_param(f : Func*, name : Char*, type : Char*) : Void
 { if (f->param_n == f->param_cap) { f->param_cap = f->param_cap ? f->param_cap * 2 : 4; f->params = (Param*)xrealloc(f->params, (size_t)f->param_cap * sizeof(Param)); } f->params[f->param_n].name=xstrdup(name); f->params[f->param_n].type=xstrdup(type); f->param_n++; }
@@ -162,6 +316,30 @@ func find_class(p : Program*, name : Char*) : Class*
 
 func find_func(p : Program*, name : Char*) : Func*
 { int i; for (i=0;i<p->func_n;i++) if (streq(p->funcs[i].name,name)) return &p->funcs[i]; return NULL; }
+
+func find_class_method_local(c : Class*, name : Char*) : Func*
+{ int i; if (!c) return NULL; for (i=0;i<c->method_n;i++) if (!c->methods[i].ctor && !c->methods[i].dtor && streq(c->methods[i].name,name)) return &c->methods[i]; return NULL; }
+
+func find_class_method(p : Program*, c : Class*, name : Char*) : Func*
+{ Func *f; Class *b; if (!c) return NULL; f=find_class_method_local(c,name); if (f) return f; if (!c->base || !*c->base) return NULL; b=find_class(p,c->base); return find_class_method(p,b,name); }
+
+func find_class_method_owner(p : Program*, c : Class*, name : Char*) : Class*
+{ Class *b; if (!c) return NULL; if (find_class_method_local(c,name)) return c; if (!c->base || !*c->base) return NULL; b=find_class(p,c->base); return find_class_method_owner(p,b,name); }
+
+func find_class_field_local(c : Class*, name : Char*) : Field*
+{ int i; if (!c) return NULL; for (i=0;i<c->field_n;i++) if (streq(c->fields[i].name,name)) return &c->fields[i]; return NULL; }
+
+func find_class_field(p : Program*, c : Class*, name : Char*) : Field*
+{ Field *f; Class *b; if (!c) return NULL; f=find_class_field_local(c,name); if (f) return f; if (!c->base || !*c->base) return NULL; b=find_class(p,c->base); return find_class_field(p,b,name); }
+
+func find_class_field_owner(p : Program*, c : Class*, name : Char*) : Class*
+{ Class *b; if (!c) return NULL; if (find_class_field_local(c,name)) return c; if (!c->base || !*c->base) return NULL; b=find_class(p,c->base); return find_class_field_owner(p,b,name); }
+
+func class_is_descendant(p : Program*, c : Class*, ancestor : Class*) : I32
+{ Class *b; if (!c || !ancestor || !c->base || !*c->base) return 0; b=find_class(p,c->base); if (!b) return 0; if (b==ancestor) return 1; return class_is_descendant(p,b,ancestor); }
+
+func class_virtual_root(p : Program*, c : Class*, name : Char*) : Class*
+{ Class *b=NULL, *r=NULL; Func *f; if (!c) return NULL; if (c->base && *c->base) { b=find_class(p,c->base); r=class_virtual_root(p,b,name); if (r) return r; } f=find_class_method_local(c,name); if (f && f->overridable) return c; return NULL; }
 
 func pk(p : Parser*, off : I32) : Tok*
 { int j = p->i + off; if (j >= p->n) j = p->n - 1; return &p->t[j]; }
@@ -269,6 +447,7 @@ func parse_class(p : Parser*) : Void
   if (tok_is_decorator(p)) { p->i++; continue; }
   if (parser_accept(p,"Overridable") || parser_accept(p,"virtual")) {
    Func f = parse_func_formal(p, c->name, NULL, NULL, 0, 0);
+   f.overridable = 1;
    class_add_method(c, f);
    continue;
   }
@@ -426,6 +605,9 @@ func mangle_class_member(c : Class*, name : Char*, f : Func*) : Char*
 func class_sym_prefix(c : Class*) : Char*
 { Str b; char *pkg = safe_pkg(c ? c->package : "StartPackage"); sb_init(&b); sb_add(&b,pkg); sb_add(&b,"__"); sb_add(&b,c ? c->name : ""); free(pkg); return sb_take(&b); }
 
+func class_dispatch_symbol(c : Class*, name : Char*, f : Func*) : Char*
+{ Str b; char *base=mangle_class_member(c,name,f); sb_init(&b); sb_add(&b,base); sb_add(&b,"__dispatch"); free(base); return sb_take(&b); }
+
 func mangle_func(f : Func*) : Char*
 { Str b; char *pkg = safe_pkg(f->package); if (streq(f->name,"main")) { free(pkg); return xstrdup("main"); } sb_init(&b); sb_add(&b,pkg); sb_add(&b,"__"); sb_add(&b,f->name); free(pkg); return sb_take(&b); }
 
@@ -566,7 +748,8 @@ func map_builtin_method(type : Char*, method : Char*) : Char*
  else if (streq(type,"Filesystem")) { sb_add(&b,"CMFilesystem_"); sb_add(&b,method); }
  else if (streq(type,"Socket")) { sb_add(&b,"CMSocket_"); sb_add(&b,method); }
  else if (streq(type,"Net")) { sb_add(&b,"CMNet_"); sb_add(&b,method); }
- else if (streq(type,"Thread") || streq(type,"Threading")) { sb_add(&b,"CMThread_"); sb_add(&b,method); }
+ else if (streq(type,"Thread")) { sb_add(&b,"CMThread_"); sb_add(&b,method); }
+ else if (streq(type,"Threading")) { sb_add(&b,"CMThreading_"); sb_add(&b,method); }
  else if (streq(type,"Algorithms")) { sb_add(&b,"CMAlgorithms_"); sb_add(&b,method); }
  else if (starts_with(type,"Vector") || starts_with(type,"List") || starts_with(type,"Dlist")) { sb_add(&b,"CMVector_"); sb_add(&b,method); }
  else if (starts_with(type,"Map") || starts_with(type,"Dict") || starts_with(type,"HashDict") || starts_with(type,"MultiDict") || starts_with(type,"MultiHashDict")) { sb_add(&b,"CMMap_"); sb_add(&b,method); }
@@ -580,9 +763,31 @@ func map_builtin_method(type : Char*, method : Char*) : Char*
  if (b.n==0) { free(b.s); return NULL; } return sb_take(&b); }
 
 func expr_from_tokens(prog : Program*, t : Tok*, n : I32, vt : VarTab*, curcls : Class*, as_lvalue : I32) : Char*
-{ Str out; int i; (void)as_lvalue; sb_init(&out); for (i=0;i<n;i++) { Tok *x=&t[i]; if (x->kind==TK_EOL) continue; if ((streq(x->v,"This") || streq(x->v,"this")) && i+3<n && (streq(t[i+1].v,".") || streq(t[i+1].v,"->")) && streq(t[i+3].v,"(")) { int end = matching_paren(t,n,i+3); Func *mf=NULL; int k; Str args; sb_init(&args); if (end > i+4) append_expr(&args,prog,t,i+4,end,vt,curcls); for(k=0; curcls && k<curcls->method_n; k++) if(streq(curcls->methods[k].name,t[i+2].v)){ mf=&curcls->methods[k]; break; } if(mf){ char *sym=mangle_class_member(curcls,t[i+2].v,mf); sb_add(&out,sym); free(sym); sb_add(&out,"(this"); if(args.n){ sb_add(&out,", "); sb_add(&out,args.s); } sb_ch(&out,')'); free(args.s); i=end; continue; } free(args.s); }
+{ Str out; int i; (void)as_lvalue; sb_init(&out); for (i=0;i<n;i++) { Tok *x=&t[i]; if (x->kind==TK_EOL) continue; if ((streq(x->v,"This") || streq(x->v,"this")) && i+3<n && (streq(t[i+1].v,".") || streq(t[i+1].v,"->")) && streq(t[i+3].v,"(")) {
+  int end = matching_paren(t,n,i+3);
+  Func *mf = find_class_method(prog,curcls,t[i+2].v);
+  Class *owner = find_class_method_owner(prog,curcls,t[i+2].v);
+  Class *vroot = class_virtual_root(prog,curcls,t[i+2].v);
+  Str args;
+  sb_init(&args);
+  if (end > i+4) append_expr(&args,prog,t,i+4,end,vt,curcls);
+  if (mf && owner) {
+   Class *expected = vroot ? vroot : owner;
+   Func *root_method = vroot ? find_class_method_local(vroot,t[i+2].v) : mf;
+   char *sym = vroot ? class_dispatch_symbol(vroot,t[i+2].v,root_method) : mangle_class_member(owner,t[i+2].v,mf);
+   sb_add(&out,sym);
+   free(sym);
+   sb_add(&out,"(("); sb_add(&out,expected->name); sb_add(&out,"*)this");
+   if(args.n){ sb_add(&out,", "); sb_add(&out,args.s); }
+   sb_ch(&out,')');
+   free(args.s);
+   i=end;
+   continue;
+  }
+  free(args.s);
+ }
  if ((streq(x->v,"This") || streq(x->v,"this")) && i+2<n && (streq(t[i+1].v,".") || streq(t[i+1].v,"->"))) { sb_add(&out,"this->"); sb_add(&out,t[i+2].v); i+=2; continue; }
- if (curcls && x->kind==TK_ID && !vt_find(vt,x->v) && !(i>0 && (streq(t[i-1].v,".") || streq(t[i-1].v,"->") || streq(t[i-1].v,"::"))) && !(i+1<n && streq(t[i+1].v,"::"))) { int fk; int field_hit=0; for(fk=0; fk<curcls->field_n; fk++) if(streq(curcls->fields[fk].name,x->v)){ sb_add(&out,"this->"); sb_add(&out,x->v); field_hit=1; break; } if(field_hit) continue; }
+ if (curcls && x->kind==TK_ID && !vt_find(vt,x->v) && !(i>0 && (streq(t[i-1].v,".") || streq(t[i-1].v,"->") || streq(t[i-1].v,"::"))) && !(i+1<n && streq(t[i+1].v,"::"))) { if (find_class_field(prog,curcls,x->v)) { sb_add(&out,"this->"); sb_add(&out,x->v); continue; } }
  if (streq(x->v,"True")||streq(x->v,"true")) { sb_add(&out,"1"); continue; } if (streq(x->v,"False")||streq(x->v,"false")) { sb_add(&out,"0"); continue; } if (streq(x->v,"Null")) { sb_add(&out,"NULL"); continue; } if (streq(x->v,"Not")) { sb_add(&out,"!"); continue; } if (streq(x->v,"This")) { sb_add(&out,"this"); continue; } if (streq(x->v,"Sizeof")) { sb_add(&out,"sizeof"); continue; }
  /* casts */
  if (streq(x->v,"(") && i+2<n && streq(t[i+2].v,")")) { if (type_is_scalar_name(t[i+1].v) || type_is_class(prog,t[i+1].v) || type_is_builtin_obj(t[i+1].v)) { char *ct = ctype(t[i+1].v); sb_printf(&out,"(%s)",ct); free(ct); i+=2; continue; } }
@@ -666,14 +871,80 @@ func expr_from_tokens(prog : Program*, t : Tok*, n : I32, vt : VarTab*, curcls :
    if (par<n && streq(t[par].v,"(")) { int end = matching_paren(t,n,par); sb_add(&out,"CMotive_New(1)"); i=end; continue; }
  }
  /* object method call */
- if (x->kind==TK_ID && i+3<n && (streq(t[i+1].v,".")||streq(t[i+1].v,"->"))) { char *var=x->v, *op=t[i+1].v, *meth=t[i+2].v; int mi=i+2, atfield=0; Var *vv = vt_find(vt,var); if (streq(t[i+3].v,"@") && i+4<n) { meth=t[i+4].v; mi=i+4; atfield=1; }
- if (mi+1<n && streq(t[mi+1].v,"(")) { int end = matching_paren(t,n,mi+1); Str args; sb_init(&args); if (end > mi+2) append_expr(&args,prog,t,mi+2,end,vt,curcls); if (vv) { if (type_is_class(prog,vv->type)) { Class *c = class_from_type(prog,vv->type); Func *mf=NULL; int k; for(k=0;c&&k<c->method_n;k++) if ((atfield && (starts_with(c->methods[k].name,"Get")||starts_with(c->methods[k].name,"Set"))) || streq(c->methods[k].name,meth) || (c->methods[k].op && streq(meth,"Operation"))) { mf=&c->methods[k]; break; } if (atfield) { Str nm; sb_init(&nm); if (starts_with(t[i+2].v,"Get")) { sb_add(&nm,"Get__"); sb_add(&nm,meth); } else { sb_add(&nm,"Set__"); sb_add(&nm,meth); } { char *sym = mangle_class_member(c,nm.s,NULL); sb_add(&out,sym); free(sym); free(nm.s); } } else { char *sym = mangle_class_member(c,meth,mf); sb_add(&out,sym); free(sym); } sb_ch(&out,'('); if (streq(op,"->") || vv->pointer) sb_add(&out,var); else { sb_ch(&out,'&'); sb_add(&out,var); } if (args.n) { sb_add(&out,", "); sb_add(&out,args.s); } sb_ch(&out,')'); free(args.s); i=end; continue; } else if (type_is_builtin_obj(vv->type)) { char *bm = map_builtin_method(vv->type,meth); if (bm) { sb_add(&out,bm); free(bm); sb_ch(&out,'('); if (streq(op,"->") || vv->pointer) sb_add(&out,var); else { sb_ch(&out,'&'); sb_add(&out,var); } if (args.n) { sb_add(&out,", "); sb_add(&out,args.s); } sb_ch(&out,')'); free(args.s); i=end; continue; } } }
- free(args.s); }
+ if (x->kind==TK_ID && i+3<n && (streq(t[i+1].v,".")||streq(t[i+1].v,"->"))) {
+  char *var=x->v, *op=t[i+1].v, *meth=t[i+2].v;
+  int mi=i+2, atfield=0;
+  Var *vv = vt_find(vt,var);
+  if (streq(t[i+3].v,"@") && i+4<n) { meth=t[i+4].v; mi=i+4; atfield=1; }
+  if (mi+1<n && streq(t[mi+1].v,"(")) {
+   int end = matching_paren(t,n,mi+1);
+   Str args;
+   sb_init(&args);
+   if (end > mi+2) append_expr(&args,prog,t,mi+2,end,vt,curcls);
+   if (vv) {
+    if (type_is_class(prog,vv->type)) {
+     Class *c = class_from_type(prog,vv->type);
+     Class *owner = NULL;
+     Class *expected = NULL;
+     Func *mf = NULL;
+     char *sym = NULL;
+     if (atfield) {
+      Str nm;
+      owner = find_class_field_owner(prog,c,meth);
+      expected = owner;
+      if (owner) {
+       sb_init(&nm);
+       if (starts_with(t[i+2].v,"Get")) { sb_add(&nm,"Get__"); sb_add(&nm,meth); }
+       else { sb_add(&nm,"Set__"); sb_add(&nm,meth); }
+       sym = mangle_class_member(owner,nm.s,NULL);
+       free(nm.s);
+      }
+     } else {
+      Class *vroot;
+      if (streq(meth,"Getall") || streq(meth,"Setall")) {
+       owner=c; expected=c; sym=mangle_class_member(c,meth,NULL);
+      } else {
+       mf = find_class_method(prog,c,meth);
+       owner = find_class_method_owner(prog,c,meth);
+       vroot = class_virtual_root(prog,c,meth);
+       if (mf && owner) {
+        expected = vroot ? vroot : owner;
+        if (vroot) {
+         Func *root_method = find_class_method_local(vroot,meth);
+         sym = class_dispatch_symbol(vroot,meth,root_method);
+        } else sym = mangle_class_member(owner,meth,mf);
+       }
+      }
+     }
+     if (sym && expected) {
+      sb_add(&out,sym);
+      free(sym);
+      sb_add(&out,"(("); sb_add(&out,expected->name); sb_add(&out,"*)");
+      if (streq(op,"->") || vv->pointer) sb_add(&out,var); else { sb_ch(&out,'&'); sb_add(&out,var); }
+      if (args.n) { sb_add(&out,", "); sb_add(&out,args.s); }
+      sb_ch(&out,')');
+      free(args.s);
+      i=end;
+      continue;
+     }
+     if (sym) free(sym);
+    } else if (type_is_builtin_obj(vv->type)) {
+     char *bm = map_builtin_method(vv->type,meth);
+     if (bm) {
+      sb_add(&out,bm); free(bm); sb_ch(&out,'(');
+      if (streq(op,"->") || vv->pointer) sb_add(&out,var); else { sb_ch(&out,'&'); sb_add(&out,var); }
+      if (args.n) { sb_add(&out,", "); sb_add(&out,args.s); }
+      sb_ch(&out,')'); free(args.s); i=end; continue;
+     }
+    }
+   }
+   free(args.s);
+  }
  }
  /* field access */
  if (x->kind==TK_ID && i+2<n && (streq(t[i+1].v,".")||streq(t[i+1].v,"->"))) { Var *vv = vt_find(vt,x->v); if (vv && type_is_class(prog,vv->type)) { sb_add(&out,x->v); sb_add(&out, streq(t[i+1].v,"->")||vv->pointer ? "->" : "."); sb_add(&out,t[i+2].v); i+=2; continue; } }
  /* bare field inside method */
- if (x->kind==TK_ID && curcls && !vt_find(vt,x->v)) { int k, isfield=0; for(k=0;k<curcls->field_n;k++) if (streq(curcls->fields[k].name,x->v)) { isfield=1; break; } if (isfield) { sb_add(&out,"this->"); sb_add(&out,x->v); continue; } }
+ if (x->kind==TK_ID && curcls && !vt_find(vt,x->v)) { if (find_class_field(prog,curcls,x->v)) { sb_add(&out,"this->"); sb_add(&out,x->v); continue; } }
  sb_add(&out,x->v); if (i+1<n && !(streq(t[i+1].v,")")||streq(t[i+1].v,"]")||streq(t[i+1].v,";")||streq(t[i+1].v,",")||streq(t[i+1].v,".")||streq(t[i+1].v,"->")||streq(x->v,"(")||streq(x->v,"[")||streq(x->v,".")||streq(x->v,"->")||streq(x->v,"!")||streq(x->v,"~"))) sb_ch(&out,' '); }
  return sb_take(&out); }
 
@@ -879,7 +1150,8 @@ func emit_local_decl(bc : BodyCtx*, name : Char*, type : Char*, init : Char*, ar
     }
     emit_indent(bc->out, bc->indent);
     if (arrsz > 0) {
-        sb_printf(bc->out, "%s %s[%d]; memset(%s, 0, sizeof(%s));\n", ct, name, arrsz, name, name);
+        if (init && *init) sb_printf(bc->out, "%s %s[%d] = %s;\n", ct, name, arrsz, expr && *expr ? expr : "{0}");
+        else sb_printf(bc->out, "%s %s[%d]; memset(%s, 0, sizeof(%s));\n", ct, name, arrsz, name, name);
         vt_add(&bc->vars, name, ntype, 1);
     } else if (init_is_zero(init)) {
         sb_printf(bc->out, "%s %s; memset(&%s, 0, sizeof(%s));\n", ct, name, name, name);
@@ -1376,7 +1648,89 @@ func emit_body_range(bc : BodyCtx*, t : Tok*, n : I32) : Void
 
 func emit_runtime_prelude(prog : Program*, out : Str*, target_arch : Char*) : Void
 { int ni; sb_add(out,"/* Generated by the CMotive frontend. */\n"); sb_printf(out,"/* target-arch: %s */\n", target_arch?target_arch:"native"); sb_add(out,"#if !defined(_WIN32)\n#ifndef _DEFAULT_SOURCE\n#define _DEFAULT_SOURCE 1\n#endif\n#ifndef _DARWIN_C_SOURCE\n#define _DARWIN_C_SOURCE 1\n#endif\n#endif\n"); for(ni=0;prog && ni<prog->native_includes.n;ni++) sb_printf(out,"#include \"%s\"\n",prog->native_includes.v[ni]); sb_add(out,"#include <stdio.h>\n#include <stdlib.h>\n#include <stdint.h>\n#include <stddef.h>\n#include <string.h>\n#include <stdarg.h>\n#include <setjmp.h>\n#include <math.h>\n#include <ctype.h>\n#include <time.h>\n#if defined(_WIN32)\n#include <windows.h>\n#else\n#include <unistd.h>\n#include <sched.h>\n#include <pthread.h>\n#endif\n#include \"runtime.c\"\ntypedef struct CMotive_ExceptionFrame { jmp_buf env; const char *message; struct CMotive_ExceptionFrame *prev; } CMotive_ExceptionFrame;\nstatic CMotive_ExceptionFrame *__cmotive_exception_stack = NULL;\ntypedef void (*CMotive_CleanupFn)(void*);\ntypedef struct CMotive_CleanupEntry { void *object; CMotive_CleanupFn cleanup; struct CMotive_CleanupEntry *prev; } CMotive_CleanupEntry;\nstatic CMotive_CleanupEntry *__cmotive_cleanup_stack = NULL;\nstatic void CMotive_Cleanup_Push(void *object, CMotive_CleanupFn cleanup){CMotive_CleanupEntry*e=(CMotive_CleanupEntry*)malloc(sizeof(CMotive_CleanupEntry)); if(!e) exit(72); e->object=object; e->cleanup=cleanup; e->prev=__cmotive_cleanup_stack; __cmotive_cleanup_stack=e;}\nstatic void CMotive_Cleanup_RunTo(CMotive_CleanupEntry *mark){while(__cmotive_cleanup_stack!=mark){CMotive_CleanupEntry*e=__cmotive_cleanup_stack; if(!e)break; __cmotive_cleanup_stack=e->prev; if(e->cleanup&&e->object)e->cleanup(e->object); free(e);}}\nstatic void CMotive_Cleanup_DiscardTo(CMotive_CleanupEntry *mark){while(__cmotive_cleanup_stack!=mark){CMotive_CleanupEntry*e=__cmotive_cleanup_stack; if(!e)break; __cmotive_cleanup_stack=e->prev; free(e);}}\nstatic void CMotive_Throw(const char*msg){CMotive_ExceptionFrame*f=__cmotive_exception_stack; if(!f){fprintf(stderr,\"CMotive unhandled exception: %s\\n\",msg?msg:\"<null>\"); exit(70);} f->message=msg?msg:\"CMotive exception\"; longjmp(f->env,1);}\n#define CMOTIVE_EXCEPTION_POP(frameptr) do{ if(__cmotive_exception_stack==(frameptr)) __cmotive_exception_stack=(frameptr)->prev; }while(0)\nstatic void CMotive_UnresolvedTarget(const char*s,uint64_t id){fprintf(stderr,\"CMotive unresolved Target: %s %llu\\n\",s?s:\"\",(unsigned long long)id); exit(73);}\nstatic uint64_t CMotive_Ror64(uint64_t v,unsigned s){s&=63u;return s?((v>>s)|(v<<(64u-s))):v;}\nstatic uint64_t CMotive_Rol64(uint64_t v,unsigned s){s&=63u;return s?((v<<s)|(v>>(64u-s))):v;}\n");
- sb_add(out,"typedef struct { const char *fmt; void *handle; } OStream; static void CMOStream_Expect(OStream*s,const char*f){s->fmt=f?f:\"%s\";} static int CMOStream_Write(OStream*s,...){va_list ap; int r; va_start(ap,s); r=vprintf(s&&s->fmt?s->fmt:\"%s\",ap); va_end(ap); return r;}\ntypedef struct { int unused; } Formatter; static int CMFormatter_Println(Formatter*f,const char*s){(void)f; return cmotive_sys_stdio_println(s);}\ntypedef struct { char *path; } Path; static void CMPath_Set(Path*p,char*v){p->path=v;} static char* CMPath_Get(Path*p){return p->path;} static int CMPath_Exists(Path*p){return cmotive_sys_filesystem_exists(p->path);} static int CMPath_IsFile(Path*p){return cmotive_sys_filesystem_is_file(p->path);} static int CMPath_IsDirectory(Path*p){return cmotive_sys_filesystem_is_directory(p->path);}\ntypedef struct { int unused; } Filesystem; static int CMFilesystem_Exists(Filesystem*f,char*p){(void)f;return cmotive_sys_filesystem_exists(p);} static int CMFilesystem_IsFile(Filesystem*f,char*p){(void)f;return cmotive_sys_filesystem_is_file(p);} static int CMFilesystem_IsDirectory(Filesystem*f,char*p){(void)f;return cmotive_sys_filesystem_is_directory(p);} static char* CMFilesystem_CurrentPath(Filesystem*f){(void)f;return cmotive_sys_filesystem_current_path();}\ntypedef struct { int fd; } Socket; static int CMSocket_OpenTcpIPv4(Socket*s){s->fd=cmotive_sys_net_socket_tcp_ipv4();return s->fd;} static int CMSocket_IsOpen(Socket*s){return s->fd>=0;} static void CMSocket_Close(Socket*s){if(s->fd>=0)cmotive_sys_net_socket_close(s->fd);s->fd=-1;} typedef struct { int unused; } Net; static int CMNet_TcpIPv4(Net*n){(void)n;return cmotive_sys_net_socket_tcp_ipv4();} static void CMNet_Close(Net*n,int fd){(void)n;cmotive_sys_net_socket_close(fd);}\ntypedef struct { void *handle; } Thread; typedef struct { int unused; } Threading; static void* CMThread_Current(void*x){(void)x;return cmotive_sys_thread_current();} static int CMThread_Yield(void*x){(void)x;return cmotive_sys_thread_yield();} static void CMThread_SleepMs(void*x,uint32_t ms){(void)x;cmotive_sys_thread_sleep_ms(ms);} static void CMThread_MicroSleep(void*x,uint64_t us){(void)x;cmotive_sys_thread_sleep_us(us);} static void CMThread_NanoSleep(void*x,uint64_t ns){(void)x;cmotive_sys_thread_sleep_ns(ns);}\ntypedef struct { int unused; } Algorithms; static void CMAlgorithms_QuickSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_quick_i64(d,n);} static int CMAlgorithms_IsSorted(Algorithms*a,int64_t*d,uint64_t n){(void)a;return cmotive_sys_algorithms_is_sorted_i64(d,n);} static int64_t CMAlgorithms_BinarySearch(Algorithms*a,int64_t*d,uint64_t n,int64_t v){(void)a;return cmotive_sys_algorithms_binary_search_i64(d,n,v);} static void CMAlgorithms_Reverse(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_reverse_i64(d,n);} static void CMAlgorithms_MergeSort(Algorithms*a,int64_t*d,uint64_t n){CMAlgorithms_QuickSort(a,d,n);} static void CMAlgorithms_HeapSort(Algorithms*a,int64_t*d,uint64_t n){CMAlgorithms_QuickSort(a,d,n);} static void CMAlgorithms_BubbleSort(Algorithms*a,int64_t*d,uint64_t n){CMAlgorithms_QuickSort(a,d,n);}\ntypedef struct { void *h; } CMotive_Vector_Int; static void CMVector_ensure(CMotive_Vector_Int*v){if(!v->h)v->h=cmotive_sys_stl_vector_create();} static void CMVector_PushBack(CMotive_Vector_Int*v,int64_t x){CMVector_ensure(v);cmotive_sys_stl_vector_push_i64(v->h,x);} static uint64_t CMVector_Size(CMotive_Vector_Int*v){CMVector_ensure(v);return cmotive_sys_stl_vector_size(v->h);} static int64_t CMVector_At(CMotive_Vector_Int*v,uint64_t i){CMVector_ensure(v);return cmotive_sys_stl_vector_get_i64(v->h,i);} static void CMVector_Sort(CMotive_Vector_Int*v){CMVector_ensure(v);cmotive_sys_stl_vector_sort_i64(v->h);}\ntypedef struct { void *h; } CMotive_Map_CharPtr_Int; static void CMMap_ensure(CMotive_Map_CharPtr_Int*m){if(!m->h)m->h=cmotive_sys_stl_map_create();} static void CMMap_Put(CMotive_Map_CharPtr_Int*m,char*k,int64_t v){CMMap_ensure(m);cmotive_sys_stl_map_put_i64(m->h,k,v);} static int64_t CMMap_Get(CMotive_Map_CharPtr_Int*m,char*k,int64_t fb){CMMap_ensure(m);return cmotive_sys_stl_map_get_i64(m->h,k,fb);} static int CMMap_Contains(CMotive_Map_CharPtr_Int*m,char*k){CMMap_ensure(m);return cmotive_sys_stl_map_contains(m->h,k);}\ntypedef struct { void *h; } CMotive_Tree_Int; static void CMTree_ensure(CMotive_Tree_Int*t){if(!t->h)t->h=cmotive_sys_stl_binary_search_tree_create();} static void CMTree_Insert(CMotive_Tree_Int*t,int64_t v){CMTree_ensure(t);cmotive_sys_stl_binary_search_tree_insert_i64(t->h,v);} static int CMTree_Contains(CMotive_Tree_Int*t,int64_t v){CMTree_ensure(t);return cmotive_sys_stl_binary_search_tree_contains_i64(t->h,v);}\ntypedef struct { char *value; } CString; static void CMCString_Set(CString*s,char*v){s->value=v;} static char* CMCString_Get(CString*s){return s->value;} static uint64_t CMCString_Length(CString*s){return cmotive_sys_string_strlen(s->value);} static int CMCString_Contains(CString*s,char*n){return cmotive_sys_string_strstr(s->value,n)!=NULL;} static int CMCString_Compare(CString*s,char*o){return cmotive_sys_string_strcmp(s->value,o);}\ntypedef struct { int unused; } Character; static int CMCharacter_IsDigit(Character*c,int ch){(void)c;return isdigit((unsigned char)ch)!=0;}\ntypedef struct { void *table; } StringParser; static void CMStringParser_Parse(StringParser*p,char*i,char*r,char*f,char e){p->table=cmotive_sys_string_str_parse(i,r,f,e);} static uint64_t CMStringParser_Rows(StringParser*p){return cmotive_sys_string_str_parse_rows(p->table);} static uint64_t CMStringParser_Cols(StringParser*p,uint64_t r){return cmotive_sys_string_str_parse_cols(p->table,r);}\ntypedef struct { uint16_t *value; } Wide16String; typedef struct { uint32_t *value; } Wide32String; static uint64_t CMWide16_Length(Wide16String*w){return cmotive_sys_wide16_len(w->value);} static uint64_t CMWide32_Length(Wide32String*w){return cmotive_sys_wide32_len(w->value);}\ntypedef struct { void *handle; } Mutex; static void CMMutex_init(Mutex*m){if(!m->handle)m->handle=cmotive_sys_locks_mutex_create();} static void CMMutex_lock(Mutex*m){CMMutex_init(m);cmotive_sys_locks_mutex_lock(m->handle);} static void CMMutex_unlock(Mutex*m){CMMutex_init(m);cmotive_sys_locks_mutex_unlock(m->handle);}\nstatic int32_t Identity_I32(int32_t x){return x;}\n"); }
+ sb_add(out,"typedef struct { const char *fmt; void *handle; } OStream; static void CMOStream_Expect(OStream*s,const char*f){s->fmt=f?f:\"%s\";} static int CMOStream_Write(OStream*s,...){va_list ap; int r; va_start(ap,s); r=vprintf(s&&s->fmt?s->fmt:\"%s\",ap); va_end(ap); return r;}\ntypedef struct { int unused; } Formatter; static int CMFormatter_Println(Formatter*f,const char*s){(void)f; return cmotive_sys_stdio_println(s);}\ntypedef struct { char *path; } Path; static void CMPath_Set(Path*p,char*v){p->path=v;} static char* CMPath_Get(Path*p){return p->path;} static int CMPath_Exists(Path*p){return cmotive_sys_filesystem_exists(p->path);} static int CMPath_IsFile(Path*p){return cmotive_sys_filesystem_is_file(p->path);} static int CMPath_IsDirectory(Path*p){return cmotive_sys_filesystem_is_directory(p->path);}\ntypedef struct { int unused; } Filesystem; static int CMFilesystem_Exists(Filesystem*f,char*p){(void)f;return cmotive_sys_filesystem_exists(p);} static int CMFilesystem_IsFile(Filesystem*f,char*p){(void)f;return cmotive_sys_filesystem_is_file(p);} static int CMFilesystem_IsDirectory(Filesystem*f,char*p){(void)f;return cmotive_sys_filesystem_is_directory(p);} static char* CMFilesystem_CurrentPath(Filesystem*f){(void)f;return cmotive_sys_filesystem_current_path();}\ntypedef struct { int fd; } Socket; static int CMSocket_OpenTcpIPv4(Socket*s){s->fd=cmotive_sys_net_socket_tcp_ipv4();return s->fd;} static int CMSocket_OpenTcpIPv6(Socket*s){s->fd=cmotive_sys_net_socket_tcp_ipv6();return s->fd;} static int CMSocket_OpenUdpIPv4(Socket*s){s->fd=cmotive_sys_net_socket_udp_ipv4();return s->fd;} static int CMSocket_OpenUdpIPv6(Socket*s){s->fd=cmotive_sys_net_socket_udp_ipv6();return s->fd;} static int CMSocket_OpenRawIPv4(Socket*s){s->fd=cmotive_sys_net_socket_raw_ipv4();return s->fd;} static int CMSocket_OpenRawIPv6(Socket*s){s->fd=cmotive_sys_net_socket_raw_ipv6();return s->fd;} static int CMSocket_OpenIcmpIPv4(Socket*s){s->fd=cmotive_sys_net_socket_icmp_ipv4();return s->fd;} static int CMSocket_OpenIcmpIPv6(Socket*s){s->fd=cmotive_sys_net_socket_icmp_ipv6();return s->fd;} static int CMSocket_Attach(Socket*s,int fd){s->fd=fd;return fd;} static int CMSocket_Fd(Socket*s){return s->fd;} static int CMSocket_IsOpen(Socket*s){return s->fd>=0;} static int CMSocket_Close(Socket*s){int r=0;if(s->fd>=0){r=cmotive_sys_net_socket_close(s->fd);s->fd=-1;}return r;} static int CMSocket_Send(Socket*s,void*b,uint64_t n){return cmotive_sys_net_send(s->fd,b,n);} static int CMSocket_Recv(Socket*s,void*b,uint64_t n){return cmotive_sys_net_recv(s->fd,b,n);} static int CMSocket_BindIPv4(Socket*s,char*ip,uint16_t port){return cmotive_sys_net_bind_ipv4(s->fd,ip,port);} static int CMSocket_ConnectIPv4(Socket*s,char*ip,uint16_t port){return cmotive_sys_net_connect_ipv4(s->fd,ip,port);} static int CMSocket_Listen(Socket*s,int backlog){return cmotive_sys_net_listen(s->fd,backlog);} static int CMSocket_Accept(Socket*s){return cmotive_sys_net_accept(s->fd);} typedef struct { int unused; } Net; static int CMNet_TcpIPv4(Net*n){(void)n;return cmotive_sys_net_socket_tcp_ipv4();} static int CMNet_TcpIPv6(Net*n){(void)n;return cmotive_sys_net_socket_tcp_ipv6();} static int CMNet_UdpIPv4(Net*n){(void)n;return cmotive_sys_net_socket_udp_ipv4();} static int CMNet_UdpIPv6(Net*n){(void)n;return cmotive_sys_net_socket_udp_ipv6();} static int CMNet_RawIPv4(Net*n){(void)n;return cmotive_sys_net_socket_raw_ipv4();} static int CMNet_RawIPv6(Net*n){(void)n;return cmotive_sys_net_socket_raw_ipv6();} static int CMNet_IcmpIPv4(Net*n){(void)n;return cmotive_sys_net_socket_icmp_ipv4();} static int CMNet_IcmpIPv6(Net*n){(void)n;return cmotive_sys_net_socket_icmp_ipv6();} static int CMNet_Close(Net*n,int fd){(void)n;return cmotive_sys_net_socket_close(fd);}\ntypedef struct { void *handle; } Thread; typedef struct { int unused; } Threading; static void* CMThread_Start(Thread*t,void*entry,void*userdata){t->handle=cmotive_sys_thread_start(entry,userdata);return t->handle;} static int CMThread_Join(Thread*t){int r=cmotive_sys_thread_join(t->handle);t->handle=NULL;return r;} static int CMThread_Detach(Thread*t){int r=cmotive_sys_thread_detach(t->handle);t->handle=NULL;return r;} static void* CMThread_Current(void*x){(void)x;return cmotive_sys_thread_current();} static int CMThread_Yield(void*x){(void)x;return cmotive_sys_thread_yield();} static void CMThread_SleepMs(void*x,uint32_t ms){(void)x;cmotive_sys_thread_sleep_ms(ms);} static void CMThread_MilliSleep(void*x,uint32_t ms){(void)x;cmotive_sys_thread_sleep_ms(ms);} static void CMThread_MicroSleep(void*x,uint64_t us){(void)x;cmotive_sys_thread_sleep_us(us);} static void CMThread_NanoSleep(void*x,uint64_t ns){(void)x;cmotive_sys_thread_sleep_ns(ns);} static void* CMThreading_Start(Threading*t,void*entry,void*userdata){(void)t;return cmotive_sys_thread_start(entry,userdata);} static int CMThreading_Join(Threading*t,void*h){(void)t;return cmotive_sys_thread_join(h);} static int CMThreading_Detach(Threading*t,void*h){(void)t;return cmotive_sys_thread_detach(h);} static void* CMThreading_Current(void*x){(void)x;return cmotive_sys_thread_current();} static int CMThreading_Yield(void*x){(void)x;return cmotive_sys_thread_yield();} static void CMThreading_SleepMs(void*x,uint32_t ms){(void)x;cmotive_sys_thread_sleep_ms(ms);} static void CMThreading_MicroSleep(void*x,uint64_t us){(void)x;cmotive_sys_thread_sleep_us(us);} static void CMThreading_NanoSleep(void*x,uint64_t ns){(void)x;cmotive_sys_thread_sleep_ns(ns);}\ntypedef struct { int unused; } Algorithms; static void CMAlgorithms_QuickSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_quick_i64(d,n);} static void CMAlgorithms_HeapSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_heap_i64(d,n);} static void CMAlgorithms_MergeSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_merge_i64(d,n);} static void CMAlgorithms_InsertionSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_insertion_i64(d,n);} static void CMAlgorithms_SelectionSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_selection_i64(d,n);} static void CMAlgorithms_BubbleSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_bubble_i64(d,n);} static void CMAlgorithms_ShellSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_shell_i64(d,n);} static void CMAlgorithms_CombSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_comb_i64(d,n);} static void CMAlgorithms_GnomeSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_gnome_i64(d,n);} static void CMAlgorithms_RadixSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_radix_i64(d,n);} static void CMAlgorithms_CountingSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_counting_i64(d,n);} static int64_t CMAlgorithms_BinarySearch(Algorithms*a,int64_t*d,uint64_t n,int64_t v){(void)a;return cmotive_sys_algorithms_binary_search_i64(d,n,v);} static int64_t CMAlgorithms_LinearSearch(Algorithms*a,int64_t*d,uint64_t n,int64_t v){(void)a;return cmotive_sys_algorithms_linear_search_i64(d,n,v);} static int64_t CMAlgorithms_JumpSearch(Algorithms*a,int64_t*d,uint64_t n,int64_t v){(void)a;return cmotive_sys_algorithms_jump_search_i64(d,n,v);} static int64_t CMAlgorithms_ExponentialSearch(Algorithms*a,int64_t*d,uint64_t n,int64_t v){(void)a;return cmotive_sys_algorithms_exponential_search_i64(d,n,v);} static int64_t CMAlgorithms_InterpolationSearch(Algorithms*a,int64_t*d,uint64_t n,int64_t v){(void)a;return cmotive_sys_algorithms_interpolation_search_i64(d,n,v);} static int CMAlgorithms_IsSorted(Algorithms*a,int64_t*d,uint64_t n){(void)a;return cmotive_sys_algorithms_is_sorted_i64(d,n);} static void CMAlgorithms_Reverse(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_reverse_i64(d,n);} static void CMAlgorithms_RotateLeft(Algorithms*a,int64_t*d,uint64_t n,uint64_t by){(void)a;cmotive_sys_algorithms_rotate_left_i64(d,n,by);} static uint64_t CMAlgorithms_Unique(Algorithms*a,int64_t*d,uint64_t n){(void)a;return cmotive_sys_algorithms_unique_i64(d,n);} static int64_t CMAlgorithms_Min(Algorithms*a,int64_t x,int64_t y){(void)a;return cmotive_sys_algorithms_min_i64(x,y);} static int64_t CMAlgorithms_Max(Algorithms*a,int64_t x,int64_t y){(void)a;return cmotive_sys_algorithms_max_i64(x,y);} static int CMAlgorithms_Compare(Algorithms*a,int x,int y){(void)a;return cmotive_sys_algorithms_compare_i32(x,y);}\ntypedef struct { void *h; } CMotive_Vector_Int; static void CMVector_ensure(CMotive_Vector_Int*v){if(!v->h)v->h=cmotive_sys_stl_vector_create();} static void CMVector_PushBack(CMotive_Vector_Int*v,int64_t x){CMVector_ensure(v);cmotive_sys_stl_vector_push_i64(v->h,x);} static uint64_t CMVector_Size(CMotive_Vector_Int*v){CMVector_ensure(v);return cmotive_sys_stl_vector_size(v->h);} static int64_t CMVector_At(CMotive_Vector_Int*v,uint64_t i){CMVector_ensure(v);return cmotive_sys_stl_vector_get_i64(v->h,i);} static void CMVector_Sort(CMotive_Vector_Int*v){CMVector_ensure(v);cmotive_sys_stl_vector_sort_i64(v->h);}\ntypedef struct { void *h; } CMotive_Map_CharPtr_Int; static void CMMap_ensure(CMotive_Map_CharPtr_Int*m){if(!m->h)m->h=cmotive_sys_stl_map_create();} static void CMMap_Put(CMotive_Map_CharPtr_Int*m,char*k,int64_t v){CMMap_ensure(m);cmotive_sys_stl_map_put_i64(m->h,k,v);} static int64_t CMMap_Get(CMotive_Map_CharPtr_Int*m,char*k,int64_t fb){CMMap_ensure(m);return cmotive_sys_stl_map_get_i64(m->h,k,fb);} static int CMMap_Contains(CMotive_Map_CharPtr_Int*m,char*k){CMMap_ensure(m);return cmotive_sys_stl_map_contains(m->h,k);}\ntypedef struct { void *h; } CMotive_Tree_Int; static void CMTree_ensure(CMotive_Tree_Int*t){if(!t->h)t->h=cmotive_sys_stl_binary_search_tree_create();} static void CMTree_Insert(CMotive_Tree_Int*t,int64_t v){CMTree_ensure(t);cmotive_sys_stl_binary_search_tree_insert_i64(t->h,v);} static int CMTree_Contains(CMotive_Tree_Int*t,int64_t v){CMTree_ensure(t);return cmotive_sys_stl_binary_search_tree_contains_i64(t->h,v);}\ntypedef struct { char *value; } CString; static void CMCString_Set(CString*s,char*v){s->value=v;} static char* CMCString_Get(CString*s){return s->value;} static uint64_t CMCString_Length(CString*s){return cmotive_sys_string_strlen(s->value);} static int CMCString_Contains(CString*s,char*n){return cmotive_sys_string_strstr(s->value,n)!=NULL;} static int CMCString_Compare(CString*s,char*o){return cmotive_sys_string_strcmp(s->value,o);}\ntypedef struct { int unused; } Character; static int CMCharacter_IsDigit(Character*c,int ch){(void)c;return isdigit((unsigned char)ch)!=0;}\ntypedef struct { void *table; } StringParser; static void CMStringParser_Parse(StringParser*p,char*i,char*r,char*f,char e){p->table=cmotive_sys_string_str_parse(i,r,f,e);} static uint64_t CMStringParser_Rows(StringParser*p){return cmotive_sys_string_str_parse_rows(p->table);} static uint64_t CMStringParser_Cols(StringParser*p,uint64_t r){return cmotive_sys_string_str_parse_cols(p->table,r);}\ntypedef struct { uint16_t *value; } Wide16String; typedef struct { uint32_t *value; } Wide32String; static uint64_t CMWide16_Length(Wide16String*w){return cmotive_sys_wide16_len(w->value);} static uint64_t CMWide32_Length(Wide32String*w){return cmotive_sys_wide32_len(w->value);}\ntypedef struct { void *handle; } Mutex; static void CMMutex_init(Mutex*m){if(!m->handle)m->handle=cmotive_sys_locks_mutex_create();} static void CMMutex_lock(Mutex*m){CMMutex_init(m);cmotive_sys_locks_mutex_lock(m->handle);} static void CMMutex_unlock(Mutex*m){CMMutex_init(m);cmotive_sys_locks_mutex_unlock(m->handle);}\nstatic int32_t Identity_I32(int32_t x){return x;}\n"); }
+
+func emit_class_fields_recursive(p : Program*, out : Str*, c : Class*) : Void
+{
+ int j;
+ if (!c) return;
+ if (c->base && *c->base) emit_class_fields_recursive(p,out,find_class(p,c->base));
+ for (j=0;j<c->field_n;j++) {
+  char *ct=ctype(c->fields[j].type);
+  sb_printf(out,"  %s %s;\n",ct,c->fields[j].name);
+  free(ct);
+ }
+}
+
+func emit_class_initialization(p : Program*, out : Str*, c : Class*) : Void
+{
+ int j;
+ if (!c) return;
+ if (c->base && *c->base) {
+  Class *b=find_class(p,c->base);
+  if (b) { char *bp=class_sym_prefix(b); sb_printf(out,"  %s__ctor((%s*)this);\n",bp,b->name); free(bp); }
+ }
+ if (!type_is_builtin_obj(c->name)) sb_printf(out,"  this->__cmotive_type=\"%s\";\n",c->name);
+ for (j=0;j<c->field_n;j++) {
+  TokVec tv=lex_text(c->fields[j].init && *c->fields[j].init ? c->fields[j].init : "0");
+  VarTab empty={0};
+  char *e=expr_from_tokens(p,tv.v,tv.n>0?tv.n-1:0,&empty,c,0);
+  sb_printf(out,"  this->%s=%s;\n",c->fields[j].name,strlen(e)?e:"0");
+  free(e);
+ }
+}
+
+func emit_virtual_default_return(out : Str*, type : Char*) : Void
+{
+ if (streq(type,"Void") || streq(type,"void")) sb_add(out,"  return;\n");
+ else if (type_decl_is_pointer(type)) sb_add(out,"  return NULL;\n");
+ else sb_add(out,"  return 0;\n");
+}
+
+func emit_virtual_dispatch_definition(p : Program*, out : Str*, root : Class*, f : Func*) : Void
+{
+ int i,k;
+ char *rt=ctype(f->ret);
+ char *dispatch=class_dispatch_symbol(root,f->name,f);
+ char *rootsym=mangle_class_member(root,f->name,f);
+ int isvoid=streq(f->ret,"Void") || streq(f->ret,"void");
+ sb_printf(out,"%s %s(%s *this",rt,dispatch,root->name);
+ for(k=0;k<f->param_n;k++) { char *ct=ctype(f->params[k].type); sb_printf(out,", %s %s",ct,f->params[k].name); free(ct); }
+ sb_add(out,") {\n");
+ sb_add(out,"  if(!this){ CMotive_UnresolvedTarget(\"virtual:null\",0);");
+ if (isvoid) sb_add(out," return; }\n"); else if (type_decl_is_pointer(f->ret)) sb_add(out," return NULL; }\n"); else sb_add(out," return 0; }\n");
+ for(i=0;i<p->class_n;i++) {
+  Class *d=&p->classes[i];
+  if (class_is_descendant(p,d,root)) {
+   Class *owner=find_class_method_owner(p,d,f->name);
+   Func *impl=find_class_method(p,d,f->name);
+   if (owner && impl && owner!=root && !impl->pure) {
+    char *sym=mangle_class_member(owner,f->name,impl);
+    sb_printf(out,"  if(this->__cmotive_type && strcmp(this->__cmotive_type,\"%s\")==0) { ",d->name);
+    if (!isvoid) sb_add(out,"return ");
+    sb_printf(out,"%s((%s*)this",sym,owner->name);
+    for(k=0;k<f->param_n;k++) sb_printf(out,", %s",f->params[k].name);
+    sb_add(out,");");
+    if (isvoid) sb_add(out," return;");
+    sb_add(out," }\n");
+    free(sym);
+   }
+  }
+ }
+ if (!f->pure) {
+  sb_add(out,"  ");
+  if (!isvoid) sb_add(out,"return ");
+  sb_printf(out,"%s(this",rootsym);
+  for(k=0;k<f->param_n;k++) sb_printf(out,", %s",f->params[k].name);
+  sb_add(out,");\n");
+  if (isvoid) sb_add(out,"  return;\n");
+ } else {
+  sb_printf(out,"  CMotive_UnresolvedTarget(\"virtual:%s.%s\",0);\n",root->name,f->name);
+  emit_virtual_default_return(out,f->ret);
+ }
+ sb_add(out,"}\n");
+ free(rt); free(dispatch); free(rootsym);
+}
 
 func emit_structs(p : Program*, out : Str*) : Void
 {
@@ -1395,21 +1749,8 @@ func emit_structs(p : Program*, out : Str*) : Void
         char *prefix = class_sym_prefix(c);
         if (!type_is_builtin_obj(c->name)) {
             sb_printf(out, "typedef struct %s {\n", c->name);
-            if (c->base && *c->base) {
-                Class *b = find_class(p, c->base);
-                if (b) {
-                    for (j = 0; j < b->field_n; j++) {
-                        char *ct = ctype(b->fields[j].type);
-                        sb_printf(out, "  %s %s;\n", ct, b->fields[j].name);
-                        free(ct);
-                    }
-                }
-            }
-            for (j = 0; j < c->field_n; j++) {
-                char *ct = ctype(c->fields[j].type);
-                sb_printf(out, "  %s %s;\n", ct, c->fields[j].name);
-                free(ct);
-            }
+            sb_add(out, "  const char *__cmotive_type;\n");
+            emit_class_fields_recursive(p,out,c);
             sb_printf(out, "} %s;\n", c->name);
         }
         sb_printf(out, "typedef struct %s__PublicData {\n", prefix);
@@ -1476,6 +1817,18 @@ func emit_prototypes(p : Program*, out : Str*) : Void
                 sb_add(out, ");\n");
                 free(rt);
                 free(sym);
+            }
+        }
+        for (j = 0; j < c->method_n; j++) {
+            Func *vf = &c->methods[j];
+            if (vf->overridable && class_virtual_root(p,c,vf->name)==c) {
+                char *rt = ctype(vf->ret);
+                char *sym = class_dispatch_symbol(c,vf->name,vf);
+                int k;
+                sb_printf(out, "%s %s(%s *this", rt, sym, c->name);
+                for (k=0;k<vf->param_n;k++) { char *ct=ctype(vf->params[k].type); sb_printf(out, ", %s %s",ct,vf->params[k].name); free(ct); }
+                sb_add(out, ");\n");
+                free(rt); free(sym);
             }
         }
         sb_printf(out, "void %s__ctor(%s *this); void %s__dtor(%s *this); void *%s__new(void); void %s__delete(%s *this);\n", prefix, c->name, prefix, c->name, prefix, prefix, c->name);
@@ -1565,17 +1918,45 @@ func emit_functions(p : Program*, out : Str*) : Void
                     free(ct);
                 }
                 sb_add(out, ") {\n");
+                if (f->ctor) emit_class_initialization(p,out,c);
                 emit_function_body(p, out, f, c);
+                if (f->dtor && c->base && *c->base) {
+                    Class *b=find_class(p,c->base);
+                    if (b) { char *bp=class_sym_prefix(b); sb_printf(out,"  %s__dtor((%s*)this);\n",bp,b->name); free(bp); }
+                }
                 if (f->ctor || f->dtor) sb_add(out, "  return;\n");
                 sb_add(out, "}\n");
                 free(rt);
                 free(sym);
             }
         }
-        if (!has_ctor0) sb_printf(out, "void %s__ctor(%s *this){(void)this;}\n", prefix, c->name);
-        if (!has_dtor) sb_printf(out, "void %s__dtor(%s *this){(void)this;}\n", prefix, c->name);
+        if (!has_ctor0) {
+            sb_printf(out, "void %s__ctor(%s *this){\n", prefix, c->name);
+            emit_class_initialization(p,out,c);
+            sb_add(out, "  return;\n}\n");
+        }
+        if (!has_dtor) {
+            sb_printf(out, "void %s__dtor(%s *this){\n", prefix, c->name);
+            if (c->base && *c->base) {
+                Class *b=find_class(p,c->base);
+                if (b) { char *bp=class_sym_prefix(b); sb_printf(out,"  %s__dtor((%s*)this);\n",bp,b->name); free(bp); }
+            }
+            sb_add(out, "  return;\n}\n");
+        }
         sb_printf(out, "void *%s__new(void){%s*this=(%s*)CMotive_New(sizeof(%s)); if(!this)return NULL; %s__ctor(this); return this;}\n", prefix, c->name, c->name, c->name, prefix);
-        sb_printf(out, "void %s__delete(%s *this){if(!this)return; %s__dtor(this); CMotive_Delete(this);}\n", prefix, c->name, prefix);
+        sb_printf(out, "void %s__delete(%s *this){if(!this)return;", prefix, c->name);
+        {
+            int di;
+            for (di=0;di<p->class_n;di++) {
+                Class *d=&p->classes[di];
+                if (class_is_descendant(p,d,c)) {
+                    char *dp=class_sym_prefix(d);
+                    sb_printf(out," if(this->__cmotive_type && strcmp(this->__cmotive_type,\"%s\")==0){%s__delete((%s*)this);return;}",d->name,dp,d->name);
+                    free(dp);
+                }
+            }
+        }
+        sb_printf(out, " %s__dtor(this); CMotive_Delete(this);}\n", prefix);
         for (j = 0; j < c->method_n; j++) {
             if (c->methods[j].ctor && c->methods[j].param_n > 0) {
                 Func *f = &c->methods[j];
@@ -1594,6 +1975,10 @@ func emit_functions(p : Program*, out : Str*) : Void
                 free(ctor);
                 free(newn);
             }
+        }
+        for (j = 0; j < c->method_n; j++) {
+            Func *vf=&c->methods[j];
+            if (vf->overridable && class_virtual_root(p,c,vf->name)==c) emit_virtual_dispatch_definition(p,out,c,vf);
         }
         for (j = 0; j < c->field_n; j++) {
             if (!c->fields[j].block) {

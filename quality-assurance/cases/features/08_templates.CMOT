@@ -1,0 +1,36 @@
+Template T: Type
+Class QaBox
+{
+    Public
+    {
+        value: T = 0;
+        QaBox() { }
+    }
+};
+Template T: Type
+T Identity x: T () { Return x; }
+Template A: Type B: Type
+Class QaPair
+{
+    Public
+    {
+        first: A = 0;
+        second: B = 0;
+    }
+};
+I32 main()
+{
+    b: QaBox<I32>;
+    p: QaPair<I32, Char>;
+    pb: QaBox<I32>* = New QaBox<I32>();
+    // QA-TEST: FEATURE-0029
+    If ( Identity<I32>(41) != 41 ) { Return 1; }
+    // QA-TEST: FEATURE-0030
+    If ( pb == Null ) { Return 2; }
+    // QA-TEST: FEATURE-0031
+    If ( Sizeof(b) == 0 ) { Return 3; }
+    // QA-TEST: FEATURE-0032
+    If ( Sizeof(p) == 0 ) { Return 4; }
+    Delete pb;
+    Return 0;
+}

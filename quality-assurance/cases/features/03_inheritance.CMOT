@@ -1,0 +1,32 @@
+Class QaBase
+{
+    Public
+    {
+        base: I32 = 5; Block
+        QaBase() { }
+        I32 BaseValue() { Return base; }
+    }
+};
+Class QaDerived Inherits QaBase Public
+{
+    Public
+    {
+        extra: I32 = 7; Block
+        QaDerived() { }
+        I32 Total() { Return base + extra; }
+    }
+};
+I32 main()
+{
+    d: QaDerived* = New QaDerived();
+    // QA-TEST: FEATURE-0009
+    If ( d == Null ) { Return 1; }
+    // QA-TEST: FEATURE-0010
+    If ( d->BaseValue() != 5 ) { Return 2; }
+    // QA-TEST: FEATURE-0011
+    If ( d->Total() != 12 ) { Return 3; }
+    // QA-TEST: FEATURE-0012
+    If ( d->extra != 7 ) { Return 4; }
+    Delete d;
+    Return 0;
+}

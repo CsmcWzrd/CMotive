@@ -1,0 +1,102 @@
+Plugswitch
+Plugcase OS: WIN32
+QaPlatform0: I32 = 1;
+Plugcase OS: UNIX
+QaPlatform0: I32 = 1;
+Plugdefault
+QaPlatform0: I32 = 0;
+Plugend
+
+Plugswitch
+Plugcase PROCESSOR: X64
+QaPlatform1: I32 = 1;
+Plugcase PROCESSOR: ARM64
+QaPlatform1: I32 = 1;
+Plugcase PROCESSOR: X86_64
+QaPlatform1: I32 = 1;
+Plugdefault
+QaPlatform1: I32 = 0;
+Plugend
+
+Plugswitch
+Plugcase ENDIAN: LITTLE
+QaPlatform2: I32 = 1;
+Plugcase ENDIAN: BIG
+QaPlatform2: I32 = 1;
+Plugdefault
+QaPlatform2: I32 = 0;
+Plugend
+
+Plugswitch
+Plugcase OS: LINUX
+QaPlatform3: I32 = 1;
+Plugcase OS: MACOS
+QaPlatform3: I32 = 1;
+Plugcase OS: WIN64
+QaPlatform3: I32 = 1;
+Plugdefault
+QaPlatform3: I32 = 0;
+Plugend
+
+Plugswitch
+Plugcase OS: WIN32
+QaPlatform4: I32 = 1;
+Plugcase OS: UNIX
+QaPlatform4: I32 = 1;
+Plugdefault
+QaPlatform4: I32 = 0;
+Plugend
+
+Plugswitch
+Plugcase PROCESSOR: X64
+QaPlatform5: I32 = 1;
+Plugcase PROCESSOR: ARM64
+QaPlatform5: I32 = 1;
+Plugcase PROCESSOR: X86_64
+QaPlatform5: I32 = 1;
+Plugdefault
+QaPlatform5: I32 = 0;
+Plugend
+
+Plugswitch
+Plugcase ENDIAN: LITTLE
+QaPlatform6: I32 = 1;
+Plugcase ENDIAN: BIG
+QaPlatform6: I32 = 1;
+Plugdefault
+QaPlatform6: I32 = 0;
+Plugend
+
+Plugswitch
+Plugcase OS: LINUX
+QaPlatform7: I32 = 1;
+Plugcase OS: MACOS
+QaPlatform7: I32 = 1;
+Plugcase OS: WIN64
+QaPlatform7: I32 = 1;
+Plugdefault
+QaPlatform7: I32 = 0;
+Plugend
+
+I32
+main
+()
+{
+    // QA-TEST: PP-0169
+    If ( QaPlatform0 != 1 ) { Return 1; }
+    // QA-TEST: PP-0170
+    If ( QaPlatform1 != 1 ) { Return 2; }
+    // QA-TEST: PP-0171
+    If ( QaPlatform2 != 1 ) { Return 3; }
+    // QA-TEST: PP-0172
+    If ( QaPlatform3 != 1 ) { Return 4; }
+    // QA-TEST: PP-0173
+    If ( QaPlatform4 != 1 ) { Return 5; }
+    // QA-TEST: PP-0174
+    If ( QaPlatform5 != 1 ) { Return 6; }
+    // QA-TEST: PP-0175
+    If ( QaPlatform6 != 1 ) { Return 7; }
+    // QA-TEST: PP-0176
+    If ( QaPlatform7 != 1 ) { Return 8; }
+    Return 0;
+}

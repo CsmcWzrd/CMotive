@@ -1,0 +1,27 @@
+Dynamic Struct QaDyn
+{
+    Int16 a;
+    Int32 b;
+};
+I32 main()
+{
+    QaDyn Expand
+    {
+        Uint16 c;
+        Double d;
+    };
+    x: QaDyn;
+    x.a = (Int16)1;
+    x.b = (Int32)2;
+    x.c = (Uint16)3;
+    x.d = 4.0;
+    // QA-TEST: FEATURE-0041
+    If ( x.a != 1 ) { Return 1; }
+    // QA-TEST: FEATURE-0042
+    If ( x.b != 2 ) { Return 2; }
+    // QA-TEST: FEATURE-0043
+    If ( x.c != 3 ) { Return 3; }
+    // QA-TEST: FEATURE-0044
+    If ( x.d < 4.0 ) { Return 4; }
+    Return 0;
+}

@@ -1,0 +1,25 @@
+Class QaNumber
+{
+    Public
+    {
+        value: Int32 = 0;
+        QaNumber() { }
+        QaNumber v: Int32 () { value = v; }
+        Int32 Operation + rhs: QaNumber () { Return value + rhs.value; }
+        Int32 Operation - rhs: QaNumber () { Return value - rhs.value; }
+    }
+};
+I32 main()
+{
+    a: QaNumber = New QaNumber(9);
+    b: QaNumber = New QaNumber(4);
+    // QA-TEST: FEATURE-0025
+    If ( a + b != 13 ) { Return 1; }
+    // QA-TEST: FEATURE-0026
+    If ( a - b != 5 ) { Return 2; }
+    // QA-TEST: FEATURE-0027
+    If ( b + a != 13 ) { Return 3; }
+    // QA-TEST: FEATURE-0028
+    If ( a - b + 1 != 6 ) { Return 4; }
+    Return 0;
+}

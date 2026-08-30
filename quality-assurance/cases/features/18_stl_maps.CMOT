@@ -1,0 +1,17 @@
+Plugin Sys::STL
+I32 main()
+{
+    d: Dict<Char*,Int>; d.Put("a", 11);
+    // QA-TEST: FEATURE-0069
+    If ( !d.Contains("a") || d.Get("a", 0) != 11 ) { Return 1; }
+    h: HashDict<Char*,Int>; h.Put("b", 12);
+    // QA-TEST: FEATURE-0070
+    If ( !h.Contains("b") || h.Get("b", 0) != 12 ) { Return 2; }
+    m: MultiDict<Char*,Int>; m.Put("c", 13);
+    // QA-TEST: FEATURE-0071
+    If ( !m.Contains("c") ) { Return 3; }
+    mh: MultiHashDict<Char*,Int>; mh.Put("d", 14);
+    // QA-TEST: FEATURE-0072
+    If ( !mh.Contains("d") ) { Return 4; }
+    Return 0;
+}

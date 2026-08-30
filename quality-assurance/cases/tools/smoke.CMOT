@@ -1,0 +1,24 @@
+Class QaToolClass
+{
+    Public
+    {
+        value: I32 = 40; Block
+        QaToolClass() { value += 1; }
+        I32 GetValue() { Return value; }
+    }
+};
+
+I32 QaToolAdd a: I32 b: I32 ()
+{
+    Return a + b;
+}
+
+I32 main()
+{
+    q: QaToolClass* = New QaToolClass();
+    If ( q == Null ) { Return 1; }
+    If ( q->GetValue() != 41 ) { Return 2; }
+    If ( QaToolAdd(1, 2) != 3 ) { Return 3; }
+    Delete q;
+    Return 0;
+}

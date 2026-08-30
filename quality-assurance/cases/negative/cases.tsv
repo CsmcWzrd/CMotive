@@ -1,0 +1,49 @@
+id	kind	path	expect
+NEG-0001	undefined-base	cases/negative/undefined_base_00.cmot.txt	undefined base class QaMissing0
+NEG-0002	undefined-base	cases/negative/undefined_base_01.cmot.txt	undefined base class QaMissing1
+NEG-0003	undefined-base	cases/negative/undefined_base_02.cmot.txt	undefined base class QaMissing2
+NEG-0004	undefined-base	cases/negative/undefined_base_03.cmot.txt	undefined base class QaMissing3
+NEG-0005	undefined-base	cases/negative/undefined_base_04.cmot.txt	undefined base class QaMissing4
+NEG-0006	undefined-base	cases/negative/undefined_base_05.cmot.txt	undefined base class QaMissing5
+NEG-0007	undefined-base	cases/negative/undefined_base_06.cmot.txt	undefined base class QaMissing6
+NEG-0008	undefined-base	cases/negative/undefined_base_07.cmot.txt	undefined base class QaMissing7
+NEG-0009	undefined-base	cases/negative/undefined_base_08.cmot.txt	undefined base class QaMissing8
+NEG-0010	undefined-base	cases/negative/undefined_base_09.cmot.txt	undefined base class QaMissing9
+NEG-0011	undefined-base	cases/negative/undefined_base_10.cmot.txt	undefined base class QaMissing10
+NEG-0012	undefined-base	cases/negative/undefined_base_11.cmot.txt	undefined base class QaMissing11
+NEG-0013	undefined-base	cases/negative/undefined_base_12.cmot.txt	undefined base class QaMissing12
+NEG-0014	undefined-base	cases/negative/undefined_base_13.cmot.txt	undefined base class QaMissing13
+NEG-0015	undefined-base	cases/negative/undefined_base_14.cmot.txt	undefined base class QaMissing14
+NEG-0016	undefined-base	cases/negative/undefined_base_15.cmot.txt	undefined base class QaMissing15
+NEG-0017	missing-input	cases/negative/missing_input_00.path	cannot read
+NEG-0018	missing-input	cases/negative/missing_input_01.path	cannot read
+NEG-0019	missing-input	cases/negative/missing_input_02.path	cannot read
+NEG-0020	missing-input	cases/negative/missing_input_03.path	cannot read
+NEG-0021	missing-input	cases/negative/missing_input_04.path	cannot read
+NEG-0022	missing-input	cases/negative/missing_input_05.path	cannot read
+NEG-0023	missing-input	cases/negative/missing_input_06.path	cannot read
+NEG-0024	missing-input	cases/negative/missing_input_07.path	cannot read
+NEG-0025	missing-input	cases/negative/missing_input_08.path	cannot read
+NEG-0026	missing-input	cases/negative/missing_input_09.path	cannot read
+NEG-0027	missing-input	cases/negative/missing_input_10.path	cannot read
+NEG-0028	missing-input	cases/negative/missing_input_11.path	cannot read
+NEG-0029	missing-input	cases/negative/missing_input_12.path	cannot read
+NEG-0030	missing-input	cases/negative/missing_input_13.path	cannot read
+NEG-0031	missing-input	cases/negative/missing_input_14.path	cannot read
+NEG-0032	missing-input	cases/negative/missing_input_15.path	cannot read
+NEG-0033	downstream-c-error	cases/negative/c_error_00.cmot.txt	qa_unknown_symbol
+NEG-0034	downstream-c-error	cases/negative/c_error_01.cmot.txt	qa_unknown_symbol
+NEG-0035	downstream-c-error	cases/negative/c_error_02.cmot.txt	qa_unknown_symbol
+NEG-0036	downstream-c-error	cases/negative/c_error_03.cmot.txt	qa_unknown_symbol
+NEG-0037	downstream-c-error	cases/negative/c_error_04.cmot.txt	qa_unknown_symbol
+NEG-0038	downstream-c-error	cases/negative/c_error_05.cmot.txt	qa_unknown_symbol
+NEG-0039	downstream-c-error	cases/negative/c_error_06.cmot.txt	qa_unknown_symbol
+NEG-0040	downstream-c-error	cases/negative/c_error_07.cmot.txt	qa_unknown_symbol
+NEG-0041	downstream-c-error	cases/negative/c_error_08.cmot.txt	qa_unknown_symbol
+NEG-0042	downstream-c-error	cases/negative/c_error_09.cmot.txt	qa_unknown_symbol
+NEG-0043	downstream-c-error	cases/negative/c_error_10.cmot.txt	qa_unknown_symbol
+NEG-0044	downstream-c-error	cases/negative/c_error_11.cmot.txt	qa_unknown_symbol
+NEG-0045	downstream-c-error	cases/negative/c_error_12.cmot.txt	qa_unknown_symbol
+NEG-0046	downstream-c-error	cases/negative/c_error_13.cmot.txt	qa_unknown_symbol
+NEG-0047	downstream-c-error	cases/negative/c_error_14.cmot.txt	qa_unknown_symbol
+NEG-0048	downstream-c-error	cases/negative/c_error_15.cmot.txt	qa_unknown_symbol

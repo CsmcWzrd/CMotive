@@ -1,0 +1,16 @@
+I32 main()
+{
+    result: I32 = 0;
+    // QA-TEST: FEATURE-0033
+    Try { result = 1; } Catchall { result = 9; }
+    If ( result != 1 ) { Return 1; }
+    // QA-TEST: FEATURE-0034
+    Try { Throw "qa"; result = 8; } Catchall { result = 2; }
+    If ( result != 2 ) { Return 2; }
+    // QA-TEST: FEATURE-0035
+    Try { Throw "qa2"; } Catch text: Char* { result = 3; }
+    If ( result != 3 ) { Return 3; }
+    // QA-TEST: FEATURE-0036
+    If ( result == 0 ) { Return 4; }
+    Return 0;
+}

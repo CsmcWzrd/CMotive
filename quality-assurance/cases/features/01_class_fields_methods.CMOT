@@ -1,0 +1,28 @@
+Plugin Sys::IO
+Class QaPoint
+{
+    Public
+    {
+        x: I32 = 0;
+        y: I32 = 0;
+        QaPoint() { }
+        QaPoint ax: I32 ay: I32 () { x = ax; y = ay; }
+        I32 Sum() { Return This.x + This.y; }
+        I32 Product() { Return x * y; }
+    }
+};
+I32 main()
+{
+    p: QaPoint* = New QaPoint(3, 4);
+    // QA-TEST: FEATURE-0001
+    If ( p->Sum() != 7 ) { Return 1; }
+    // QA-TEST: FEATURE-0002
+    If ( p->Product() != 12 ) { Return 2; }
+    // QA-TEST: FEATURE-0003
+    If ( p->x != 3 ) { Return 3; }
+    p->y = 9;
+    // QA-TEST: FEATURE-0004
+    If ( p->Sum() != 12 ) { Return 4; }
+    Delete p;
+    Return 0;
+}

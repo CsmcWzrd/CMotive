@@ -1,0 +1,377 @@
+Plugin Sys::IO
+
+I32
+main
+()
+{
+    x0: I32 = 0;
+    While ( x0 < 1 )
+    {
+        x0++;
+    }
+    // QA-TEST: LANG-0481
+    If ( !(x0 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0481");
+        Return 1;
+    }
+    x1: I32 = 0;
+    Do
+    {
+        x1++;
+    }
+    While ( x1 < 2 );
+    // QA-TEST: LANG-0482
+    If ( !(x1 == 2) )
+    {
+        Sys::IO::println("FAIL LANG-0482");
+        Return 1;
+    }
+    x2: I32 = 0;
+    While ( x2 < 3 )
+    {
+        x2++;
+    }
+    // QA-TEST: LANG-0483
+    If ( !(x2 == 3) )
+    {
+        Sys::IO::println("FAIL LANG-0483");
+        Return 1;
+    }
+    x3: I32 = 0;
+    Do
+    {
+        x3++;
+    }
+    While ( x3 < 4 );
+    // QA-TEST: LANG-0484
+    If ( !(x3 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0484");
+        Return 1;
+    }
+    x4: I32 = 0;
+    While ( x4 < 5 )
+    {
+        x4++;
+    }
+    // QA-TEST: LANG-0485
+    If ( !(x4 == 5) )
+    {
+        Sys::IO::println("FAIL LANG-0485");
+        Return 1;
+    }
+    x5: I32 = 0;
+    Do
+    {
+        x5++;
+    }
+    While ( x5 < 6 );
+    // QA-TEST: LANG-0486
+    If ( !(x5 == 6) )
+    {
+        Sys::IO::println("FAIL LANG-0486");
+        Return 1;
+    }
+    x6: I32 = 0;
+    While ( x6 < 7 )
+    {
+        x6++;
+    }
+    // QA-TEST: LANG-0487
+    If ( !(x6 == 7) )
+    {
+        Sys::IO::println("FAIL LANG-0487");
+        Return 1;
+    }
+    x7: I32 = 0;
+    Do
+    {
+        x7++;
+    }
+    While ( x7 < 1 );
+    // QA-TEST: LANG-0488
+    If ( !(x7 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0488");
+        Return 1;
+    }
+    x8: I32 = 0;
+    While ( x8 < 2 )
+    {
+        x8++;
+    }
+    // QA-TEST: LANG-0489
+    If ( !(x8 == 2) )
+    {
+        Sys::IO::println("FAIL LANG-0489");
+        Return 1;
+    }
+    x9: I32 = 0;
+    Do
+    {
+        x9++;
+    }
+    While ( x9 < 3 );
+    // QA-TEST: LANG-0490
+    If ( !(x9 == 3) )
+    {
+        Sys::IO::println("FAIL LANG-0490");
+        Return 1;
+    }
+    x10: I32 = 0;
+    While ( x10 < 4 )
+    {
+        x10++;
+    }
+    // QA-TEST: LANG-0491
+    If ( !(x10 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0491");
+        Return 1;
+    }
+    x11: I32 = 0;
+    Do
+    {
+        x11++;
+    }
+    While ( x11 < 5 );
+    // QA-TEST: LANG-0492
+    If ( !(x11 == 5) )
+    {
+        Sys::IO::println("FAIL LANG-0492");
+        Return 1;
+    }
+    x12: I32 = 0;
+    While ( x12 < 6 )
+    {
+        x12++;
+    }
+    // QA-TEST: LANG-0493
+    If ( !(x12 == 6) )
+    {
+        Sys::IO::println("FAIL LANG-0493");
+        Return 1;
+    }
+    x13: I32 = 0;
+    Do
+    {
+        x13++;
+    }
+    While ( x13 < 7 );
+    // QA-TEST: LANG-0494
+    If ( !(x13 == 7) )
+    {
+        Sys::IO::println("FAIL LANG-0494");
+        Return 1;
+    }
+    x14: I32 = 0;
+    While ( x14 < 1 )
+    {
+        x14++;
+    }
+    // QA-TEST: LANG-0495
+    If ( !(x14 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0495");
+        Return 1;
+    }
+    x15: I32 = 0;
+    Do
+    {
+        x15++;
+    }
+    While ( x15 < 2 );
+    // QA-TEST: LANG-0496
+    If ( !(x15 == 2) )
+    {
+        Sys::IO::println("FAIL LANG-0496");
+        Return 1;
+    }
+    x16: I32 = 0;
+    While ( x16 < 3 )
+    {
+        x16++;
+    }
+    // QA-TEST: LANG-0497
+    If ( !(x16 == 3) )
+    {
+        Sys::IO::println("FAIL LANG-0497");
+        Return 1;
+    }
+    x17: I32 = 0;
+    Do
+    {
+        x17++;
+    }
+    While ( x17 < 4 );
+    // QA-TEST: LANG-0498
+    If ( !(x17 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0498");
+        Return 1;
+    }
+    x18: I32 = 0;
+    While ( x18 < 5 )
+    {
+        x18++;
+    }
+    // QA-TEST: LANG-0499
+    If ( !(x18 == 5) )
+    {
+        Sys::IO::println("FAIL LANG-0499");
+        Return 1;
+    }
+    x19: I32 = 0;
+    Do
+    {
+        x19++;
+    }
+    While ( x19 < 6 );
+    // QA-TEST: LANG-0500
+    If ( !(x19 == 6) )
+    {
+        Sys::IO::println("FAIL LANG-0500");
+        Return 1;
+    }
+    x20: I32 = 0;
+    While ( x20 < 7 )
+    {
+        x20++;
+    }
+    // QA-TEST: LANG-0501
+    If ( !(x20 == 7) )
+    {
+        Sys::IO::println("FAIL LANG-0501");
+        Return 1;
+    }
+    x21: I32 = 0;
+    Do
+    {
+        x21++;
+    }
+    While ( x21 < 1 );
+    // QA-TEST: LANG-0502
+    If ( !(x21 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0502");
+        Return 1;
+    }
+    x22: I32 = 0;
+    While ( x22 < 2 )
+    {
+        x22++;
+    }
+    // QA-TEST: LANG-0503
+    If ( !(x22 == 2) )
+    {
+        Sys::IO::println("FAIL LANG-0503");
+        Return 1;
+    }
+    x23: I32 = 0;
+    Do
+    {
+        x23++;
+    }
+    While ( x23 < 3 );
+    // QA-TEST: LANG-0504
+    If ( !(x23 == 3) )
+    {
+        Sys::IO::println("FAIL LANG-0504");
+        Return 1;
+    }
+    x24: I32 = 0;
+    While ( x24 < 4 )
+    {
+        x24++;
+    }
+    // QA-TEST: LANG-0505
+    If ( !(x24 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0505");
+        Return 1;
+    }
+    x25: I32 = 0;
+    Do
+    {
+        x25++;
+    }
+    While ( x25 < 5 );
+    // QA-TEST: LANG-0506
+    If ( !(x25 == 5) )
+    {
+        Sys::IO::println("FAIL LANG-0506");
+        Return 1;
+    }
+    x26: I32 = 0;
+    While ( x26 < 6 )
+    {
+        x26++;
+    }
+    // QA-TEST: LANG-0507
+    If ( !(x26 == 6) )
+    {
+        Sys::IO::println("FAIL LANG-0507");
+        Return 1;
+    }
+    x27: I32 = 0;
+    Do
+    {
+        x27++;
+    }
+    While ( x27 < 7 );
+    // QA-TEST: LANG-0508
+    If ( !(x27 == 7) )
+    {
+        Sys::IO::println("FAIL LANG-0508");
+        Return 1;
+    }
+    x28: I32 = 0;
+    While ( x28 < 1 )
+    {
+        x28++;
+    }
+    // QA-TEST: LANG-0509
+    If ( !(x28 == 1) )
+    {
+        Sys::IO::println("FAIL LANG-0509");
+        Return 1;
+    }
+    x29: I32 = 0;
+    Do
+    {
+        x29++;
+    }
+    While ( x29 < 2 );
+    // QA-TEST: LANG-0510
+    If ( !(x29 == 2) )
+    {
+        Sys::IO::println("FAIL LANG-0510");
+        Return 1;
+    }
+    x30: I32 = 0;
+    While ( x30 < 3 )
+    {
+        x30++;
+    }
+    // QA-TEST: LANG-0511
+    If ( !(x30 == 3) )
+    {
+        Sys::IO::println("FAIL LANG-0511");
+        Return 1;
+    }
+    x31: I32 = 0;
+    Do
+    {
+        x31++;
+    }
+    While ( x31 < 4 );
+    // QA-TEST: LANG-0512
+    If ( !(x31 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0512");
+        Return 1;
+    }
+    Sys::IO::println("PASS LANG-GROUP-16 32");
+    Return 0;
+}

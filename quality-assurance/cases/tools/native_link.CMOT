@@ -1,0 +1,2 @@
+NativeInclude "quality-assurance/cases/tools/native_api.h";
+I32 main() { If ( qa_native_value() != 42 ) { Return 1; } Return 0; }

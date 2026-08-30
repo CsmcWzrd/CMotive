@@ -1,0 +1,17 @@
+Fptr I32 QaCallback x: I32 ();
+Global QaGlobalA: I32 = 11;
+Global QaGlobalB: I32 = 22;
+I32 main()
+{
+    cb: QaCallback = 0;
+    // QA-TEST: FEATURE-0045
+    If ( cb != 0 ) { Return 1; }
+    // QA-TEST: FEATURE-0046
+    If ( QaGlobalA != 11 ) { Return 2; }
+    // QA-TEST: FEATURE-0047
+    If ( QaGlobalB != 22 ) { Return 3; }
+    QaGlobalA += QaGlobalB;
+    // QA-TEST: FEATURE-0048
+    If ( QaGlobalA != 33 ) { Return 4; }
+    Return 0;
+}

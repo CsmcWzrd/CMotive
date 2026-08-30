@@ -1,0 +1,649 @@
+Plugin Sys::IO
+
+I32
+main
+()
+{
+    i0: I32 = 0;
+    sum0: I32 = 0;
+    For ( i0 = 0; i0 < 4; i0++ )
+    {
+        If ( (i0 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i0 == 7 )
+        {
+            Break;
+        }
+        sum0 += i0;
+    }
+    // QA-TEST: LANG-0609
+    If ( !(sum0 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0609");
+        Return 1;
+    }
+    i1: I32 = 0;
+    sum1: I32 = 0;
+    For ( i1 = 0; i1 < 5; i1++ )
+    {
+        If ( (i1 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i1 == 7 )
+        {
+            Break;
+        }
+        sum1 += i1;
+    }
+    // QA-TEST: LANG-0610
+    If ( !(sum1 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0610");
+        Return 1;
+    }
+    i2: I32 = 0;
+    sum2: I32 = 0;
+    For ( i2 = 0; i2 < 6; i2++ )
+    {
+        If ( (i2 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i2 == 7 )
+        {
+            Break;
+        }
+        sum2 += i2;
+    }
+    // QA-TEST: LANG-0611
+    If ( !(sum2 == 9) )
+    {
+        Sys::IO::println("FAIL LANG-0611");
+        Return 1;
+    }
+    i3: I32 = 0;
+    sum3: I32 = 0;
+    For ( i3 = 0; i3 < 7; i3++ )
+    {
+        If ( (i3 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i3 == 7 )
+        {
+            Break;
+        }
+        sum3 += i3;
+    }
+    // QA-TEST: LANG-0612
+    If ( !(sum3 == 9) )
+    {
+        Sys::IO::println("FAIL LANG-0612");
+        Return 1;
+    }
+    i4: I32 = 0;
+    sum4: I32 = 0;
+    For ( i4 = 0; i4 < 8; i4++ )
+    {
+        If ( (i4 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i4 == 7 )
+        {
+            Break;
+        }
+        sum4 += i4;
+    }
+    // QA-TEST: LANG-0613
+    If ( !(sum4 == 9) )
+    {
+        Sys::IO::println("FAIL LANG-0613");
+        Return 1;
+    }
+    i5: I32 = 0;
+    sum5: I32 = 0;
+    For ( i5 = 0; i5 < 4; i5++ )
+    {
+        If ( (i5 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i5 == 7 )
+        {
+            Break;
+        }
+        sum5 += i5;
+    }
+    // QA-TEST: LANG-0614
+    If ( !(sum5 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0614");
+        Return 1;
+    }
+    i6: I32 = 0;
+    sum6: I32 = 0;
+    For ( i6 = 0; i6 < 5; i6++ )
+    {
+        If ( (i6 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i6 == 7 )
+        {
+            Break;
+        }
+        sum6 += i6;
+    }
+    // QA-TEST: LANG-0615
+    If ( !(sum6 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0615");
+        Return 1;
+    }
+    i7: I32 = 0;
+    sum7: I32 = 0;
+    For ( i7 = 0; i7 < 6; i7++ )
+    {
+        If ( (i7 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i7 == 7 )
+        {
+            Break;
+        }
+        sum7 += i7;
+    }
+    // QA-TEST: LANG-0616
+    If ( !(sum7 == 9) )
+    {
+        Sys::IO::println("FAIL LANG-0616");
+        Return 1;
+    }
+    i8: I32 = 0;
+    sum8: I32 = 0;
+    For ( i8 = 0; i8 < 7; i8++ )
+    {
+        If ( (i8 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i8 == 7 )
+        {
+            Break;
+        }
+        sum8 += i8;
+    }
+    // QA-TEST: LANG-0617
+    If ( !(sum8 == 9) )
+    {
+        Sys::IO::println("FAIL LANG-0617");
+        Return 1;
+    }
+    i9: I32 = 0;
+    sum9: I32 = 0;
+    For ( i9 = 0; i9 < 8; i9++ )
+    {
+        If ( (i9 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i9 == 7 )
+        {
+            Break;
+        }
+        sum9 += i9;
+    }
+    // QA-TEST: LANG-0618
+    If ( !(sum9 == 9) )
+    {
+        Sys::IO::println("FAIL LANG-0618");
+        Return 1;
+    }
+    i10: I32 = 0;
+    sum10: I32 = 0;
+    For ( i10 = 0; i10 < 4; i10++ )
+    {
+        If ( (i10 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i10 == 7 )
+        {
+            Break;
+        }
+        sum10 += i10;
+    }
+    // QA-TEST: LANG-0619
+    If ( !(sum10 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0619");
+        Return 1;
+    }
+    i11: I32 = 0;
+    sum11: I32 = 0;
+    For ( i11 = 0; i11 < 5; i11++ )
+    {
+        If ( (i11 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i11 == 7 )
+        {
+            Break;
+        }
+        sum11 += i11;
+    }
+    // QA-TEST: LANG-0620
+    If ( !(sum11 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0620");
+        Return 1;
+    }
+    i12: I32 = 0;
+    sum12: I32 = 0;
+    For ( i12 = 0; i12 < 6; i12++ )
+    {
+        If ( (i12 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i12 == 7 )
+        {
+            Break;
+        }
+        sum12 += i12;
+    }
+    // QA-TEST: LANG-0621
+    If ( !(sum12 == 9) )
+    {
+        Sys::IO::println("FAIL LANG-0621");
+        Return 1;
+    }
+    i13: I32 = 0;
+    sum13: I32 = 0;
+    For ( i13 = 0; i13 < 7; i13++ )
+    {
+        If ( (i13 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i13 == 7 )
+        {
+            Break;
+        }
+        sum13 += i13;
+    }
+    // QA-TEST: LANG-0622
+    If ( !(sum13 == 9) )
+    {
+        Sys::IO::println("FAIL LANG-0622");
+        Return 1;
+    }
+    i14: I32 = 0;
+    sum14: I32 = 0;
+    For ( i14 = 0; i14 < 8; i14++ )
+    {
+        If ( (i14 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i14 == 7 )
+        {
+            Break;
+        }
+        sum14 += i14;
+    }
+    // QA-TEST: LANG-0623
+    If ( !(sum14 == 9) )
+    {
+        Sys::IO::println("FAIL LANG-0623");
+        Return 1;
+    }
+    i15: I32 = 0;
+    sum15: I32 = 0;
+    For ( i15 = 0; i15 < 4; i15++ )
+    {
+        If ( (i15 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i15 == 7 )
+        {
+            Break;
+        }
+        sum15 += i15;
+    }
+    // QA-TEST: LANG-0624
+    If ( !(sum15 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0624");
+        Return 1;
+    }
+    i16: I32 = 0;
+    sum16: I32 = 0;
+    For ( i16 = 0; i16 < 5; i16++ )
+    {
+        If ( (i16 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i16 == 7 )
+        {
+            Break;
+        }
+        sum16 += i16;
+    }
+    // QA-TEST: LANG-0625
+    If ( !(sum16 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0625");
+        Return 1;
+    }
+    i17: I32 = 0;
+    sum17: I32 = 0;
+    For ( i17 = 0; i17 < 6; i17++ )
+    {
+        If ( (i17 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i17 == 7 )
+        {
+            Break;
+        }
+        sum17 += i17;
+    }
+    // QA-TEST: LANG-0626
+    If ( !(sum17 == 9) )
+    {
+        Sys::IO::println("FAIL LANG-0626");
+        Return 1;
+    }
+    i18: I32 = 0;
+    sum18: I32 = 0;
+    For ( i18 = 0; i18 < 7; i18++ )
+    {
+        If ( (i18 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i18 == 7 )
+        {
+            Break;
+        }
+        sum18 += i18;
+    }
+    // QA-TEST: LANG-0627
+    If ( !(sum18 == 9) )
+    {
+        Sys::IO::println("FAIL LANG-0627");
+        Return 1;
+    }
+    i19: I32 = 0;
+    sum19: I32 = 0;
+    For ( i19 = 0; i19 < 8; i19++ )
+    {
+        If ( (i19 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i19 == 7 )
+        {
+            Break;
+        }
+        sum19 += i19;
+    }
+    // QA-TEST: LANG-0628
+    If ( !(sum19 == 9) )
+    {
+        Sys::IO::println("FAIL LANG-0628");
+        Return 1;
+    }
+    i20: I32 = 0;
+    sum20: I32 = 0;
+    For ( i20 = 0; i20 < 4; i20++ )
+    {
+        If ( (i20 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i20 == 7 )
+        {
+            Break;
+        }
+        sum20 += i20;
+    }
+    // QA-TEST: LANG-0629
+    If ( !(sum20 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0629");
+        Return 1;
+    }
+    i21: I32 = 0;
+    sum21: I32 = 0;
+    For ( i21 = 0; i21 < 5; i21++ )
+    {
+        If ( (i21 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i21 == 7 )
+        {
+            Break;
+        }
+        sum21 += i21;
+    }
+    // QA-TEST: LANG-0630
+    If ( !(sum21 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0630");
+        Return 1;
+    }
+    i22: I32 = 0;
+    sum22: I32 = 0;
+    For ( i22 = 0; i22 < 6; i22++ )
+    {
+        If ( (i22 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i22 == 7 )
+        {
+            Break;
+        }
+        sum22 += i22;
+    }
+    // QA-TEST: LANG-0631
+    If ( !(sum22 == 9) )
+    {
+        Sys::IO::println("FAIL LANG-0631");
+        Return 1;
+    }
+    i23: I32 = 0;
+    sum23: I32 = 0;
+    For ( i23 = 0; i23 < 7; i23++ )
+    {
+        If ( (i23 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i23 == 7 )
+        {
+            Break;
+        }
+        sum23 += i23;
+    }
+    // QA-TEST: LANG-0632
+    If ( !(sum23 == 9) )
+    {
+        Sys::IO::println("FAIL LANG-0632");
+        Return 1;
+    }
+    i24: I32 = 0;
+    sum24: I32 = 0;
+    For ( i24 = 0; i24 < 8; i24++ )
+    {
+        If ( (i24 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i24 == 7 )
+        {
+            Break;
+        }
+        sum24 += i24;
+    }
+    // QA-TEST: LANG-0633
+    If ( !(sum24 == 9) )
+    {
+        Sys::IO::println("FAIL LANG-0633");
+        Return 1;
+    }
+    i25: I32 = 0;
+    sum25: I32 = 0;
+    For ( i25 = 0; i25 < 4; i25++ )
+    {
+        If ( (i25 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i25 == 7 )
+        {
+            Break;
+        }
+        sum25 += i25;
+    }
+    // QA-TEST: LANG-0634
+    If ( !(sum25 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0634");
+        Return 1;
+    }
+    i26: I32 = 0;
+    sum26: I32 = 0;
+    For ( i26 = 0; i26 < 5; i26++ )
+    {
+        If ( (i26 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i26 == 7 )
+        {
+            Break;
+        }
+        sum26 += i26;
+    }
+    // QA-TEST: LANG-0635
+    If ( !(sum26 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0635");
+        Return 1;
+    }
+    i27: I32 = 0;
+    sum27: I32 = 0;
+    For ( i27 = 0; i27 < 6; i27++ )
+    {
+        If ( (i27 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i27 == 7 )
+        {
+            Break;
+        }
+        sum27 += i27;
+    }
+    // QA-TEST: LANG-0636
+    If ( !(sum27 == 9) )
+    {
+        Sys::IO::println("FAIL LANG-0636");
+        Return 1;
+    }
+    i28: I32 = 0;
+    sum28: I32 = 0;
+    For ( i28 = 0; i28 < 7; i28++ )
+    {
+        If ( (i28 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i28 == 7 )
+        {
+            Break;
+        }
+        sum28 += i28;
+    }
+    // QA-TEST: LANG-0637
+    If ( !(sum28 == 9) )
+    {
+        Sys::IO::println("FAIL LANG-0637");
+        Return 1;
+    }
+    i29: I32 = 0;
+    sum29: I32 = 0;
+    For ( i29 = 0; i29 < 8; i29++ )
+    {
+        If ( (i29 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i29 == 7 )
+        {
+            Break;
+        }
+        sum29 += i29;
+    }
+    // QA-TEST: LANG-0638
+    If ( !(sum29 == 9) )
+    {
+        Sys::IO::println("FAIL LANG-0638");
+        Return 1;
+    }
+    i30: I32 = 0;
+    sum30: I32 = 0;
+    For ( i30 = 0; i30 < 4; i30++ )
+    {
+        If ( (i30 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i30 == 7 )
+        {
+            Break;
+        }
+        sum30 += i30;
+    }
+    // QA-TEST: LANG-0639
+    If ( !(sum30 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0639");
+        Return 1;
+    }
+    i31: I32 = 0;
+    sum31: I32 = 0;
+    For ( i31 = 0; i31 < 5; i31++ )
+    {
+        If ( (i31 % 2) == 0 )
+        {
+            Continue;
+        }
+        If ( i31 == 7 )
+        {
+            Break;
+        }
+        sum31 += i31;
+    }
+    // QA-TEST: LANG-0640
+    If ( !(sum31 == 4) )
+    {
+        Sys::IO::println("FAIL LANG-0640");
+        Return 1;
+    }
+    Sys::IO::println("PASS LANG-GROUP-20 32");
+    Return 0;
+}

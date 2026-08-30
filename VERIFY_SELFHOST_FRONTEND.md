@@ -52,7 +52,7 @@ The stage-1, stage-2, and stage-3 generated frontend C files were compared
 byte-for-byte. All three have this SHA-256:
 
 ```text
-b1194b63771eec8e44b40e86cf4ee0e25b1f6cc0dc899083e09e7856997b8e05
+234844823a813797df9b3b234bb3aa3bc0991ef1e2a6091904fd8da1308565ff
 ```
 
 The behavioral self-host check also verified:
@@ -101,6 +101,37 @@ warnings in the generated native bridge because CMotive pointer signatures do
 not yet preserve C `const` qualifiers. This review case is documented in
 `docs/C_TO_CMOTIVE_CONVERTER.md`; it does not change the tested runtime output.
 
+
+## Expanded quality-assurance catalog
+
+Command:
+
+```sh
+make -f Makefile.linux qa
+```
+
+Result:
+
+```text
+CMotive QA summary: 1200 passed, 0 failed, 1200 manifest tests
+```
+
+The checked-in suite under `quality-assurance/` contains 1,200 unique, stable
+case IDs: 640 runtime-language assertions, 192 preprocessor assertions, 96
+advanced language/standard-library assertions, 128 compiler/tool assertions,
+96 C-to-CMotive converter assertions, and 48 expected-failure diagnostics. The
+runner verified zero duplicate, missing, or unknown result IDs.
+
+The expanded regression found and fixed a builtin-class layout issue: classes
+loaded from headers such as `Thread` and `Threading` used runtime-supplied
+structs without `__cmotive_type`, while their generated constructors attempted
+to initialize that field. Type-tag initialization is now limited to
+frontend-generated class layouts, and the actual `Sys/Thread.HMOT` path is
+covered by a permanent QA fixture.
+
+See `quality-assurance/VERIFICATION.md` for the category-level results and exact
+commands.
+
 ## Merged examples
 
 Command:
@@ -128,7 +159,7 @@ CMOTIVE_VALIDATE_JOBS=8 make -f Makefile.linux language
 Result:
 
 ```text
-CMotive language files: PASS (228 files, 8 parallel jobs)
+CMotive language files: PASS (311 files, 8 parallel jobs)
 ```
 
 Every `.CMOT`, `.CMTV`, `.HMOT`, and `.HMTV` file outside generated, legacy,
@@ -155,7 +186,7 @@ CMotive relocation and strict-C11 emitted-C test: PASS
 
 ## Build-file validation
 
-- All nine shell scripts passed `sh -n` parsing.
+- All 12 shell scripts passed `sh -n` parsing.
 - All four VS2022 `.vcxproj`/`.filters` XML files parsed successfully.
 - The VS2022 solution now references `CMotive.SelfHostedFrontend.vcxproj`.
 - Windows Makefile linkage includes Winsock for the generated runtime.

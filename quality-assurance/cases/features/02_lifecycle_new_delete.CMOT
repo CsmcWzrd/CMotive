@@ -1,0 +1,25 @@
+Destroyed: I32 = 0;
+Class QaLife
+{
+    Public
+    {
+        value: I32 = 0; Block
+        QaLife() { value = 21; }
+        ~QaLife() { Destroyed = 44; }
+        I32 Get() { Return value; }
+    }
+};
+I32 main()
+{
+    p: QaLife* = New QaLife();
+    // QA-TEST: FEATURE-0005
+    If ( p == Null ) { Return 1; }
+    // QA-TEST: FEATURE-0006
+    If ( p->Get() != 21 ) { Return 2; }
+    Delete p;
+    // QA-TEST: FEATURE-0007
+    If ( Destroyed != 44 ) { Return 3; }
+    // QA-TEST: FEATURE-0008
+    If ( Destroyed == 0 ) { Return 4; }
+    Return 0;
+}

@@ -1,0 +1,39 @@
+Replace QA_R_6_0 601;
+Replace QA_R_6_1 602;
+Replace QA_R_6_2 603;
+Replace QA_R_6_3 604;
+Replace QA_R_6_4 605;
+Replace QA_R_6_5 606;
+Replace QA_R_6_6 607;
+Replace QA_R_6_7 608;
+
+I32
+main
+()
+{
+    // QA-TEST: PP-0041
+    p0: I32 = QA_R_6_0;
+    If ( p0 != 601 ) { Return 1; }
+    // QA-TEST: PP-0042
+    p1: I32 = QA_R_6_1;
+    If ( p1 != 602 ) { Return 2; }
+    // QA-TEST: PP-0043
+    p2: I32 = QA_R_6_2;
+    If ( p2 != 603 ) { Return 3; }
+    // QA-TEST: PP-0044
+    p3: I32 = QA_R_6_3;
+    If ( p3 != 604 ) { Return 4; }
+    // QA-TEST: PP-0045
+    p4: I32 = QA_R_6_4;
+    If ( p4 != 605 ) { Return 5; }
+    // QA-TEST: PP-0046
+    p5: I32 = QA_R_6_5;
+    If ( p5 != 606 ) { Return 6; }
+    // QA-TEST: PP-0047
+    p6: I32 = QA_R_6_6;
+    If ( p6 != 607 ) { Return 7; }
+    // QA-TEST: PP-0048
+    p7: I32 = QA_R_6_7;
+    If ( p7 != 608 ) { Return 8; }
+    Return 0;
+}

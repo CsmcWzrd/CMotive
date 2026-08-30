@@ -1,0 +1,18 @@
+// QA-TEST: FEATURE-0049
+count1: Tstore Int32 = 1;
+// QA-TEST: FEATURE-0050
+count2: ThreadStore Int32 = 2;
+
+Int32
+main
+()
+{
+    local: ThreadStore Int32 = 3;
+    // QA-TEST: FEATURE-0051
+    count1 += 4;
+    count1 -= 4;
+    count2 += 5;
+    count2 -= 5;
+    // QA-TEST: FEATURE-0052
+    Return count1 + count2 + local == 6 ? 0 : 1;
+}

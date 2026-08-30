@@ -1,0 +1,15 @@
+feature-area	test-ranges	coverage
+lexing, identifiers, comments, literals	LANG-0001..LANG-0640; FEATURE-0001..FEATURE-0096	Runtime parsing across all generated programs and advanced fixtures, including Contains raw strings
+scalar types and synonyms	LANG-0321..LANG-0352	I16/Int16, I32/Int32, I64/Int, unsigned families, Float/Double/Ldouble, Boolean
+operators	LANG-0001..LANG-0320	Arithmetic, compound assignment, increment/decrement, comparisons, logical, ternary, bitwise, shifts, rotates
+arrays and pointers	LANG-0353..LANG-0416	Initializers, indexing, address-of, dereference, pointer writes
+control flow	LANG-0449..LANG-0544; LANG-0609..LANG-0640	If/Else, For, While, Do/While, Switch/Case/Default, Break, Continue, nested flow
+functions and globals	LANG-0545..LANG-0608	Parameters, returns, calls, globals, nested scopes
+classes and object model	FEATURE-0001..FEATURE-0032	Fields, methods, constructors, destructors, inheritance, overridable dispatch, overloads, auto accessors, Operation
+templates and exceptions	FEATURE-0033..FEATURE-0040	Template classes/functions, multi-type templates, Try/Throw/Catch/Catchall, unwind destructor
+dynamic/Fptr/Global/Tstore/Target-Hit	FEATURE-0041..FEATURE-0060	Dynamic Struct Expand, Fptr, Global placement, Tstore/ThreadStore, Target/Hit forms
+packages and standard library	FEATURE-0061..FEATURE-0096	Packages, STL containers, algorithms, IO, String, Wide, Math, Filesystem, Logging, Locks, Thread, Net
+preprocessor	PP-0001..PP-0192	Replace, #define, #undef, -D, include resolution, nested includes, Plugswitch DEFINED/OS/PROCESSOR/ENDIAN, Plugin
+compiler and tools	TOOL-0001..TOOL-0128	cmotive, cmotive++, cmotivepp, CMotiveSymsToDebugFile, c2cmotive, scripts, make targets and packaging
+C-to-CMotive converter	CONVERT-0001..CONVERT-0096	Function conversion, parameters, arrays, loops, branches, return values, generated source compilation/execution
+negative diagnostics	NEG-0001..NEG-0048	Undefined bases, missing sources, downstream C diagnostics and nonzero status

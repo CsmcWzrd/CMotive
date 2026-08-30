@@ -1,0 +1,32 @@
+Class QaVBase
+{
+    Public
+    {
+        QaVBase() { }
+        Overridable I32 Value() { Return 1; }
+        Overridable I32 Other() { Return 2; }
+    }
+};
+Class QaVDerived Inherits QaVBase Public
+{
+    Public
+    {
+        QaVDerived() { }
+        I32 Value() { Return 9; }
+        I32 Other() { Return 8; }
+    }
+};
+I32 main()
+{
+    b: QaVBase* = New QaVDerived();
+    // QA-TEST: FEATURE-0013
+    If ( b == Null ) { Return 1; }
+    // QA-TEST: FEATURE-0014
+    If ( b->Value() != 9 ) { Return 2; }
+    // QA-TEST: FEATURE-0015
+    If ( b->Other() != 8 ) { Return 3; }
+    // QA-TEST: FEATURE-0016
+    If ( b->Value() + b->Other() != 17 ) { Return 4; }
+    Delete b;
+    Return 0;
+}

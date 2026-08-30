@@ -90,10 +90,19 @@ Useful aggregate targets are:
 ```sh
 make -f Makefile.linux test          # self-host, conformance, converter tests
 make -f Makefile.linux full-test     # extended conformance plus converter tests
+make -f Makefile.linux qa            # 1,200-case catalogued QA suite
+make -f Makefile.linux qa-all        # QA plus self-host, legacy, examples, language sweep
 make -f Makefile.linux examples      # preprocess, compile, and run 158 examples
 make -f Makefile.linux language      # preprocess and compile-check every language file
-make -f Makefile.linux verify-all    # all of the above
+make -f Makefile.linux verify-all    # alias for qa-all
 ```
+
+The checked-in suite under `quality-assurance/` assigns a stable ID to every
+case and covers runtime semantics, advanced object-oriented features, the
+preprocessor, diagnostics, command-line behavior, debug symbols, release
+packaging, and C-to-CMotive conversion.  Its manifest contains 1,200 tests;
+the runner rejects missing, duplicated, or unrecognised result IDs and writes
+machine-readable results under `build/quality-assurance/`.
 
 Whole-tree language validation defaults to four parallel workers. Override it
 with `CMOTIVE_VALIDATE_JOBS=<count>`.
@@ -182,4 +191,5 @@ environment.
 - `docs/SELF_HOSTING.md` — bootstrap architecture and fixed-point verification
 - `docs/C_TO_CMOTIVE_CONVERTER.md` — converter behavior and usage
 - `docs/CMotive-v1-LanguageDefinition.md` — language definition
+- `quality-assurance/README.md` — 1,200-case suite inventory and execution
 - `VERIFY_SELFHOST_FRONTEND.md` — exact verification results for this release

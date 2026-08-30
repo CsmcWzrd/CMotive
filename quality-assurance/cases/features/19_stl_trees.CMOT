@@ -1,0 +1,17 @@
+Plugin Sys::STL
+I32 main()
+{
+    a: BinaryTree<Int>; a.Insert(10);
+    // QA-TEST: FEATURE-0073
+    If ( !a.Contains(10) ) { Return 1; }
+    b: BinarySearchTree<Int>; b.Insert(20);
+    // QA-TEST: FEATURE-0074
+    If ( !b.Contains(20) ) { Return 2; }
+    c: BTree<Int>; c.Insert(30);
+    // QA-TEST: FEATURE-0075
+    If ( !c.Contains(30) ) { Return 3; }
+    d: BPlusTree<Int>; d.Insert(40);
+    // QA-TEST: FEATURE-0076
+    If ( !d.Contains(40) ) { Return 4; }
+    Return 0;
+}

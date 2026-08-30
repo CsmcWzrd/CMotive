@@ -1,0 +1,36 @@
+Plugin Sys::Algorithms
+
+Int32
+main
+()
+{
+    a : Int[4];
+    a[0] = 9;
+    a[1] = 2;
+    a[2] = 7;
+    a[3] = 4;
+    // QA-TEST: FEATURE-0077
+    alg : Algorithms;
+    // QA-TEST: FEATURE-0078
+    alg.QuickSort(a, 4);
+    If ( !alg.IsSorted(a, 4) )
+    {
+        Return 1;
+    }
+    // QA-TEST: FEATURE-0079
+    If ( alg.BinarySearch(a, 4, 7) < 0 )
+    {
+        Return 2;
+    }
+    // QA-TEST: FEATURE-0080
+    If ( alg.Min(4, 9) != 4 || alg.Max(4, 9) != 9 )
+    {
+        Return 3;
+    }
+    alg.Reverse(a, 4);
+    If ( a[0] != 9 )
+    {
+        Return 4;
+    }
+    Return 0;
+}

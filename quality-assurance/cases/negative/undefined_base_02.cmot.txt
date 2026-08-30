@@ -1,0 +1,2 @@
+Class QaBad2 Inherits QaMissing2 Public { Public { value: I32 = 0; } };
+I32 main() { Return 0; }

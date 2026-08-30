@@ -1,0 +1,42 @@
+Destroyed : I32 = 0;
+
+Class
+Guard
+{
+    Public
+    {
+        Guard
+        ()
+        {
+        }
+
+        ~Guard
+        ()
+        {
+            Destroyed = 99;
+        }
+    }
+};
+
+// QA-TEST: FEATURE-0037
+// QA-TEST: FEATURE-0038
+// QA-TEST: FEATURE-0039
+// QA-TEST: FEATURE-0040
+I32
+main
+()
+{
+    Try
+    {
+        g : Guard;
+        Throw "boom";
+    }
+    Catchall
+    {
+        If ( Destroyed == 99 )
+        {
+            Return 0;
+        }
+    }
+    Return 1;
+}

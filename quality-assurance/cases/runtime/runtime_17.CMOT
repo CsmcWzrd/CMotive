@@ -1,0 +1,745 @@
+Plugin Sys::IO
+
+I32
+main
+()
+{
+    mode0: I32 = 0;
+    out0: I32 = 0;
+    Switch ( mode0 )
+    {
+        Case 0:
+            out0 = 10;
+            Break;
+        Case 1:
+            out0 = 20;
+            Break;
+        Case 2:
+            out0 = 30;
+            Break;
+        Default:
+            out0 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0513
+    If ( !(out0 == 10) )
+    {
+        Sys::IO::println("FAIL LANG-0513");
+        Return 1;
+    }
+    mode1: I32 = 1;
+    out1: I32 = 0;
+    Switch ( mode1 )
+    {
+        Case 0:
+            out1 = 10;
+            Break;
+        Case 1:
+            out1 = 20;
+            Break;
+        Case 2:
+            out1 = 30;
+            Break;
+        Default:
+            out1 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0514
+    If ( !(out1 == 20) )
+    {
+        Sys::IO::println("FAIL LANG-0514");
+        Return 1;
+    }
+    mode2: I32 = 2;
+    out2: I32 = 0;
+    Switch ( mode2 )
+    {
+        Case 0:
+            out2 = 10;
+            Break;
+        Case 1:
+            out2 = 20;
+            Break;
+        Case 2:
+            out2 = 30;
+            Break;
+        Default:
+            out2 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0515
+    If ( !(out2 == 30) )
+    {
+        Sys::IO::println("FAIL LANG-0515");
+        Return 1;
+    }
+    mode3: I32 = 3;
+    out3: I32 = 0;
+    Switch ( mode3 )
+    {
+        Case 0:
+            out3 = 10;
+            Break;
+        Case 1:
+            out3 = 20;
+            Break;
+        Case 2:
+            out3 = 30;
+            Break;
+        Default:
+            out3 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0516
+    If ( !(out3 == 40) )
+    {
+        Sys::IO::println("FAIL LANG-0516");
+        Return 1;
+    }
+    mode4: I32 = 0;
+    out4: I32 = 0;
+    Switch ( mode4 )
+    {
+        Case 0:
+            out4 = 10;
+            Break;
+        Case 1:
+            out4 = 20;
+            Break;
+        Case 2:
+            out4 = 30;
+            Break;
+        Default:
+            out4 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0517
+    If ( !(out4 == 10) )
+    {
+        Sys::IO::println("FAIL LANG-0517");
+        Return 1;
+    }
+    mode5: I32 = 1;
+    out5: I32 = 0;
+    Switch ( mode5 )
+    {
+        Case 0:
+            out5 = 10;
+            Break;
+        Case 1:
+            out5 = 20;
+            Break;
+        Case 2:
+            out5 = 30;
+            Break;
+        Default:
+            out5 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0518
+    If ( !(out5 == 20) )
+    {
+        Sys::IO::println("FAIL LANG-0518");
+        Return 1;
+    }
+    mode6: I32 = 2;
+    out6: I32 = 0;
+    Switch ( mode6 )
+    {
+        Case 0:
+            out6 = 10;
+            Break;
+        Case 1:
+            out6 = 20;
+            Break;
+        Case 2:
+            out6 = 30;
+            Break;
+        Default:
+            out6 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0519
+    If ( !(out6 == 30) )
+    {
+        Sys::IO::println("FAIL LANG-0519");
+        Return 1;
+    }
+    mode7: I32 = 3;
+    out7: I32 = 0;
+    Switch ( mode7 )
+    {
+        Case 0:
+            out7 = 10;
+            Break;
+        Case 1:
+            out7 = 20;
+            Break;
+        Case 2:
+            out7 = 30;
+            Break;
+        Default:
+            out7 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0520
+    If ( !(out7 == 40) )
+    {
+        Sys::IO::println("FAIL LANG-0520");
+        Return 1;
+    }
+    mode8: I32 = 0;
+    out8: I32 = 0;
+    Switch ( mode8 )
+    {
+        Case 0:
+            out8 = 10;
+            Break;
+        Case 1:
+            out8 = 20;
+            Break;
+        Case 2:
+            out8 = 30;
+            Break;
+        Default:
+            out8 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0521
+    If ( !(out8 == 10) )
+    {
+        Sys::IO::println("FAIL LANG-0521");
+        Return 1;
+    }
+    mode9: I32 = 1;
+    out9: I32 = 0;
+    Switch ( mode9 )
+    {
+        Case 0:
+            out9 = 10;
+            Break;
+        Case 1:
+            out9 = 20;
+            Break;
+        Case 2:
+            out9 = 30;
+            Break;
+        Default:
+            out9 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0522
+    If ( !(out9 == 20) )
+    {
+        Sys::IO::println("FAIL LANG-0522");
+        Return 1;
+    }
+    mode10: I32 = 2;
+    out10: I32 = 0;
+    Switch ( mode10 )
+    {
+        Case 0:
+            out10 = 10;
+            Break;
+        Case 1:
+            out10 = 20;
+            Break;
+        Case 2:
+            out10 = 30;
+            Break;
+        Default:
+            out10 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0523
+    If ( !(out10 == 30) )
+    {
+        Sys::IO::println("FAIL LANG-0523");
+        Return 1;
+    }
+    mode11: I32 = 3;
+    out11: I32 = 0;
+    Switch ( mode11 )
+    {
+        Case 0:
+            out11 = 10;
+            Break;
+        Case 1:
+            out11 = 20;
+            Break;
+        Case 2:
+            out11 = 30;
+            Break;
+        Default:
+            out11 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0524
+    If ( !(out11 == 40) )
+    {
+        Sys::IO::println("FAIL LANG-0524");
+        Return 1;
+    }
+    mode12: I32 = 0;
+    out12: I32 = 0;
+    Switch ( mode12 )
+    {
+        Case 0:
+            out12 = 10;
+            Break;
+        Case 1:
+            out12 = 20;
+            Break;
+        Case 2:
+            out12 = 30;
+            Break;
+        Default:
+            out12 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0525
+    If ( !(out12 == 10) )
+    {
+        Sys::IO::println("FAIL LANG-0525");
+        Return 1;
+    }
+    mode13: I32 = 1;
+    out13: I32 = 0;
+    Switch ( mode13 )
+    {
+        Case 0:
+            out13 = 10;
+            Break;
+        Case 1:
+            out13 = 20;
+            Break;
+        Case 2:
+            out13 = 30;
+            Break;
+        Default:
+            out13 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0526
+    If ( !(out13 == 20) )
+    {
+        Sys::IO::println("FAIL LANG-0526");
+        Return 1;
+    }
+    mode14: I32 = 2;
+    out14: I32 = 0;
+    Switch ( mode14 )
+    {
+        Case 0:
+            out14 = 10;
+            Break;
+        Case 1:
+            out14 = 20;
+            Break;
+        Case 2:
+            out14 = 30;
+            Break;
+        Default:
+            out14 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0527
+    If ( !(out14 == 30) )
+    {
+        Sys::IO::println("FAIL LANG-0527");
+        Return 1;
+    }
+    mode15: I32 = 3;
+    out15: I32 = 0;
+    Switch ( mode15 )
+    {
+        Case 0:
+            out15 = 10;
+            Break;
+        Case 1:
+            out15 = 20;
+            Break;
+        Case 2:
+            out15 = 30;
+            Break;
+        Default:
+            out15 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0528
+    If ( !(out15 == 40) )
+    {
+        Sys::IO::println("FAIL LANG-0528");
+        Return 1;
+    }
+    mode16: I32 = 0;
+    out16: I32 = 0;
+    Switch ( mode16 )
+    {
+        Case 0:
+            out16 = 10;
+            Break;
+        Case 1:
+            out16 = 20;
+            Break;
+        Case 2:
+            out16 = 30;
+            Break;
+        Default:
+            out16 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0529
+    If ( !(out16 == 10) )
+    {
+        Sys::IO::println("FAIL LANG-0529");
+        Return 1;
+    }
+    mode17: I32 = 1;
+    out17: I32 = 0;
+    Switch ( mode17 )
+    {
+        Case 0:
+            out17 = 10;
+            Break;
+        Case 1:
+            out17 = 20;
+            Break;
+        Case 2:
+            out17 = 30;
+            Break;
+        Default:
+            out17 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0530
+    If ( !(out17 == 20) )
+    {
+        Sys::IO::println("FAIL LANG-0530");
+        Return 1;
+    }
+    mode18: I32 = 2;
+    out18: I32 = 0;
+    Switch ( mode18 )
+    {
+        Case 0:
+            out18 = 10;
+            Break;
+        Case 1:
+            out18 = 20;
+            Break;
+        Case 2:
+            out18 = 30;
+            Break;
+        Default:
+            out18 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0531
+    If ( !(out18 == 30) )
+    {
+        Sys::IO::println("FAIL LANG-0531");
+        Return 1;
+    }
+    mode19: I32 = 3;
+    out19: I32 = 0;
+    Switch ( mode19 )
+    {
+        Case 0:
+            out19 = 10;
+            Break;
+        Case 1:
+            out19 = 20;
+            Break;
+        Case 2:
+            out19 = 30;
+            Break;
+        Default:
+            out19 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0532
+    If ( !(out19 == 40) )
+    {
+        Sys::IO::println("FAIL LANG-0532");
+        Return 1;
+    }
+    mode20: I32 = 0;
+    out20: I32 = 0;
+    Switch ( mode20 )
+    {
+        Case 0:
+            out20 = 10;
+            Break;
+        Case 1:
+            out20 = 20;
+            Break;
+        Case 2:
+            out20 = 30;
+            Break;
+        Default:
+            out20 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0533
+    If ( !(out20 == 10) )
+    {
+        Sys::IO::println("FAIL LANG-0533");
+        Return 1;
+    }
+    mode21: I32 = 1;
+    out21: I32 = 0;
+    Switch ( mode21 )
+    {
+        Case 0:
+            out21 = 10;
+            Break;
+        Case 1:
+            out21 = 20;
+            Break;
+        Case 2:
+            out21 = 30;
+            Break;
+        Default:
+            out21 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0534
+    If ( !(out21 == 20) )
+    {
+        Sys::IO::println("FAIL LANG-0534");
+        Return 1;
+    }
+    mode22: I32 = 2;
+    out22: I32 = 0;
+    Switch ( mode22 )
+    {
+        Case 0:
+            out22 = 10;
+            Break;
+        Case 1:
+            out22 = 20;
+            Break;
+        Case 2:
+            out22 = 30;
+            Break;
+        Default:
+            out22 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0535
+    If ( !(out22 == 30) )
+    {
+        Sys::IO::println("FAIL LANG-0535");
+        Return 1;
+    }
+    mode23: I32 = 3;
+    out23: I32 = 0;
+    Switch ( mode23 )
+    {
+        Case 0:
+            out23 = 10;
+            Break;
+        Case 1:
+            out23 = 20;
+            Break;
+        Case 2:
+            out23 = 30;
+            Break;
+        Default:
+            out23 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0536
+    If ( !(out23 == 40) )
+    {
+        Sys::IO::println("FAIL LANG-0536");
+        Return 1;
+    }
+    mode24: I32 = 0;
+    out24: I32 = 0;
+    Switch ( mode24 )
+    {
+        Case 0:
+            out24 = 10;
+            Break;
+        Case 1:
+            out24 = 20;
+            Break;
+        Case 2:
+            out24 = 30;
+            Break;
+        Default:
+            out24 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0537
+    If ( !(out24 == 10) )
+    {
+        Sys::IO::println("FAIL LANG-0537");
+        Return 1;
+    }
+    mode25: I32 = 1;
+    out25: I32 = 0;
+    Switch ( mode25 )
+    {
+        Case 0:
+            out25 = 10;
+            Break;
+        Case 1:
+            out25 = 20;
+            Break;
+        Case 2:
+            out25 = 30;
+            Break;
+        Default:
+            out25 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0538
+    If ( !(out25 == 20) )
+    {
+        Sys::IO::println("FAIL LANG-0538");
+        Return 1;
+    }
+    mode26: I32 = 2;
+    out26: I32 = 0;
+    Switch ( mode26 )
+    {
+        Case 0:
+            out26 = 10;
+            Break;
+        Case 1:
+            out26 = 20;
+            Break;
+        Case 2:
+            out26 = 30;
+            Break;
+        Default:
+            out26 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0539
+    If ( !(out26 == 30) )
+    {
+        Sys::IO::println("FAIL LANG-0539");
+        Return 1;
+    }
+    mode27: I32 = 3;
+    out27: I32 = 0;
+    Switch ( mode27 )
+    {
+        Case 0:
+            out27 = 10;
+            Break;
+        Case 1:
+            out27 = 20;
+            Break;
+        Case 2:
+            out27 = 30;
+            Break;
+        Default:
+            out27 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0540
+    If ( !(out27 == 40) )
+    {
+        Sys::IO::println("FAIL LANG-0540");
+        Return 1;
+    }
+    mode28: I32 = 0;
+    out28: I32 = 0;
+    Switch ( mode28 )
+    {
+        Case 0:
+            out28 = 10;
+            Break;
+        Case 1:
+            out28 = 20;
+            Break;
+        Case 2:
+            out28 = 30;
+            Break;
+        Default:
+            out28 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0541
+    If ( !(out28 == 10) )
+    {
+        Sys::IO::println("FAIL LANG-0541");
+        Return 1;
+    }
+    mode29: I32 = 1;
+    out29: I32 = 0;
+    Switch ( mode29 )
+    {
+        Case 0:
+            out29 = 10;
+            Break;
+        Case 1:
+            out29 = 20;
+            Break;
+        Case 2:
+            out29 = 30;
+            Break;
+        Default:
+            out29 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0542
+    If ( !(out29 == 20) )
+    {
+        Sys::IO::println("FAIL LANG-0542");
+        Return 1;
+    }
+    mode30: I32 = 2;
+    out30: I32 = 0;
+    Switch ( mode30 )
+    {
+        Case 0:
+            out30 = 10;
+            Break;
+        Case 1:
+            out30 = 20;
+            Break;
+        Case 2:
+            out30 = 30;
+            Break;
+        Default:
+            out30 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0543
+    If ( !(out30 == 30) )
+    {
+        Sys::IO::println("FAIL LANG-0543");
+        Return 1;
+    }
+    mode31: I32 = 3;
+    out31: I32 = 0;
+    Switch ( mode31 )
+    {
+        Case 0:
+            out31 = 10;
+            Break;
+        Case 1:
+            out31 = 20;
+            Break;
+        Case 2:
+            out31 = 30;
+            Break;
+        Default:
+            out31 = 40;
+            Break;
+    }
+    // QA-TEST: LANG-0544
+    If ( !(out31 == 40) )
+    {
+        Sys::IO::println("FAIL LANG-0544");
+        Return 1;
+    }
+    Sys::IO::println("PASS LANG-GROUP-17 32");
+    Return 0;
+}

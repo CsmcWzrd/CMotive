@@ -1,0 +1,34 @@
+#include "Sys/Thread.HMOT"
+
+Int32
+main
+()
+{
+    // QA-TEST: FEATURE-0089
+    th : Thread;
+    th.SleepMs(0);
+    // QA-TEST: FEATURE-0090
+    current1 : Void* = th.Current();
+    If ( current1 == Null )
+    {
+        Return 1;
+    }
+    // QA-TEST: FEATURE-0091
+    If ( th.Yield() != 0 )
+    {
+        Return 2;
+    }
+    // QA-TEST: FEATURE-0092
+    th.MicroSleep(0);
+    th.NanoSleep(0);
+    tm : Threading;
+    current2 : Void* = tm.Current();
+    If ( current2 == Null )
+    {
+        Return 3;
+    }
+    tm.MicroSleep(0);
+    tm.NanoSleep(0);
+    tm.Yield();
+    Return 0;
+}

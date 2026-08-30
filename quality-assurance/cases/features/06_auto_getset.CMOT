@@ -1,0 +1,27 @@
+Class QaAuto
+{
+    Public
+    {
+        value: Int32 = 0;
+        other: Int = 0;
+        hidden: Int32 = 9; Block
+        QaAuto() { }
+    }
+};
+I32 main()
+{
+    a: QaAuto;
+    a.Set@value(41);
+    // QA-TEST: FEATURE-0021
+    If ( a.Get@value() != 41 ) { Return 1; }
+    a.Set@other((Int)2);
+    // QA-TEST: FEATURE-0022
+    If ( a.Get@other() != 2 ) { Return 2; }
+    data: StartPackage__QaAuto__PublicData = a.Getall();
+    // QA-TEST: FEATURE-0023
+    If ( data.value != 41 || data.other != 2 ) { Return 3; }
+    a.Setall(7, 8);
+    // QA-TEST: FEATURE-0024
+    If ( a.Get@value() != 7 || a.Get@other() != 8 ) { Return 4; }
+    Return 0;
+}

@@ -1,0 +1,32 @@
+#include "includes/inc_15_b.HMOT"
+
+I32
+main
+()
+{
+    // QA-TEST: PP-0113
+    p0: I32 = QA_INC_15_0;
+    If ( p0 != 1500 ) { Return 1; }
+    // QA-TEST: PP-0114
+    p1: I32 = QA_INC_15_1;
+    If ( p1 != 1501 ) { Return 2; }
+    // QA-TEST: PP-0115
+    p2: I32 = QA_INC_15_2;
+    If ( p2 != 1502 ) { Return 3; }
+    // QA-TEST: PP-0116
+    p3: I32 = QA_INC_15_3;
+    If ( p3 != 1503 ) { Return 4; }
+    // QA-TEST: PP-0117
+    p4: I32 = QA_INC_15_4;
+    If ( p4 != 1504 ) { Return 5; }
+    // QA-TEST: PP-0118
+    p5: I32 = QA_INC_15_5;
+    If ( p5 != 1505 ) { Return 6; }
+    // QA-TEST: PP-0119
+    p6: I32 = QA_INC_15_6;
+    If ( p6 != 1506 ) { Return 7; }
+    // QA-TEST: PP-0120
+    p7: I32 = QA_INC_15_7;
+    If ( p7 != 1507 ) { Return 8; }
+    Return 0;
+}

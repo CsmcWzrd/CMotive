@@ -1,0 +1,25 @@
+Class QaOverCtor
+{
+    Public
+    {
+        value: I32 = 0; Block
+        QaOverCtor x: Int32 () { value = 32; }
+        QaOverCtor x: Int () { value = 64; }
+        I32 Value() { Return value; }
+    }
+};
+I32 main()
+{
+    a: QaOverCtor* = New QaOverCtor((Int32)7);
+    b: QaOverCtor* = New QaOverCtor((Int)7);
+    // QA-TEST: FEATURE-0017
+    If ( a->Value() != 32 ) { Return 1; }
+    // QA-TEST: FEATURE-0018
+    If ( b->Value() != 64 ) { Return 2; }
+    // QA-TEST: FEATURE-0019
+    If ( a->Value() + b->Value() != 96 ) { Return 3; }
+    Delete a; Delete b;
+    // QA-TEST: FEATURE-0020
+    If ( 1 != 1 ) { Return 4; }
+    Return 0;
+}

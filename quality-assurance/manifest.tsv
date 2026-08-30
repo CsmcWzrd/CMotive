@@ -1,0 +1,1201 @@
+id	category	subcategory	runner	artifact	description
+LANG-0001	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 3+2
+LANG-0002	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 4+3
+LANG-0003	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 5+4
+LANG-0004	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 6+5
+LANG-0005	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 7+6
+LANG-0006	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 8+7
+LANG-0007	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 9+8
+LANG-0008	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 10+9
+LANG-0009	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 11+10
+LANG-0010	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 12+2
+LANG-0011	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 13+3
+LANG-0012	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 14+4
+LANG-0013	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 15+5
+LANG-0014	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 16+6
+LANG-0015	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 17+7
+LANG-0016	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 18+8
+LANG-0017	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 19+9
+LANG-0018	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 20+10
+LANG-0019	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 21+2
+LANG-0020	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 22+3
+LANG-0021	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 23+4
+LANG-0022	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 24+5
+LANG-0023	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 25+6
+LANG-0024	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 26+7
+LANG-0025	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 27+8
+LANG-0026	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 28+9
+LANG-0027	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 29+10
+LANG-0028	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 30+2
+LANG-0029	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 31+3
+LANG-0030	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 32+4
+LANG-0031	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 33+5
+LANG-0032	language-runtime	integer-addition	runtime-01	cases/runtime/runtime_01.CMOT	I32 addition 34+6
+LANG-0033	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 40 - 3
+LANG-0034	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 3 * 4
+LANG-0035	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 42 - 5
+LANG-0036	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 5 * 6
+LANG-0037	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 44 - 7
+LANG-0038	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 7 * 3
+LANG-0039	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 46 - 9
+LANG-0040	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 9 * 5
+LANG-0041	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 48 - 4
+LANG-0042	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 3 * 7
+LANG-0043	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 50 - 6
+LANG-0044	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 5 * 4
+LANG-0045	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 52 - 8
+LANG-0046	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 7 * 6
+LANG-0047	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 54 - 3
+LANG-0048	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 9 * 3
+LANG-0049	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 56 - 5
+LANG-0050	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 3 * 5
+LANG-0051	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 58 - 7
+LANG-0052	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 5 * 7
+LANG-0053	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 60 - 9
+LANG-0054	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 7 * 4
+LANG-0055	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 62 - 4
+LANG-0056	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 9 * 6
+LANG-0057	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 64 - 6
+LANG-0058	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 3 * 3
+LANG-0059	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 66 - 8
+LANG-0060	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 5 * 5
+LANG-0061	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 68 - 3
+LANG-0062	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 7 * 7
+LANG-0063	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 70 - 5
+LANG-0064	language-runtime	subtraction-multiplication	runtime-02	cases/runtime/runtime_02.CMOT	Integer expression 9 * 4
+LANG-0065	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 6 / 2
+LANG-0066	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 13 % 3
+LANG-0067	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 22 / 4
+LANG-0068	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 33 % 5
+LANG-0069	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 46 / 6
+LANG-0070	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 61 % 7
+LANG-0071	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 78 / 8
+LANG-0072	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 21 % 2
+LANG-0073	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 35 / 3
+LANG-0074	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 13 % 4
+LANG-0075	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 20 / 5
+LANG-0076	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 35 % 6
+LANG-0077	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 47 / 7
+LANG-0078	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 61 % 8
+LANG-0079	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 16 / 2
+LANG-0080	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 27 % 3
+LANG-0081	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 40 / 4
+LANG-0082	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 57 % 5
+LANG-0083	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 18 / 6
+LANG-0084	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 33 % 7
+LANG-0085	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 44 / 8
+LANG-0086	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 13 % 2
+LANG-0087	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 22 / 3
+LANG-0088	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 35 % 4
+LANG-0089	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 49 / 5
+LANG-0090	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 61 % 6
+LANG-0091	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 82 / 7
+LANG-0092	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 27 % 8
+LANG-0093	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 8 / 2
+LANG-0094	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 17 % 3
+LANG-0095	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 26 / 4
+LANG-0096	language-runtime	division-modulo	runtime-03	cases/runtime/runtime_03.CMOT	Integer expression 36 % 5
+LANG-0097	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment +=
+LANG-0098	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment -=
+LANG-0099	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment *=
+LANG-0100	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment /=
+LANG-0101	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment %=
+LANG-0102	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment &=
+LANG-0103	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment |=
+LANG-0104	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment ^=
+LANG-0105	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment +=
+LANG-0106	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment -=
+LANG-0107	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment *=
+LANG-0108	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment /=
+LANG-0109	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment %=
+LANG-0110	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment &=
+LANG-0111	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment |=
+LANG-0112	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment ^=
+LANG-0113	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment +=
+LANG-0114	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment -=
+LANG-0115	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment *=
+LANG-0116	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment /=
+LANG-0117	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment %=
+LANG-0118	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment &=
+LANG-0119	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment |=
+LANG-0120	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment ^=
+LANG-0121	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment +=
+LANG-0122	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment -=
+LANG-0123	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment *=
+LANG-0124	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment /=
+LANG-0125	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment %=
+LANG-0126	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment &=
+LANG-0127	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment |=
+LANG-0128	language-runtime	compound-assignment	runtime-04	cases/runtime/runtime_04.CMOT	Compound assignment ^=
+LANG-0129	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix ++
+LANG-0130	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix --
+LANG-0131	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix ++
+LANG-0132	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix --
+LANG-0133	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix ++
+LANG-0134	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix --
+LANG-0135	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix ++
+LANG-0136	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix --
+LANG-0137	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix ++
+LANG-0138	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix --
+LANG-0139	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix ++
+LANG-0140	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix --
+LANG-0141	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix ++
+LANG-0142	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix --
+LANG-0143	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix ++
+LANG-0144	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix --
+LANG-0145	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix ++
+LANG-0146	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix --
+LANG-0147	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix ++
+LANG-0148	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix --
+LANG-0149	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix ++
+LANG-0150	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix --
+LANG-0151	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix ++
+LANG-0152	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix --
+LANG-0153	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix ++
+LANG-0154	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix --
+LANG-0155	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix ++
+LANG-0156	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix --
+LANG-0157	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix ++
+LANG-0158	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix --
+LANG-0159	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix ++
+LANG-0160	language-runtime	increment-decrement	runtime-05	cases/runtime/runtime_05.CMOT	Postfix --
+LANG-0161	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 10 == 10
+LANG-0162	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 11 != 12
+LANG-0163	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 12 < 13
+LANG-0164	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 13 > 12
+LANG-0165	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 10 <= 10
+LANG-0166	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 11 >= 11
+LANG-0167	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 12 == 13
+LANG-0168	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 13 != 13
+LANG-0169	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 10 == 10
+LANG-0170	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 11 != 12
+LANG-0171	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 12 < 13
+LANG-0172	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 13 > 12
+LANG-0173	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 10 <= 10
+LANG-0174	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 11 >= 11
+LANG-0175	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 12 == 13
+LANG-0176	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 13 != 13
+LANG-0177	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 10 == 10
+LANG-0178	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 11 != 12
+LANG-0179	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 12 < 13
+LANG-0180	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 13 > 12
+LANG-0181	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 10 <= 10
+LANG-0182	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 11 >= 11
+LANG-0183	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 12 == 13
+LANG-0184	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 13 != 13
+LANG-0185	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 10 == 10
+LANG-0186	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 11 != 12
+LANG-0187	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 12 < 13
+LANG-0188	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 13 > 12
+LANG-0189	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 10 <= 10
+LANG-0190	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 11 >= 11
+LANG-0191	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 12 == 13
+LANG-0192	language-runtime	comparisons	runtime-06	cases/runtime/runtime_06.CMOT	Comparison 13 != 13
+LANG-0193	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression True && True
+LANG-0194	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression False || True
+LANG-0195	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression !False
+LANG-0196	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression (3 > 5) ? 4 : 5
+LANG-0197	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression True && True
+LANG-0198	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression False || True
+LANG-0199	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression !False
+LANG-0200	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression (7 > 5) ? 8 : 9
+LANG-0201	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression True && True
+LANG-0202	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression False || True
+LANG-0203	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression !False
+LANG-0204	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression (11 > 5) ? 12 : 13
+LANG-0205	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression True && True
+LANG-0206	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression False || True
+LANG-0207	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression !False
+LANG-0208	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression (15 > 5) ? 16 : 17
+LANG-0209	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression True && True
+LANG-0210	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression False || True
+LANG-0211	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression !False
+LANG-0212	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression (19 > 5) ? 20 : 21
+LANG-0213	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression True && True
+LANG-0214	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression False || True
+LANG-0215	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression !False
+LANG-0216	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression (23 > 5) ? 24 : 25
+LANG-0217	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression True && True
+LANG-0218	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression False || True
+LANG-0219	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression !False
+LANG-0220	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression (27 > 5) ? 28 : 29
+LANG-0221	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression True && True
+LANG-0222	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression False || True
+LANG-0223	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression !False
+LANG-0224	language-runtime	logical-ternary	runtime-07	cases/runtime/runtime_07.CMOT	Logical/ternary expression (31 > 5) ? 32 : 33
+LANG-0225	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 17 & 3
+LANG-0226	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 18 | 4
+LANG-0227	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 19 ^ 5
+LANG-0228	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 20 & 6
+LANG-0229	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 21 | 7
+LANG-0230	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 22 ^ 8
+LANG-0231	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 23 & 9
+LANG-0232	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 24 | 10
+LANG-0233	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 25 ^ 11
+LANG-0234	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 26 & 12
+LANG-0235	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 27 | 13
+LANG-0236	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 28 ^ 3
+LANG-0237	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 29 & 4
+LANG-0238	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 30 | 5
+LANG-0239	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 31 ^ 6
+LANG-0240	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 32 & 7
+LANG-0241	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 33 | 8
+LANG-0242	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 34 ^ 9
+LANG-0243	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 35 & 10
+LANG-0244	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 36 | 11
+LANG-0245	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 37 ^ 12
+LANG-0246	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 38 & 13
+LANG-0247	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 39 | 3
+LANG-0248	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 40 ^ 4
+LANG-0249	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 41 & 5
+LANG-0250	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 42 | 6
+LANG-0251	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 43 ^ 7
+LANG-0252	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 44 & 8
+LANG-0253	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 45 | 9
+LANG-0254	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 46 ^ 10
+LANG-0255	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 47 & 11
+LANG-0256	language-runtime	bitwise	runtime-08	cases/runtime/runtime_08.CMOT	Bitwise expression 48 | 12
+LANG-0257	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 3 << 1
+LANG-0258	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 68 >> 2
+LANG-0259	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 5 << 3
+LANG-0260	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 76 >> 4
+LANG-0261	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 7 << 5
+LANG-0262	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 84 >> 1
+LANG-0263	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 9 << 2
+LANG-0264	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 92 >> 3
+LANG-0265	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 4 << 4
+LANG-0266	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 100 >> 5
+LANG-0267	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 6 << 1
+LANG-0268	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 108 >> 2
+LANG-0269	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 8 << 3
+LANG-0270	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 116 >> 4
+LANG-0271	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 3 << 5
+LANG-0272	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 124 >> 1
+LANG-0273	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 5 << 2
+LANG-0274	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 132 >> 3
+LANG-0275	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 7 << 4
+LANG-0276	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 140 >> 5
+LANG-0277	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 9 << 1
+LANG-0278	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 148 >> 2
+LANG-0279	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 4 << 3
+LANG-0280	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 156 >> 4
+LANG-0281	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 6 << 5
+LANG-0282	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 164 >> 1
+LANG-0283	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 8 << 2
+LANG-0284	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 172 >> 3
+LANG-0285	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 3 << 4
+LANG-0286	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 180 >> 5
+LANG-0287	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 5 << 1
+LANG-0288	language-runtime	shift	runtime-09	cases/runtime/runtime_09.CMOT	Shift expression 188 >> 2
+LANG-0289	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 1 <<< 1
+LANG-0290	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 2 >>> 2
+LANG-0291	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 4 <<< 3
+LANG-0292	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 8 >>> 4
+LANG-0293	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 16 <<< 5
+LANG-0294	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 32 >>> 6
+LANG-0295	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 64 <<< 7
+LANG-0296	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 128 >>> 1
+LANG-0297	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 256 <<< 2
+LANG-0298	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 512 >>> 3
+LANG-0299	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 1024 <<< 4
+LANG-0300	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 2048 >>> 5
+LANG-0301	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 4096 <<< 6
+LANG-0302	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 8192 >>> 7
+LANG-0303	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 16384 <<< 1
+LANG-0304	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 32768 >>> 2
+LANG-0305	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 1 <<< 3
+LANG-0306	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 2 >>> 4
+LANG-0307	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 4 <<< 5
+LANG-0308	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 8 >>> 6
+LANG-0309	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 16 <<< 7
+LANG-0310	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 32 >>> 1
+LANG-0311	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 64 <<< 2
+LANG-0312	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 128 >>> 3
+LANG-0313	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 256 <<< 4
+LANG-0314	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 512 >>> 5
+LANG-0315	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 1024 <<< 6
+LANG-0316	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 2048 >>> 7
+LANG-0317	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 4096 <<< 1
+LANG-0318	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 8192 >>> 2
+LANG-0319	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 16384 <<< 3
+LANG-0320	language-runtime	rotate	runtime-10	cases/runtime/runtime_10.CMOT	64-bit rotate 32768 >>> 4
+LANG-0321	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast I16
+LANG-0322	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Int16
+LANG-0323	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast I32
+LANG-0324	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Int32
+LANG-0325	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast I64
+LANG-0326	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Int
+LANG-0327	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast U16
+LANG-0328	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Uint16
+LANG-0329	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast U32
+LANG-0330	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Uint32
+LANG-0331	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast U64
+LANG-0332	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Uint
+LANG-0333	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Float
+LANG-0334	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Double
+LANG-0335	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Ldouble
+LANG-0336	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Boolean
+LANG-0337	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast I16
+LANG-0338	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Int16
+LANG-0339	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast I32
+LANG-0340	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Int32
+LANG-0341	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast I64
+LANG-0342	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Int
+LANG-0343	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast U16
+LANG-0344	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Uint16
+LANG-0345	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast U32
+LANG-0346	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Uint32
+LANG-0347	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast U64
+LANG-0348	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Uint
+LANG-0349	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Float
+LANG-0350	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Double
+LANG-0351	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Ldouble
+LANG-0352	language-runtime	types-casts-synonyms	runtime-11	cases/runtime/runtime_11.CMOT	Type and cast Boolean
+LANG-0353	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 0
+LANG-0354	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 1
+LANG-0355	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 2
+LANG-0356	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 0
+LANG-0357	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 1
+LANG-0358	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 2
+LANG-0359	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 0
+LANG-0360	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 1
+LANG-0361	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 2
+LANG-0362	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 0
+LANG-0363	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 1
+LANG-0364	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 2
+LANG-0365	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 0
+LANG-0366	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 1
+LANG-0367	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 2
+LANG-0368	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 0
+LANG-0369	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 1
+LANG-0370	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 2
+LANG-0371	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 0
+LANG-0372	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 1
+LANG-0373	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 2
+LANG-0374	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 0
+LANG-0375	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 1
+LANG-0376	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 2
+LANG-0377	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 0
+LANG-0378	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 1
+LANG-0379	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 2
+LANG-0380	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 0
+LANG-0381	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 1
+LANG-0382	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 2
+LANG-0383	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 0
+LANG-0384	language-runtime	arrays-indexing	runtime-12	cases/runtime/runtime_12.CMOT	Array initializer and index 1
+LANG-0385	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 0
+LANG-0386	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 1
+LANG-0387	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 2
+LANG-0388	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 3
+LANG-0389	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 4
+LANG-0390	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 5
+LANG-0391	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 6
+LANG-0392	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 7
+LANG-0393	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 8
+LANG-0394	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 9
+LANG-0395	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 10
+LANG-0396	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 11
+LANG-0397	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 12
+LANG-0398	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 13
+LANG-0399	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 14
+LANG-0400	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 15
+LANG-0401	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 16
+LANG-0402	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 17
+LANG-0403	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 18
+LANG-0404	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 19
+LANG-0405	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 20
+LANG-0406	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 21
+LANG-0407	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 22
+LANG-0408	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 23
+LANG-0409	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 24
+LANG-0410	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 25
+LANG-0411	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 26
+LANG-0412	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 27
+LANG-0413	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 28
+LANG-0414	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 29
+LANG-0415	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 30
+LANG-0416	language-runtime	pointers-address-dereference	runtime-13	cases/runtime/runtime_13.CMOT	Address and dereference test 31
+LANG-0417	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Char literal
+LANG-0418	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Char16 value
+LANG-0419	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Sizeof operator
+LANG-0420	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Null pointer
+LANG-0421	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Char literal
+LANG-0422	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Char16 value
+LANG-0423	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Sizeof operator
+LANG-0424	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Null pointer
+LANG-0425	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Char literal
+LANG-0426	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Char16 value
+LANG-0427	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Sizeof operator
+LANG-0428	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Null pointer
+LANG-0429	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Char literal
+LANG-0430	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Char16 value
+LANG-0431	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Sizeof operator
+LANG-0432	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Null pointer
+LANG-0433	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Char literal
+LANG-0434	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Char16 value
+LANG-0435	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Sizeof operator
+LANG-0436	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Null pointer
+LANG-0437	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Char literal
+LANG-0438	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Char16 value
+LANG-0439	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Sizeof operator
+LANG-0440	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Null pointer
+LANG-0441	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Char literal
+LANG-0442	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Char16 value
+LANG-0443	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Sizeof operator
+LANG-0444	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Null pointer
+LANG-0445	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Char literal
+LANG-0446	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Char16 value
+LANG-0447	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Sizeof operator
+LANG-0448	language-runtime	characters-sizeof-null	runtime-14	cases/runtime/runtime_14.CMOT	Null pointer
+LANG-0449	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 1
+LANG-0450	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 2
+LANG-0451	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 3
+LANG-0452	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 4
+LANG-0453	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 5
+LANG-0454	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 6
+LANG-0455	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 7
+LANG-0456	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 8
+LANG-0457	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 1
+LANG-0458	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 2
+LANG-0459	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 3
+LANG-0460	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 4
+LANG-0461	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 5
+LANG-0462	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 6
+LANG-0463	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 7
+LANG-0464	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 8
+LANG-0465	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 1
+LANG-0466	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 2
+LANG-0467	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 3
+LANG-0468	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 4
+LANG-0469	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 5
+LANG-0470	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 6
+LANG-0471	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 7
+LANG-0472	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 8
+LANG-0473	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 1
+LANG-0474	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 2
+LANG-0475	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 3
+LANG-0476	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 4
+LANG-0477	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 5
+LANG-0478	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 6
+LANG-0479	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 7
+LANG-0480	language-runtime	for-loop	runtime-15	cases/runtime/runtime_15.CMOT	For loop sum to 8
+LANG-0481	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	While loop to 1
+LANG-0482	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	Do/While loop to 2
+LANG-0483	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	While loop to 3
+LANG-0484	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	Do/While loop to 4
+LANG-0485	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	While loop to 5
+LANG-0486	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	Do/While loop to 6
+LANG-0487	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	While loop to 7
+LANG-0488	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	Do/While loop to 1
+LANG-0489	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	While loop to 2
+LANG-0490	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	Do/While loop to 3
+LANG-0491	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	While loop to 4
+LANG-0492	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	Do/While loop to 5
+LANG-0493	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	While loop to 6
+LANG-0494	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	Do/While loop to 7
+LANG-0495	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	While loop to 1
+LANG-0496	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	Do/While loop to 2
+LANG-0497	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	While loop to 3
+LANG-0498	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	Do/While loop to 4
+LANG-0499	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	While loop to 5
+LANG-0500	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	Do/While loop to 6
+LANG-0501	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	While loop to 7
+LANG-0502	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	Do/While loop to 1
+LANG-0503	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	While loop to 2
+LANG-0504	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	Do/While loop to 3
+LANG-0505	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	While loop to 4
+LANG-0506	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	Do/While loop to 5
+LANG-0507	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	While loop to 6
+LANG-0508	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	Do/While loop to 7
+LANG-0509	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	While loop to 1
+LANG-0510	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	Do/While loop to 2
+LANG-0511	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	While loop to 3
+LANG-0512	language-runtime	while-do-while	runtime-16	cases/runtime/runtime_16.CMOT	Do/While loop to 4
+LANG-0513	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 0
+LANG-0514	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 1
+LANG-0515	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 2
+LANG-0516	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 3
+LANG-0517	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 0
+LANG-0518	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 1
+LANG-0519	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 2
+LANG-0520	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 3
+LANG-0521	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 0
+LANG-0522	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 1
+LANG-0523	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 2
+LANG-0524	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 3
+LANG-0525	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 0
+LANG-0526	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 1
+LANG-0527	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 2
+LANG-0528	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 3
+LANG-0529	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 0
+LANG-0530	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 1
+LANG-0531	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 2
+LANG-0532	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 3
+LANG-0533	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 0
+LANG-0534	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 1
+LANG-0535	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 2
+LANG-0536	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 3
+LANG-0537	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 0
+LANG-0538	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 1
+LANG-0539	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 2
+LANG-0540	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 3
+LANG-0541	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 0
+LANG-0542	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 1
+LANG-0543	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 2
+LANG-0544	language-runtime	switch-case-default	runtime-17	cases/runtime/runtime_17.CMOT	Switch case 3
+LANG-0545	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc0
+LANG-0546	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc1
+LANG-0547	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc2
+LANG-0548	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc3
+LANG-0549	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc4
+LANG-0550	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc5
+LANG-0551	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc6
+LANG-0552	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc7
+LANG-0553	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc8
+LANG-0554	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc9
+LANG-0555	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc10
+LANG-0556	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc11
+LANG-0557	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc12
+LANG-0558	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc13
+LANG-0559	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc14
+LANG-0560	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc15
+LANG-0561	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc16
+LANG-0562	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc17
+LANG-0563	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc18
+LANG-0564	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc19
+LANG-0565	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc20
+LANG-0566	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc21
+LANG-0567	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc22
+LANG-0568	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc23
+LANG-0569	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc24
+LANG-0570	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc25
+LANG-0571	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc26
+LANG-0572	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc27
+LANG-0573	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc28
+LANG-0574	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc29
+LANG-0575	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc30
+LANG-0576	language-runtime	functions-parameters-returns	runtime-18	cases/runtime/runtime_18.CMOT	Function call QaFunc31
+LANG-0577	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 0
+LANG-0578	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 1
+LANG-0579	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 2
+LANG-0580	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 3
+LANG-0581	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 4
+LANG-0582	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 5
+LANG-0583	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 6
+LANG-0584	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 7
+LANG-0585	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 8
+LANG-0586	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 9
+LANG-0587	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 10
+LANG-0588	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 11
+LANG-0589	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 12
+LANG-0590	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 13
+LANG-0591	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 14
+LANG-0592	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 15
+LANG-0593	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 16
+LANG-0594	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 17
+LANG-0595	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 18
+LANG-0596	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 19
+LANG-0597	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 20
+LANG-0598	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 21
+LANG-0599	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 22
+LANG-0600	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 23
+LANG-0601	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 24
+LANG-0602	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 25
+LANG-0603	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 26
+LANG-0604	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 27
+LANG-0605	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 28
+LANG-0606	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 29
+LANG-0607	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 30
+LANG-0608	language-runtime	globals-and-scopes	runtime-19	cases/runtime/runtime_19.CMOT	Global and nested scope 31
+LANG-0609	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 4
+LANG-0610	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 5
+LANG-0611	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 6
+LANG-0612	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 7
+LANG-0613	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 8
+LANG-0614	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 4
+LANG-0615	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 5
+LANG-0616	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 6
+LANG-0617	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 7
+LANG-0618	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 8
+LANG-0619	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 4
+LANG-0620	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 5
+LANG-0621	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 6
+LANG-0622	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 7
+LANG-0623	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 8
+LANG-0624	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 4
+LANG-0625	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 5
+LANG-0626	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 6
+LANG-0627	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 7
+LANG-0628	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 8
+LANG-0629	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 4
+LANG-0630	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 5
+LANG-0631	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 6
+LANG-0632	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 7
+LANG-0633	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 8
+LANG-0634	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 4
+LANG-0635	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 5
+LANG-0636	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 6
+LANG-0637	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 7
+LANG-0638	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 8
+LANG-0639	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 4
+LANG-0640	language-runtime	nested-control-break-continue	runtime-20	cases/runtime/runtime_20.CMOT	Nested control with break/continue 5
+PP-0001	preprocessor	replace	preprocessor-01	cases/preprocessor/pp_01.CMOT	Replace macro QA_R_1_0
+PP-0002	preprocessor	replace	preprocessor-01	cases/preprocessor/pp_01.CMOT	Replace macro QA_R_1_1
+PP-0003	preprocessor	replace	preprocessor-01	cases/preprocessor/pp_01.CMOT	Replace macro QA_R_1_2
+PP-0004	preprocessor	replace	preprocessor-01	cases/preprocessor/pp_01.CMOT	Replace macro QA_R_1_3
+PP-0005	preprocessor	replace	preprocessor-01	cases/preprocessor/pp_01.CMOT	Replace macro QA_R_1_4
+PP-0006	preprocessor	replace	preprocessor-01	cases/preprocessor/pp_01.CMOT	Replace macro QA_R_1_5
+PP-0007	preprocessor	replace	preprocessor-01	cases/preprocessor/pp_01.CMOT	Replace macro QA_R_1_6
+PP-0008	preprocessor	replace	preprocessor-01	cases/preprocessor/pp_01.CMOT	Replace macro QA_R_1_7
+PP-0009	preprocessor	replace	preprocessor-02	cases/preprocessor/pp_02.CMOT	Replace macro QA_R_2_0
+PP-0010	preprocessor	replace	preprocessor-02	cases/preprocessor/pp_02.CMOT	Replace macro QA_R_2_1
+PP-0011	preprocessor	replace	preprocessor-02	cases/preprocessor/pp_02.CMOT	Replace macro QA_R_2_2
+PP-0012	preprocessor	replace	preprocessor-02	cases/preprocessor/pp_02.CMOT	Replace macro QA_R_2_3
+PP-0013	preprocessor	replace	preprocessor-02	cases/preprocessor/pp_02.CMOT	Replace macro QA_R_2_4
+PP-0014	preprocessor	replace	preprocessor-02	cases/preprocessor/pp_02.CMOT	Replace macro QA_R_2_5
+PP-0015	preprocessor	replace	preprocessor-02	cases/preprocessor/pp_02.CMOT	Replace macro QA_R_2_6
+PP-0016	preprocessor	replace	preprocessor-02	cases/preprocessor/pp_02.CMOT	Replace macro QA_R_2_7
+PP-0017	preprocessor	replace	preprocessor-03	cases/preprocessor/pp_03.CMOT	Replace macro QA_R_3_0
+PP-0018	preprocessor	replace	preprocessor-03	cases/preprocessor/pp_03.CMOT	Replace macro QA_R_3_1
+PP-0019	preprocessor	replace	preprocessor-03	cases/preprocessor/pp_03.CMOT	Replace macro QA_R_3_2
+PP-0020	preprocessor	replace	preprocessor-03	cases/preprocessor/pp_03.CMOT	Replace macro QA_R_3_3
+PP-0021	preprocessor	replace	preprocessor-03	cases/preprocessor/pp_03.CMOT	Replace macro QA_R_3_4
+PP-0022	preprocessor	replace	preprocessor-03	cases/preprocessor/pp_03.CMOT	Replace macro QA_R_3_5
+PP-0023	preprocessor	replace	preprocessor-03	cases/preprocessor/pp_03.CMOT	Replace macro QA_R_3_6
+PP-0024	preprocessor	replace	preprocessor-03	cases/preprocessor/pp_03.CMOT	Replace macro QA_R_3_7
+PP-0025	preprocessor	replace	preprocessor-04	cases/preprocessor/pp_04.CMOT	Replace macro QA_R_4_0
+PP-0026	preprocessor	replace	preprocessor-04	cases/preprocessor/pp_04.CMOT	Replace macro QA_R_4_1
+PP-0027	preprocessor	replace	preprocessor-04	cases/preprocessor/pp_04.CMOT	Replace macro QA_R_4_2
+PP-0028	preprocessor	replace	preprocessor-04	cases/preprocessor/pp_04.CMOT	Replace macro QA_R_4_3
+PP-0029	preprocessor	replace	preprocessor-04	cases/preprocessor/pp_04.CMOT	Replace macro QA_R_4_4
+PP-0030	preprocessor	replace	preprocessor-04	cases/preprocessor/pp_04.CMOT	Replace macro QA_R_4_5
+PP-0031	preprocessor	replace	preprocessor-04	cases/preprocessor/pp_04.CMOT	Replace macro QA_R_4_6
+PP-0032	preprocessor	replace	preprocessor-04	cases/preprocessor/pp_04.CMOT	Replace macro QA_R_4_7
+PP-0033	preprocessor	replace	preprocessor-05	cases/preprocessor/pp_05.CMOT	Replace macro QA_R_5_0
+PP-0034	preprocessor	replace	preprocessor-05	cases/preprocessor/pp_05.CMOT	Replace macro QA_R_5_1
+PP-0035	preprocessor	replace	preprocessor-05	cases/preprocessor/pp_05.CMOT	Replace macro QA_R_5_2
+PP-0036	preprocessor	replace	preprocessor-05	cases/preprocessor/pp_05.CMOT	Replace macro QA_R_5_3
+PP-0037	preprocessor	replace	preprocessor-05	cases/preprocessor/pp_05.CMOT	Replace macro QA_R_5_4
+PP-0038	preprocessor	replace	preprocessor-05	cases/preprocessor/pp_05.CMOT	Replace macro QA_R_5_5
+PP-0039	preprocessor	replace	preprocessor-05	cases/preprocessor/pp_05.CMOT	Replace macro QA_R_5_6
+PP-0040	preprocessor	replace	preprocessor-05	cases/preprocessor/pp_05.CMOT	Replace macro QA_R_5_7
+PP-0041	preprocessor	replace	preprocessor-06	cases/preprocessor/pp_06.CMOT	Replace macro QA_R_6_0
+PP-0042	preprocessor	replace	preprocessor-06	cases/preprocessor/pp_06.CMOT	Replace macro QA_R_6_1
+PP-0043	preprocessor	replace	preprocessor-06	cases/preprocessor/pp_06.CMOT	Replace macro QA_R_6_2
+PP-0044	preprocessor	replace	preprocessor-06	cases/preprocessor/pp_06.CMOT	Replace macro QA_R_6_3
+PP-0045	preprocessor	replace	preprocessor-06	cases/preprocessor/pp_06.CMOT	Replace macro QA_R_6_4
+PP-0046	preprocessor	replace	preprocessor-06	cases/preprocessor/pp_06.CMOT	Replace macro QA_R_6_5
+PP-0047	preprocessor	replace	preprocessor-06	cases/preprocessor/pp_06.CMOT	Replace macro QA_R_6_6
+PP-0048	preprocessor	replace	preprocessor-06	cases/preprocessor/pp_06.CMOT	Replace macro QA_R_6_7
+PP-0049	preprocessor	replace	preprocessor-07	cases/preprocessor/pp_07.CMOT	Replace macro QA_R_7_0
+PP-0050	preprocessor	replace	preprocessor-07	cases/preprocessor/pp_07.CMOT	Replace macro QA_R_7_1
+PP-0051	preprocessor	replace	preprocessor-07	cases/preprocessor/pp_07.CMOT	Replace macro QA_R_7_2
+PP-0052	preprocessor	replace	preprocessor-07	cases/preprocessor/pp_07.CMOT	Replace macro QA_R_7_3
+PP-0053	preprocessor	replace	preprocessor-07	cases/preprocessor/pp_07.CMOT	Replace macro QA_R_7_4
+PP-0054	preprocessor	replace	preprocessor-07	cases/preprocessor/pp_07.CMOT	Replace macro QA_R_7_5
+PP-0055	preprocessor	replace	preprocessor-07	cases/preprocessor/pp_07.CMOT	Replace macro QA_R_7_6
+PP-0056	preprocessor	replace	preprocessor-07	cases/preprocessor/pp_07.CMOT	Replace macro QA_R_7_7
+PP-0057	preprocessor	replace	preprocessor-08	cases/preprocessor/pp_08.CMOT	Replace macro QA_R_8_0
+PP-0058	preprocessor	replace	preprocessor-08	cases/preprocessor/pp_08.CMOT	Replace macro QA_R_8_1
+PP-0059	preprocessor	replace	preprocessor-08	cases/preprocessor/pp_08.CMOT	Replace macro QA_R_8_2
+PP-0060	preprocessor	replace	preprocessor-08	cases/preprocessor/pp_08.CMOT	Replace macro QA_R_8_3
+PP-0061	preprocessor	replace	preprocessor-08	cases/preprocessor/pp_08.CMOT	Replace macro QA_R_8_4
+PP-0062	preprocessor	replace	preprocessor-08	cases/preprocessor/pp_08.CMOT	Replace macro QA_R_8_5
+PP-0063	preprocessor	replace	preprocessor-08	cases/preprocessor/pp_08.CMOT	Replace macro QA_R_8_6
+PP-0064	preprocessor	replace	preprocessor-08	cases/preprocessor/pp_08.CMOT	Replace macro QA_R_8_7
+PP-0065	preprocessor	define	preprocessor-09	cases/preprocessor/pp_09.CMOT	Preprocessor define QA_D_9_0
+PP-0066	preprocessor	define	preprocessor-09	cases/preprocessor/pp_09.CMOT	Preprocessor define QA_D_9_1
+PP-0067	preprocessor	define	preprocessor-09	cases/preprocessor/pp_09.CMOT	Preprocessor define QA_D_9_2
+PP-0068	preprocessor	define	preprocessor-09	cases/preprocessor/pp_09.CMOT	Preprocessor define QA_D_9_3
+PP-0069	preprocessor	undef-redefine	preprocessor-09	cases/preprocessor/pp_09.CMOT	Preprocessor define QA_U_9_4
+PP-0070	preprocessor	undef-redefine	preprocessor-09	cases/preprocessor/pp_09.CMOT	Preprocessor define QA_U_9_5
+PP-0071	preprocessor	command-line-define	preprocessor-09	cases/preprocessor/pp_09.CMOT	Preprocessor define QA_CMD_9_6
+PP-0072	preprocessor	command-line-define	preprocessor-09	cases/preprocessor/pp_09.CMOT	Preprocessor define QA_CMD_9_7
+PP-0073	preprocessor	define	preprocessor-10	cases/preprocessor/pp_10.CMOT	Preprocessor define QA_D_10_0
+PP-0074	preprocessor	define	preprocessor-10	cases/preprocessor/pp_10.CMOT	Preprocessor define QA_D_10_1
+PP-0075	preprocessor	define	preprocessor-10	cases/preprocessor/pp_10.CMOT	Preprocessor define QA_D_10_2
+PP-0076	preprocessor	define	preprocessor-10	cases/preprocessor/pp_10.CMOT	Preprocessor define QA_D_10_3
+PP-0077	preprocessor	undef-redefine	preprocessor-10	cases/preprocessor/pp_10.CMOT	Preprocessor define QA_U_10_4
+PP-0078	preprocessor	undef-redefine	preprocessor-10	cases/preprocessor/pp_10.CMOT	Preprocessor define QA_U_10_5
+PP-0079	preprocessor	command-line-define	preprocessor-10	cases/preprocessor/pp_10.CMOT	Preprocessor define QA_CMD_10_6
+PP-0080	preprocessor	command-line-define	preprocessor-10	cases/preprocessor/pp_10.CMOT	Preprocessor define QA_CMD_10_7
+PP-0081	preprocessor	define	preprocessor-11	cases/preprocessor/pp_11.CMOT	Preprocessor define QA_D_11_0
+PP-0082	preprocessor	define	preprocessor-11	cases/preprocessor/pp_11.CMOT	Preprocessor define QA_D_11_1
+PP-0083	preprocessor	define	preprocessor-11	cases/preprocessor/pp_11.CMOT	Preprocessor define QA_D_11_2
+PP-0084	preprocessor	define	preprocessor-11	cases/preprocessor/pp_11.CMOT	Preprocessor define QA_D_11_3
+PP-0085	preprocessor	undef-redefine	preprocessor-11	cases/preprocessor/pp_11.CMOT	Preprocessor define QA_U_11_4
+PP-0086	preprocessor	undef-redefine	preprocessor-11	cases/preprocessor/pp_11.CMOT	Preprocessor define QA_U_11_5
+PP-0087	preprocessor	command-line-define	preprocessor-11	cases/preprocessor/pp_11.CMOT	Preprocessor define QA_CMD_11_6
+PP-0088	preprocessor	command-line-define	preprocessor-11	cases/preprocessor/pp_11.CMOT	Preprocessor define QA_CMD_11_7
+PP-0089	preprocessor	define	preprocessor-12	cases/preprocessor/pp_12.CMOT	Preprocessor define QA_D_12_0
+PP-0090	preprocessor	define	preprocessor-12	cases/preprocessor/pp_12.CMOT	Preprocessor define QA_D_12_1
+PP-0091	preprocessor	define	preprocessor-12	cases/preprocessor/pp_12.CMOT	Preprocessor define QA_D_12_2
+PP-0092	preprocessor	define	preprocessor-12	cases/preprocessor/pp_12.CMOT	Preprocessor define QA_D_12_3
+PP-0093	preprocessor	undef-redefine	preprocessor-12	cases/preprocessor/pp_12.CMOT	Preprocessor define QA_U_12_4
+PP-0094	preprocessor	undef-redefine	preprocessor-12	cases/preprocessor/pp_12.CMOT	Preprocessor define QA_U_12_5
+PP-0095	preprocessor	command-line-define	preprocessor-12	cases/preprocessor/pp_12.CMOT	Preprocessor define QA_CMD_12_6
+PP-0096	preprocessor	command-line-define	preprocessor-12	cases/preprocessor/pp_12.CMOT	Preprocessor define QA_CMD_12_7
+PP-0097	preprocessor	include-resolution	preprocessor-13	cases/preprocessor/pp_13.CMOT	Nested include macro QA_INC_13_0
+PP-0098	preprocessor	include-resolution	preprocessor-13	cases/preprocessor/pp_13.CMOT	Nested include macro QA_INC_13_1
+PP-0099	preprocessor	include-resolution	preprocessor-13	cases/preprocessor/pp_13.CMOT	Nested include macro QA_INC_13_2
+PP-0100	preprocessor	include-resolution	preprocessor-13	cases/preprocessor/pp_13.CMOT	Nested include macro QA_INC_13_3
+PP-0101	preprocessor	include-resolution	preprocessor-13	cases/preprocessor/pp_13.CMOT	Nested include macro QA_INC_13_4
+PP-0102	preprocessor	include-resolution	preprocessor-13	cases/preprocessor/pp_13.CMOT	Nested include macro QA_INC_13_5
+PP-0103	preprocessor	include-resolution	preprocessor-13	cases/preprocessor/pp_13.CMOT	Nested include macro QA_INC_13_6
+PP-0104	preprocessor	include-resolution	preprocessor-13	cases/preprocessor/pp_13.CMOT	Nested include macro QA_INC_13_7
+PP-0105	preprocessor	include-resolution	preprocessor-14	cases/preprocessor/pp_14.CMOT	Nested include macro QA_INC_14_0
+PP-0106	preprocessor	include-resolution	preprocessor-14	cases/preprocessor/pp_14.CMOT	Nested include macro QA_INC_14_1
+PP-0107	preprocessor	include-resolution	preprocessor-14	cases/preprocessor/pp_14.CMOT	Nested include macro QA_INC_14_2
+PP-0108	preprocessor	include-resolution	preprocessor-14	cases/preprocessor/pp_14.CMOT	Nested include macro QA_INC_14_3
+PP-0109	preprocessor	include-resolution	preprocessor-14	cases/preprocessor/pp_14.CMOT	Nested include macro QA_INC_14_4
+PP-0110	preprocessor	include-resolution	preprocessor-14	cases/preprocessor/pp_14.CMOT	Nested include macro QA_INC_14_5
+PP-0111	preprocessor	include-resolution	preprocessor-14	cases/preprocessor/pp_14.CMOT	Nested include macro QA_INC_14_6
+PP-0112	preprocessor	include-resolution	preprocessor-14	cases/preprocessor/pp_14.CMOT	Nested include macro QA_INC_14_7
+PP-0113	preprocessor	include-resolution	preprocessor-15	cases/preprocessor/pp_15.CMOT	Nested include macro QA_INC_15_0
+PP-0114	preprocessor	include-resolution	preprocessor-15	cases/preprocessor/pp_15.CMOT	Nested include macro QA_INC_15_1
+PP-0115	preprocessor	include-resolution	preprocessor-15	cases/preprocessor/pp_15.CMOT	Nested include macro QA_INC_15_2
+PP-0116	preprocessor	include-resolution	preprocessor-15	cases/preprocessor/pp_15.CMOT	Nested include macro QA_INC_15_3
+PP-0117	preprocessor	include-resolution	preprocessor-15	cases/preprocessor/pp_15.CMOT	Nested include macro QA_INC_15_4
+PP-0118	preprocessor	include-resolution	preprocessor-15	cases/preprocessor/pp_15.CMOT	Nested include macro QA_INC_15_5
+PP-0119	preprocessor	include-resolution	preprocessor-15	cases/preprocessor/pp_15.CMOT	Nested include macro QA_INC_15_6
+PP-0120	preprocessor	include-resolution	preprocessor-15	cases/preprocessor/pp_15.CMOT	Nested include macro QA_INC_15_7
+PP-0121	preprocessor	include-resolution	preprocessor-16	cases/preprocessor/pp_16.CMOT	Nested include macro QA_INC_16_0
+PP-0122	preprocessor	include-resolution	preprocessor-16	cases/preprocessor/pp_16.CMOT	Nested include macro QA_INC_16_1
+PP-0123	preprocessor	include-resolution	preprocessor-16	cases/preprocessor/pp_16.CMOT	Nested include macro QA_INC_16_2
+PP-0124	preprocessor	include-resolution	preprocessor-16	cases/preprocessor/pp_16.CMOT	Nested include macro QA_INC_16_3
+PP-0125	preprocessor	include-resolution	preprocessor-16	cases/preprocessor/pp_16.CMOT	Nested include macro QA_INC_16_4
+PP-0126	preprocessor	include-resolution	preprocessor-16	cases/preprocessor/pp_16.CMOT	Nested include macro QA_INC_16_5
+PP-0127	preprocessor	include-resolution	preprocessor-16	cases/preprocessor/pp_16.CMOT	Nested include macro QA_INC_16_6
+PP-0128	preprocessor	include-resolution	preprocessor-16	cases/preprocessor/pp_16.CMOT	Nested include macro QA_INC_16_7
+PP-0129	preprocessor	plugswitch-defined	preprocessor-17	cases/preprocessor/pp_17.CMOT	Plugswitch DEFINED QA_SW_17_0 >= 5
+PP-0130	preprocessor	plugswitch-defined	preprocessor-17	cases/preprocessor/pp_17.CMOT	Plugswitch DEFINED QA_SW_17_1 <= 5
+PP-0131	preprocessor	plugswitch-defined	preprocessor-17	cases/preprocessor/pp_17.CMOT	Plugswitch DEFINED QA_SW_17_2 == 7
+PP-0132	preprocessor	plugswitch-defined	preprocessor-17	cases/preprocessor/pp_17.CMOT	Plugswitch DEFINED QA_SW_17_3 != 8
+PP-0133	preprocessor	plugswitch-defined	preprocessor-17	cases/preprocessor/pp_17.CMOT	Plugswitch DEFINED QA_SW_17_4 > 2
+PP-0134	preprocessor	plugswitch-defined	preprocessor-17	cases/preprocessor/pp_17.CMOT	Plugswitch DEFINED QA_SW_17_5 < 3
+PP-0135	preprocessor	plugswitch-defined	preprocessor-17	cases/preprocessor/pp_17.CMOT	Plugswitch DEFINED QA_SW_17_6 >= 9
+PP-0136	preprocessor	plugswitch-defined	preprocessor-17	cases/preprocessor/pp_17.CMOT	Plugswitch DEFINED QA_SW_17_7 <= 3
+PP-0137	preprocessor	plugswitch-defined	preprocessor-18	cases/preprocessor/pp_18.CMOT	Plugswitch DEFINED QA_SW_18_0 >= 5
+PP-0138	preprocessor	plugswitch-defined	preprocessor-18	cases/preprocessor/pp_18.CMOT	Plugswitch DEFINED QA_SW_18_1 <= 5
+PP-0139	preprocessor	plugswitch-defined	preprocessor-18	cases/preprocessor/pp_18.CMOT	Plugswitch DEFINED QA_SW_18_2 == 7
+PP-0140	preprocessor	plugswitch-defined	preprocessor-18	cases/preprocessor/pp_18.CMOT	Plugswitch DEFINED QA_SW_18_3 != 8
+PP-0141	preprocessor	plugswitch-defined	preprocessor-18	cases/preprocessor/pp_18.CMOT	Plugswitch DEFINED QA_SW_18_4 > 2
+PP-0142	preprocessor	plugswitch-defined	preprocessor-18	cases/preprocessor/pp_18.CMOT	Plugswitch DEFINED QA_SW_18_5 < 3
+PP-0143	preprocessor	plugswitch-defined	preprocessor-18	cases/preprocessor/pp_18.CMOT	Plugswitch DEFINED QA_SW_18_6 >= 9
+PP-0144	preprocessor	plugswitch-defined	preprocessor-18	cases/preprocessor/pp_18.CMOT	Plugswitch DEFINED QA_SW_18_7 <= 3
+PP-0145	preprocessor	plugswitch-defined	preprocessor-19	cases/preprocessor/pp_19.CMOT	Plugswitch DEFINED QA_SW_19_0 >= 5
+PP-0146	preprocessor	plugswitch-defined	preprocessor-19	cases/preprocessor/pp_19.CMOT	Plugswitch DEFINED QA_SW_19_1 <= 5
+PP-0147	preprocessor	plugswitch-defined	preprocessor-19	cases/preprocessor/pp_19.CMOT	Plugswitch DEFINED QA_SW_19_2 == 7
+PP-0148	preprocessor	plugswitch-defined	preprocessor-19	cases/preprocessor/pp_19.CMOT	Plugswitch DEFINED QA_SW_19_3 != 8
+PP-0149	preprocessor	plugswitch-defined	preprocessor-19	cases/preprocessor/pp_19.CMOT	Plugswitch DEFINED QA_SW_19_4 > 2
+PP-0150	preprocessor	plugswitch-defined	preprocessor-19	cases/preprocessor/pp_19.CMOT	Plugswitch DEFINED QA_SW_19_5 < 3
+PP-0151	preprocessor	plugswitch-defined	preprocessor-19	cases/preprocessor/pp_19.CMOT	Plugswitch DEFINED QA_SW_19_6 >= 9
+PP-0152	preprocessor	plugswitch-defined	preprocessor-19	cases/preprocessor/pp_19.CMOT	Plugswitch DEFINED QA_SW_19_7 <= 3
+PP-0153	preprocessor	plugswitch-defined	preprocessor-20	cases/preprocessor/pp_20.CMOT	Plugswitch DEFINED QA_SW_20_0 >= 5
+PP-0154	preprocessor	plugswitch-defined	preprocessor-20	cases/preprocessor/pp_20.CMOT	Plugswitch DEFINED QA_SW_20_1 <= 5
+PP-0155	preprocessor	plugswitch-defined	preprocessor-20	cases/preprocessor/pp_20.CMOT	Plugswitch DEFINED QA_SW_20_2 == 7
+PP-0156	preprocessor	plugswitch-defined	preprocessor-20	cases/preprocessor/pp_20.CMOT	Plugswitch DEFINED QA_SW_20_3 != 8
+PP-0157	preprocessor	plugswitch-defined	preprocessor-20	cases/preprocessor/pp_20.CMOT	Plugswitch DEFINED QA_SW_20_4 > 2
+PP-0158	preprocessor	plugswitch-defined	preprocessor-20	cases/preprocessor/pp_20.CMOT	Plugswitch DEFINED QA_SW_20_5 < 3
+PP-0159	preprocessor	plugswitch-defined	preprocessor-20	cases/preprocessor/pp_20.CMOT	Plugswitch DEFINED QA_SW_20_6 >= 9
+PP-0160	preprocessor	plugswitch-defined	preprocessor-20	cases/preprocessor/pp_20.CMOT	Plugswitch DEFINED QA_SW_20_7 <= 3
+PP-0161	preprocessor	plugswitch-platform	preprocessor-21	cases/preprocessor/pp_21.CMOT	Platform Plugswitch family 0
+PP-0162	preprocessor	plugswitch-platform	preprocessor-21	cases/preprocessor/pp_21.CMOT	Platform Plugswitch family 1
+PP-0163	preprocessor	plugswitch-platform	preprocessor-21	cases/preprocessor/pp_21.CMOT	Platform Plugswitch family 2
+PP-0164	preprocessor	plugswitch-platform	preprocessor-21	cases/preprocessor/pp_21.CMOT	Platform Plugswitch family 3
+PP-0165	preprocessor	plugswitch-platform	preprocessor-21	cases/preprocessor/pp_21.CMOT	Platform Plugswitch family 4
+PP-0166	preprocessor	plugswitch-platform	preprocessor-21	cases/preprocessor/pp_21.CMOT	Platform Plugswitch family 5
+PP-0167	preprocessor	plugswitch-platform	preprocessor-21	cases/preprocessor/pp_21.CMOT	Platform Plugswitch family 6
+PP-0168	preprocessor	plugswitch-platform	preprocessor-21	cases/preprocessor/pp_21.CMOT	Platform Plugswitch family 7
+PP-0169	preprocessor	plugswitch-platform	preprocessor-22	cases/preprocessor/pp_22.CMOT	Platform Plugswitch family 0
+PP-0170	preprocessor	plugswitch-platform	preprocessor-22	cases/preprocessor/pp_22.CMOT	Platform Plugswitch family 1
+PP-0171	preprocessor	plugswitch-platform	preprocessor-22	cases/preprocessor/pp_22.CMOT	Platform Plugswitch family 2
+PP-0172	preprocessor	plugswitch-platform	preprocessor-22	cases/preprocessor/pp_22.CMOT	Platform Plugswitch family 3
+PP-0173	preprocessor	plugswitch-platform	preprocessor-22	cases/preprocessor/pp_22.CMOT	Platform Plugswitch family 4
+PP-0174	preprocessor	plugswitch-platform	preprocessor-22	cases/preprocessor/pp_22.CMOT	Platform Plugswitch family 5
+PP-0175	preprocessor	plugswitch-platform	preprocessor-22	cases/preprocessor/pp_22.CMOT	Platform Plugswitch family 6
+PP-0176	preprocessor	plugswitch-platform	preprocessor-22	cases/preprocessor/pp_22.CMOT	Platform Plugswitch family 7
+PP-0177	preprocessor	plugin-loading	preprocessor-23	cases/preprocessor/pp_23.CMOT	Plugin QA::Plugin23 value 0
+PP-0178	preprocessor	plugin-loading	preprocessor-23	cases/preprocessor/pp_23.CMOT	Plugin QA::Plugin23 value 1
+PP-0179	preprocessor	plugin-loading	preprocessor-23	cases/preprocessor/pp_23.CMOT	Plugin QA::Plugin23 value 2
+PP-0180	preprocessor	plugin-loading	preprocessor-23	cases/preprocessor/pp_23.CMOT	Plugin QA::Plugin23 value 3
+PP-0181	preprocessor	plugin-loading	preprocessor-23	cases/preprocessor/pp_23.CMOT	Plugin QA::Plugin23 value 4
+PP-0182	preprocessor	plugin-loading	preprocessor-23	cases/preprocessor/pp_23.CMOT	Plugin QA::Plugin23 value 5
+PP-0183	preprocessor	plugin-loading	preprocessor-23	cases/preprocessor/pp_23.CMOT	Plugin QA::Plugin23 value 6
+PP-0184	preprocessor	plugin-loading	preprocessor-23	cases/preprocessor/pp_23.CMOT	Plugin QA::Plugin23 value 7
+PP-0185	preprocessor	plugin-loading	preprocessor-24	cases/preprocessor/pp_24.CMOT	Plugin QA::Plugin24 value 0
+PP-0186	preprocessor	plugin-loading	preprocessor-24	cases/preprocessor/pp_24.CMOT	Plugin QA::Plugin24 value 1
+PP-0187	preprocessor	plugin-loading	preprocessor-24	cases/preprocessor/pp_24.CMOT	Plugin QA::Plugin24 value 2
+PP-0188	preprocessor	plugin-loading	preprocessor-24	cases/preprocessor/pp_24.CMOT	Plugin QA::Plugin24 value 3
+PP-0189	preprocessor	plugin-loading	preprocessor-24	cases/preprocessor/pp_24.CMOT	Plugin QA::Plugin24 value 4
+PP-0190	preprocessor	plugin-loading	preprocessor-24	cases/preprocessor/pp_24.CMOT	Plugin QA::Plugin24 value 5
+PP-0191	preprocessor	plugin-loading	preprocessor-24	cases/preprocessor/pp_24.CMOT	Plugin QA::Plugin24 value 6
+PP-0192	preprocessor	plugin-loading	preprocessor-24	cases/preprocessor/pp_24.CMOT	Plugin QA::Plugin24 value 7
+FEATURE-0001	language-feature	01_class_fields_methods	01_class_fields_methods	cases/features/01_class_fields_methods.CMOT	class construction
+FEATURE-0002	language-feature	01_class_fields_methods	01_class_fields_methods	cases/features/01_class_fields_methods.CMOT	method using This
+FEATURE-0003	language-feature	01_class_fields_methods	01_class_fields_methods	cases/features/01_class_fields_methods.CMOT	public field read
+FEATURE-0004	language-feature	01_class_fields_methods	01_class_fields_methods	cases/features/01_class_fields_methods.CMOT	public field write
+FEATURE-0005	language-feature	02_lifecycle_new_delete	02_lifecycle_new_delete	cases/features/02_lifecycle_new_delete.CMOT	New allocates
+FEATURE-0006	language-feature	02_lifecycle_new_delete	02_lifecycle_new_delete	cases/features/02_lifecycle_new_delete.CMOT	constructor initializes
+FEATURE-0007	language-feature	02_lifecycle_new_delete	02_lifecycle_new_delete	cases/features/02_lifecycle_new_delete.CMOT	destructor executes
+FEATURE-0008	language-feature	02_lifecycle_new_delete	02_lifecycle_new_delete	cases/features/02_lifecycle_new_delete.CMOT	Delete changes lifecycle state
+FEATURE-0009	language-feature	03_inheritance	03_inheritance	cases/features/03_inheritance.CMOT	single inheritance allocation
+FEATURE-0010	language-feature	03_inheritance	03_inheritance	cases/features/03_inheritance.CMOT	inherited method
+FEATURE-0011	language-feature	03_inheritance	03_inheritance	cases/features/03_inheritance.CMOT	derived method inherited field
+FEATURE-0012	language-feature	03_inheritance	03_inheritance	cases/features/03_inheritance.CMOT	derived public field
+FEATURE-0013	language-feature	04_virtual_dispatch	04_virtual_dispatch	cases/features/04_virtual_dispatch.CMOT	base pointer to derived
+FEATURE-0014	language-feature	04_virtual_dispatch	04_virtual_dispatch	cases/features/04_virtual_dispatch.CMOT	overridable Value dispatch
+FEATURE-0015	language-feature	04_virtual_dispatch	04_virtual_dispatch	cases/features/04_virtual_dispatch.CMOT	overridable Other dispatch
+FEATURE-0016	language-feature	04_virtual_dispatch	04_virtual_dispatch	cases/features/04_virtual_dispatch.CMOT	multiple virtual calls
+FEATURE-0017	language-feature	05_constructor_overload	05_constructor_overload	cases/features/05_constructor_overload.CMOT	Int32 constructor overload
+FEATURE-0018	language-feature	05_constructor_overload	05_constructor_overload	cases/features/05_constructor_overload.CMOT	Int constructor overload
+FEATURE-0019	language-feature	05_constructor_overload	05_constructor_overload	cases/features/05_constructor_overload.CMOT	typed constructor selection
+FEATURE-0020	language-feature	05_constructor_overload	05_constructor_overload	cases/features/05_constructor_overload.CMOT	delete overloaded instances
+FEATURE-0021	language-feature	06_auto_getset	06_auto_getset	cases/features/06_auto_getset.CMOT	automatic getter
+FEATURE-0022	language-feature	06_auto_getset	06_auto_getset	cases/features/06_auto_getset.CMOT	automatic setter
+FEATURE-0023	language-feature	06_auto_getset	06_auto_getset	cases/features/06_auto_getset.CMOT	Getall public data
+FEATURE-0024	language-feature	06_auto_getset	06_auto_getset	cases/features/06_auto_getset.CMOT	Setall public fields
+FEATURE-0025	language-feature	07_operation_overload	07_operation_overload	cases/features/07_operation_overload.CMOT	Operation plus
+FEATURE-0026	language-feature	07_operation_overload	07_operation_overload	cases/features/07_operation_overload.CMOT	Operation minus
+FEATURE-0027	language-feature	07_operation_overload	07_operation_overload	cases/features/07_operation_overload.CMOT	commuted operands
+FEATURE-0028	language-feature	07_operation_overload	07_operation_overload	cases/features/07_operation_overload.CMOT	operation result expression
+FEATURE-0029	language-feature	08_templates	08_templates	cases/features/08_templates.CMOT	template function instantiation
+FEATURE-0030	language-feature	08_templates	08_templates	cases/features/08_templates.CMOT	template class New
+FEATURE-0031	language-feature	08_templates	08_templates	cases/features/08_templates.CMOT	single-type template storage
+FEATURE-0032	language-feature	08_templates	08_templates	cases/features/08_templates.CMOT	multi-type template storage
+FEATURE-0033	language-feature	09_exceptions	09_exceptions	cases/features/09_exceptions.CMOT	Try normal path
+FEATURE-0034	language-feature	09_exceptions	09_exceptions	cases/features/09_exceptions.CMOT	Throw Catchall
+FEATURE-0035	language-feature	09_exceptions	09_exceptions	cases/features/09_exceptions.CMOT	typed Catch
+FEATURE-0036	language-feature	09_exceptions	09_exceptions	cases/features/09_exceptions.CMOT	post-catch continuation
+FEATURE-0037	language-feature	10_exception_destructor	10_exception_destructor	cases/features/10_exception_destructor.CMOT	stack object setup
+FEATURE-0038	language-feature	10_exception_destructor	10_exception_destructor	cases/features/10_exception_destructor.CMOT	throw unwinding
+FEATURE-0039	language-feature	10_exception_destructor	10_exception_destructor	cases/features/10_exception_destructor.CMOT	destructor during unwind
+FEATURE-0040	language-feature	10_exception_destructor	10_exception_destructor	cases/features/10_exception_destructor.CMOT	catch completion
+FEATURE-0041	language-feature	11_dynamic_struct	11_dynamic_struct	cases/features/11_dynamic_struct.CMOT	base dynamic field Int16
+FEATURE-0042	language-feature	11_dynamic_struct	11_dynamic_struct	cases/features/11_dynamic_struct.CMOT	base dynamic field Int32
+FEATURE-0043	language-feature	11_dynamic_struct	11_dynamic_struct	cases/features/11_dynamic_struct.CMOT	expanded Uint16 field
+FEATURE-0044	language-feature	11_dynamic_struct	11_dynamic_struct	cases/features/11_dynamic_struct.CMOT	expanded Double field
+FEATURE-0045	language-feature	12_fptr_global	12_fptr_global	cases/features/12_fptr_global.CMOT	Fptr declaration
+FEATURE-0046	language-feature	12_fptr_global	12_fptr_global	cases/features/12_fptr_global.CMOT	Global prefix
+FEATURE-0047	language-feature	12_fptr_global	12_fptr_global	cases/features/12_fptr_global.CMOT	Global suffix
+FEATURE-0048	language-feature	12_fptr_global	12_fptr_global	cases/features/12_fptr_global.CMOT	global mutation
+FEATURE-0049	language-feature	13_tstore_threadstore	13_tstore_threadstore	cases/features/13_tstore_threadstore.CMOT	Tstore declaration
+FEATURE-0050	language-feature	13_tstore_threadstore	13_tstore_threadstore	cases/features/13_tstore_threadstore.CMOT	ThreadStore synonym
+FEATURE-0051	language-feature	13_tstore_threadstore	13_tstore_threadstore	cases/features/13_tstore_threadstore.CMOT	thread local mutation
+FEATURE-0052	language-feature	13_tstore_threadstore	13_tstore_threadstore	cases/features/13_tstore_threadstore.CMOT	thread local result
+FEATURE-0053	language-feature	14_target_hit_direct	14_target_hit_direct	cases/features/14_target_hit_direct.CMOT	Hit declaration
+FEATURE-0054	language-feature	14_target_hit_direct	14_target_hit_direct	cases/features/14_target_hit_direct.CMOT	Target direct dispatch
+FEATURE-0055	language-feature	14_target_hit_direct	14_target_hit_direct	cases/features/14_target_hit_direct.CMOT	Target arguments
+FEATURE-0056	language-feature	14_target_hit_direct	14_target_hit_direct	cases/features/14_target_hit_direct.CMOT	Hit return path
+FEATURE-0057	language-feature	15_target_hit_object	15_target_hit_object	cases/features/15_target_hit_object.CMOT	object Target declaration
+FEATURE-0058	language-feature	15_target_hit_object	15_target_hit_object	cases/features/15_target_hit_object.CMOT	object Hit declaration
+FEATURE-0059	language-feature	15_target_hit_object	15_target_hit_object	cases/features/15_target_hit_object.CMOT	object dispatch
+FEATURE-0060	language-feature	15_target_hit_object	15_target_hit_object	cases/features/15_target_hit_object.CMOT	object payload
+FEATURE-0061	language-feature	16_packages	16_packages	cases/features/16_packages.CMOT	package function Add
+FEATURE-0062	language-feature	16_packages	16_packages	cases/features/16_packages.CMOT	package function Mul
+FEATURE-0063	language-feature	16_packages	16_packages	cases/features/16_packages.CMOT	nested package calls
+FEATURE-0064	language-feature	16_packages	16_packages	cases/features/16_packages.CMOT	package name mangling
+FEATURE-0065	language-feature	17_stl_sequence	17_stl_sequence	cases/features/17_stl_sequence.CMOT	Vector sort/At
+FEATURE-0066	language-feature	17_stl_sequence	17_stl_sequence	cases/features/17_stl_sequence.CMOT	List sort/At
+FEATURE-0067	language-feature	17_stl_sequence	17_stl_sequence	cases/features/17_stl_sequence.CMOT	Dlist sort/At
+FEATURE-0068	language-feature	17_stl_sequence	17_stl_sequence	cases/features/17_stl_sequence.CMOT	Vector Size
+FEATURE-0069	language-feature	18_stl_maps	18_stl_maps	cases/features/18_stl_maps.CMOT	Dict put/get
+FEATURE-0070	language-feature	18_stl_maps	18_stl_maps	cases/features/18_stl_maps.CMOT	HashDict put/get
+FEATURE-0071	language-feature	18_stl_maps	18_stl_maps	cases/features/18_stl_maps.CMOT	MultiDict contains
+FEATURE-0072	language-feature	18_stl_maps	18_stl_maps	cases/features/18_stl_maps.CMOT	MultiHashDict contains
+FEATURE-0073	language-feature	19_stl_trees	19_stl_trees	cases/features/19_stl_trees.CMOT	BinaryTree
+FEATURE-0074	language-feature	19_stl_trees	19_stl_trees	cases/features/19_stl_trees.CMOT	BinarySearchTree
+FEATURE-0075	language-feature	19_stl_trees	19_stl_trees	cases/features/19_stl_trees.CMOT	BTree
+FEATURE-0076	language-feature	19_stl_trees	19_stl_trees	cases/features/19_stl_trees.CMOT	BPlusTree
+FEATURE-0077	language-feature	20_algorithms	20_algorithms	cases/features/20_algorithms.CMOT	algorithm object creation
+FEATURE-0078	language-feature	20_algorithms	20_algorithms	cases/features/20_algorithms.CMOT	sorting algorithm
+FEATURE-0079	language-feature	20_algorithms	20_algorithms	cases/features/20_algorithms.CMOT	search algorithm
+FEATURE-0080	language-feature	20_algorithms	20_algorithms	cases/features/20_algorithms.CMOT	min/max comparison
+FEATURE-0081	language-feature	21_io_string_wide_math	21_io_string_wide_math	cases/features/21_io_string_wide_math.CMOT	CString object and Contains raw strings (nested and escaped braces, quotes, slash, multiline preservation)
+FEATURE-0082	language-feature	21_io_string_wide_math	21_io_string_wide_math	cases/features/21_io_string_wide_math.CMOT	Character object
+FEATURE-0083	language-feature	21_io_string_wide_math	21_io_string_wide_math	cases/features/21_io_string_wide_math.CMOT	StringParser object
+FEATURE-0084	language-feature	21_io_string_wide_math	21_io_string_wide_math	cases/features/21_io_string_wide_math.CMOT	Wide string objects
+FEATURE-0085	language-feature	22_filesystem_logging_locks	22_filesystem_logging_locks	cases/features/22_filesystem_logging_locks.CMOT	Math and String packages
+FEATURE-0086	language-feature	22_filesystem_logging_locks	22_filesystem_logging_locks	cases/features/22_filesystem_logging_locks.CMOT	Wide and Locks packages
+FEATURE-0087	language-feature	22_filesystem_logging_locks	22_filesystem_logging_locks	cases/features/22_filesystem_logging_locks.CMOT	Filesystem package
+FEATURE-0088	language-feature	22_filesystem_logging_locks	22_filesystem_logging_locks	cases/features/22_filesystem_logging_locks.CMOT	Logging and Exception packages
+FEATURE-0089	language-feature	23_thread	23_thread	cases/features/23_thread.CMOT	Header-defined builtin Thread object construction
+FEATURE-0090	language-feature	23_thread	23_thread	cases/features/23_thread.CMOT	current thread
+FEATURE-0091	language-feature	23_thread	23_thread	cases/features/23_thread.CMOT	yield
+FEATURE-0092	language-feature	23_thread	23_thread	cases/features/23_thread.CMOT	micro/nano sleep
+FEATURE-0093	language-feature	24_net	24_net	cases/features/24_net.CMOT	Net object
+FEATURE-0094	language-feature	24_net	24_net	cases/features/24_net.CMOT	TCP IPv4 socket
+FEATURE-0095	language-feature	24_net	24_net	cases/features/24_net.CMOT	UDP IPv4 socket
+FEATURE-0096	language-feature	24_net	24_net	cases/features/24_net.CMOT	socket close
+TOOL-0001	tool-cli	binaries-version-diagnostics	tool-tests	scripts/run_tool_tests.sh	cmotive executable is present
+TOOL-0002	tool-cli	binaries-version-diagnostics	tool-tests	scripts/run_tool_tests.sh	cmotive++ executable is present
+TOOL-0003	tool-cli	binaries-version-diagnostics	tool-tests	scripts/run_tool_tests.sh	cmotivepp executable is present
+TOOL-0004	tool-cli	binaries-version-diagnostics	tool-tests	scripts/run_tool_tests.sh	CMotiveSymsToDebugFile executable is present
+TOOL-0005	tool-cli	binaries-version-diagnostics	tool-tests	scripts/run_tool_tests.sh	c2cmotive executable is present
+TOOL-0006	tool-cli	binaries-version-diagnostics	tool-tests	scripts/run_tool_tests.sh	cmotive --version exits successfully
+TOOL-0007	tool-cli	binaries-version-diagnostics	tool-tests	scripts/run_tool_tests.sh	cmotive reports the self-hosted compiler version
+TOOL-0008	tool-cli	binaries-version-diagnostics	tool-tests	scripts/run_tool_tests.sh	cmotive++ reports the same compiler version
+TOOL-0009	tool-cli	binaries-version-diagnostics	tool-tests	scripts/run_tool_tests.sh	c2cmotive reports its self-hosted version
+TOOL-0010	tool-cli	binaries-version-diagnostics	tool-tests	scripts/run_tool_tests.sh	c2cmotive --help exits successfully
+TOOL-0011	tool-cli	binaries-version-diagnostics	tool-tests	scripts/run_tool_tests.sh	c2cmotive help documents the output option
+TOOL-0012	tool-cli	binaries-version-diagnostics	tool-tests	scripts/run_tool_tests.sh	c2cmotive help documents the support-header option
+TOOL-0013	tool-cli	binaries-version-diagnostics	tool-tests	scripts/run_tool_tests.sh	cmotive without input returns status 2
+TOOL-0014	tool-cli	binaries-version-diagnostics	tool-tests	scripts/run_tool_tests.sh	cmotive without input emits a diagnostic
+TOOL-0015	tool-cli	binaries-version-diagnostics	tool-tests	scripts/run_tool_tests.sh	cmotivepp without input returns status 2
+TOOL-0016	tool-cli	binaries-version-diagnostics	tool-tests	scripts/run_tool_tests.sh	cmotivepp without input emits a diagnostic
+TOOL-0017	tool-cli	driver-target-root-discovery	tool-tests	scripts/run_tool_tests.sh	--print-linker exits successfully
+TOOL-0018	tool-cli	driver-target-root-discovery	tool-tests	scripts/run_tool_tests.sh	--print-linker returns a nonempty linker command
+TOOL-0019	tool-cli	driver-target-root-discovery	tool-tests	scripts/run_tool_tests.sh	--print-toolchain exits successfully
+TOOL-0020	tool-cli	driver-target-root-discovery	tool-tests	scripts/run_tool_tests.sh	toolchain report contains the C compiler
+TOOL-0021	tool-cli	driver-target-root-discovery	tool-tests	scripts/run_tool_tests.sh	toolchain report contains the linker
+TOOL-0022	tool-cli	driver-target-root-discovery	tool-tests	scripts/run_tool_tests.sh	default target architecture is native
+TOOL-0023	tool-cli	driver-target-root-discovery	tool-tests	scripts/run_tool_tests.sh	x64 target selection round-trips
+TOOL-0024	tool-cli	driver-target-root-discovery	tool-tests	scripts/run_tool_tests.sh	x86_64 target selection round-trips
+TOOL-0025	tool-cli	driver-target-root-discovery	tool-tests	scripts/run_tool_tests.sh	arm64 target selection round-trips
+TOOL-0026	tool-cli	driver-target-root-discovery	tool-tests	scripts/run_tool_tests.sh	cmotive++ is the same frontend binary
+TOOL-0027	tool-cli	driver-target-root-discovery	tool-tests	scripts/run_tool_tests.sh	cmotivepp is the same multi-call frontend binary
+TOOL-0028	tool-cli	driver-target-root-discovery	tool-tests	scripts/run_tool_tests.sh	CMotiveSymsToDebugFile is the same multi-call frontend binary
+TOOL-0029	tool-cli	driver-target-root-discovery	tool-tests	scripts/run_tool_tests.sh	version output is deterministic
+TOOL-0030	tool-cli	driver-target-root-discovery	tool-tests	scripts/run_tool_tests.sh	frontend discovers its source root outside the working directory
+TOOL-0031	tool-cli	driver-target-root-discovery	tool-tests	scripts/run_tool_tests.sh	compiler accepts an uppercase CMOT source extension
+TOOL-0032	tool-cli	driver-target-root-discovery	tool-tests	scripts/run_tool_tests.sh	compiler accepts a lowercase cmot source extension
+TOOL-0033	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	normal compile-and-link mode exits successfully
+TOOL-0034	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	normal compile-and-link mode creates the requested executable
+TOOL-0035	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	compiled CMotive executable returns success
+TOOL-0036	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	-o writes the exact requested output path
+TOOL-0037	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	--emit-c exits successfully
+TOOL-0038	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	--emit-c identifies generated CMotive C
+TOOL-0039	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	emitted C compiles in strict C11 mode
+TOOL-0040	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	strict-C11 compiled output executes successfully
+TOOL-0041	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	-c object-only mode exits successfully
+TOOL-0042	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	-c object-only mode creates a nonempty object
+TOOL-0043	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	--keep-c compile-and-link mode exits successfully
+TOOL-0044	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	--keep-c preserves output-path.c
+TOOL-0045	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	preserved --keep-c source is generated CMotive C
+TOOL-0046	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	-g build exits successfully
+TOOL-0047	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	-g build creates JSON debug metadata
+TOOL-0048	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	-g build creates CMotive symbol metadata
+TOOL-0049	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	-g metadata records debug level 1
+TOOL-0050	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	-g symbol file records debug level 1
+TOOL-0051	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	-g2 metadata records debug level 2
+TOOL-0052	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	-g3 metadata records debug level 3
+TOOL-0053	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	-O0 is passed through and recorded
+TOOL-0054	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	-O1 is passed through and recorded
+TOOL-0055	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	-O2 is passed through and recorded
+TOOL-0056	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	-O3 is passed through and recorded
+TOOL-0057	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	-Os is passed through and recorded
+TOOL-0058	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	debug symbols include a free-function prototype
+TOOL-0059	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	debug symbols include a class-method prototype
+TOOL-0060	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	debug symbol output excludes main
+TOOL-0061	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	--emit-c accepts an explicit target architecture
+TOOL-0062	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	emitted C records the selected target architecture
+TOOL-0063	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	multiple CMotive inputs are combined and linked
+TOOL-0064	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	native object, include, library-dir and library options link successfully
+TOOL-0065	tool-cli	preprocessor-cli-integration	tool-tests	scripts/run_tool_tests.sh	cmotivepp writes expanded source to stdout
+TOOL-0066	tool-cli	preprocessor-cli-integration	tool-tests	scripts/run_tool_tests.sh	Replace directives expand in stdout mode
+TOOL-0067	tool-cli	preprocessor-cli-integration	tool-tests	scripts/run_tool_tests.sh	cmotivepp -o exits successfully
+TOOL-0068	tool-cli	preprocessor-cli-integration	tool-tests	scripts/run_tool_tests.sh	cmotivepp -o creates the requested output file
+TOOL-0069	tool-cli	preprocessor-cli-integration	tool-tests	scripts/run_tool_tests.sh	#define directives expand
+TOOL-0070	tool-cli	preprocessor-cli-integration	tool-tests	scripts/run_tool_tests.sh	#undef permits the later Replace fallback
+TOOL-0071	tool-cli	preprocessor-cli-integration	tool-tests	scripts/run_tool_tests.sh	joined -DNAME=VALUE definitions expand
+TOOL-0072	tool-cli	preprocessor-cli-integration	tool-tests	scripts/run_tool_tests.sh	split -D NAME=VALUE definitions expand
+TOOL-0073	tool-cli	preprocessor-cli-integration	tool-tests	scripts/run_tool_tests.sh	quoted include paths resolve relative to the source file
+TOOL-0074	tool-cli	preprocessor-cli-integration	tool-tests	scripts/run_tool_tests.sh	joined -I path resolves a Plugin source
+TOOL-0075	tool-cli	preprocessor-cli-integration	tool-tests	scripts/run_tool_tests.sh	split -I path resolves a Plugin source
+TOOL-0076	tool-cli	preprocessor-cli-integration	tool-tests	scripts/run_tool_tests.sh	nested includes expose values from the second include level
+TOOL-0077	tool-cli	preprocessor-cli-integration	tool-tests	scripts/run_tool_tests.sh	Plugswitch DEFINED comparison selects the matching case
+TOOL-0078	tool-cli	preprocessor-cli-integration	tool-tests	scripts/run_tool_tests.sh	Plugswitch OS selection emits a supported platform branch
+TOOL-0079	tool-cli	preprocessor-cli-integration	tool-tests	scripts/run_tool_tests.sh	Plugswitch PROCESSOR and ENDIAN selections emit supported branches
+TOOL-0080	tool-cli	preprocessor-cli-integration	tool-tests	scripts/run_tool_tests.sh	compiler-integrated preprocessing resolves Plugin input
+TOOL-0081	tool-cli	debug-symbol-tool	tool-tests	scripts/run_tool_tests.sh	symbol tool accepts an empty invocation
+TOOL-0082	tool-cli	debug-symbol-tool	tool-tests	scripts/run_tool_tests.sh	symbol tool empty invocation creates its default output
+TOOL-0083	tool-cli	debug-symbol-tool	tool-tests	scripts/run_tool_tests.sh	symbol tool accepts a binary and custom output path
+TOOL-0084	tool-cli	debug-symbol-tool	tool-tests	scripts/run_tool_tests.sh	symbol tool creates the custom symbol file
+TOOL-0085	tool-cli	debug-symbol-tool	tool-tests	scripts/run_tool_tests.sh	standalone symbol file has the CMotive header
+TOOL-0086	tool-cli	debug-symbol-tool	tool-tests	scripts/run_tool_tests.sh	standalone symbol file records the binary path
+TOOL-0087	tool-cli	debug-symbol-tool	tool-tests	scripts/run_tool_tests.sh	standalone symbol file records debug level 0
+TOOL-0088	tool-cli	debug-symbol-tool	tool-tests	scripts/run_tool_tests.sh	standalone symbol file contains an optimization field
+TOOL-0089	tool-cli	debug-symbol-tool	tool-tests	scripts/run_tool_tests.sh	standalone symbol file contains a 64-bit-style offset field
+TOOL-0090	tool-cli	debug-symbol-tool	tool-tests	scripts/run_tool_tests.sh	symbol tool accepts the --metadata companion option
+TOOL-0091	tool-cli	debug-symbol-tool	tool-tests	scripts/run_tool_tests.sh	--metadata argument is not mistaken for the binary
+TOOL-0092	tool-cli	debug-symbol-tool	tool-tests	scripts/run_tool_tests.sh	compiler symbol filename uses the required suffix
+TOOL-0093	tool-cli	debug-symbol-tool	tool-tests	scripts/run_tool_tests.sh	compiler JSON metadata declares its format
+TOOL-0094	tool-cli	debug-symbol-tool	tool-tests	scripts/run_tool_tests.sh	compiler JSON metadata has opening and closing braces
+TOOL-0095	tool-cli	debug-symbol-tool	tool-tests	scripts/run_tool_tests.sh	compiler symbols retain parameter names and types
+TOOL-0096	tool-cli	debug-symbol-tool	tool-tests	scripts/run_tool_tests.sh	compiler symbols omit constructors and destructors
+TOOL-0097	tool-cli	c-to-cmotive-cli	tool-tests	scripts/run_tool_tests.sh	c2cmotive custom-output conversion exits successfully
+TOOL-0098	tool-cli	c-to-cmotive-cli	tool-tests	scripts/run_tool_tests.sh	c2cmotive creates the requested CMotive source
+TOOL-0099	tool-cli	c-to-cmotive-cli	tool-tests	scripts/run_tool_tests.sh	c2cmotive creates the requested native support header
+TOOL-0100	tool-cli	c-to-cmotive-cli	tool-tests	scripts/run_tool_tests.sh	generated CMotive source declares StartPackage
+TOOL-0101	tool-cli	c-to-cmotive-cli	tool-tests	scripts/run_tool_tests.sh	generated CMotive source includes its support header
+TOOL-0102	tool-cli	c-to-cmotive-cli	tool-tests	scripts/run_tool_tests.sh	generated CMotive source contains converted functions
+TOOL-0103	tool-cli	c-to-cmotive-cli	tool-tests	scripts/run_tool_tests.sh	generated support header bridges retained main to converted functions
+TOOL-0104	tool-cli	c-to-cmotive-cli	tool-tests	scripts/run_tool_tests.sh	c2cmotive --verbose exits successfully
+TOOL-0105	tool-cli	c-to-cmotive-cli	tool-tests	scripts/run_tool_tests.sh	c2cmotive --verbose reports conversion counts
+TOOL-0106	tool-cli	c-to-cmotive-cli	tool-tests	scripts/run_tool_tests.sh	--include controls the NativeInclude spelling
+TOOL-0107	tool-cli	c-to-cmotive-cli	tool-tests	scripts/run_tool_tests.sh	--preserve-keywords retains lowercase C control flow
+TOOL-0108	tool-cli	c-to-cmotive-cli	tool-tests	scripts/run_tool_tests.sh	default conversion maps C control flow to CMotive spelling
+TOOL-0109	tool-cli	c-to-cmotive-cli	tool-tests	scripts/run_tool_tests.sh	converter creates the default .CMOT path
+TOOL-0110	tool-cli	c-to-cmotive-cli	tool-tests	scripts/run_tool_tests.sh	converter creates the default _native.h support path
+TOOL-0111	tool-cli	c-to-cmotive-cli	tool-tests	scripts/run_tool_tests.sh	converted CMotive source compiles with the self-hosted frontend
+TOOL-0112	tool-cli	c-to-cmotive-cli	tool-tests	scripts/run_tool_tests.sh	converted executable preserves the original C behavior
+TOOL-0113	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	legacy conformance runner has valid POSIX-shell syntax
+TOOL-0114	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	legacy converter runner has valid POSIX-shell syntax
+TOOL-0115	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	example runner has valid POSIX-shell syntax
+TOOL-0116	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	language-file validator has valid POSIX-shell syntax
+TOOL-0117	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	self-host verifier has valid POSIX-shell syntax
+TOOL-0118	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	release packager has valid POSIX-shell syntax
+TOOL-0119	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	release-candidate cutter has valid POSIX-shell syntax
+TOOL-0120	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	GA promotion script has valid POSIX-shell syntax
+TOOL-0121	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	quality-assurance orchestrator has valid POSIX-shell syntax
+TOOL-0122	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	Linux Makefile exposes a parseable qa target
+TOOL-0123	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	macOS Makefile exposes a parseable qa target
+TOOL-0124	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	Windows Makefile exposes a parseable qa target
+TOOL-0125	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	Visual Studio project retains the self-hosted frontend source
+TOOL-0126	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	QA manifest contains exactly 1200 tests
+TOOL-0127	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	QA manifest contains no duplicate IDs
+TOOL-0128	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	release packaging preserves the QA manifest
+CONVERT-0001	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_0
+CONVERT-0002	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_1
+CONVERT-0003	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_2
+CONVERT-0004	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_3
+CONVERT-0005	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_4
+CONVERT-0006	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_5
+CONVERT-0007	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_6
+CONVERT-0008	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_7
+CONVERT-0009	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_8
+CONVERT-0010	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_9
+CONVERT-0011	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_10
+CONVERT-0012	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_11
+CONVERT-0013	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_12
+CONVERT-0014	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_13
+CONVERT-0015	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_14
+CONVERT-0016	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_15
+CONVERT-0017	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_16
+CONVERT-0018	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_17
+CONVERT-0019	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_18
+CONVERT-0020	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_19
+CONVERT-0021	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_20
+CONVERT-0022	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_21
+CONVERT-0023	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_22
+CONVERT-0024	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_23
+CONVERT-0025	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_24
+CONVERT-0026	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_25
+CONVERT-0027	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_26
+CONVERT-0028	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_27
+CONVERT-0029	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_28
+CONVERT-0030	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_29
+CONVERT-0031	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_30
+CONVERT-0032	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_31
+CONVERT-0033	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_0
+CONVERT-0034	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_1
+CONVERT-0035	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_2
+CONVERT-0036	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_3
+CONVERT-0037	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_4
+CONVERT-0038	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_5
+CONVERT-0039	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_6
+CONVERT-0040	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_7
+CONVERT-0041	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_8
+CONVERT-0042	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_9
+CONVERT-0043	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_10
+CONVERT-0044	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_11
+CONVERT-0045	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_12
+CONVERT-0046	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_13
+CONVERT-0047	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_14
+CONVERT-0048	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_15
+CONVERT-0049	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_16
+CONVERT-0050	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_17
+CONVERT-0051	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_18
+CONVERT-0052	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_19
+CONVERT-0053	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_20
+CONVERT-0054	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_21
+CONVERT-0055	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_22
+CONVERT-0056	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_23
+CONVERT-0057	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_24
+CONVERT-0058	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_25
+CONVERT-0059	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_26
+CONVERT-0060	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_27
+CONVERT-0061	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_28
+CONVERT-0062	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_29
+CONVERT-0063	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_30
+CONVERT-0064	converter	fixture-2	converter-2	cases/converter/converter_2.c	Convert and execute C function qa_c_2_31
+CONVERT-0065	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_0
+CONVERT-0066	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_1
+CONVERT-0067	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_2
+CONVERT-0068	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_3
+CONVERT-0069	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_4
+CONVERT-0070	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_5
+CONVERT-0071	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_6
+CONVERT-0072	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_7
+CONVERT-0073	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_8
+CONVERT-0074	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_9
+CONVERT-0075	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_10
+CONVERT-0076	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_11
+CONVERT-0077	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_12
+CONVERT-0078	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_13
+CONVERT-0079	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_14
+CONVERT-0080	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_15
+CONVERT-0081	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_16
+CONVERT-0082	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_17
+CONVERT-0083	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_18
+CONVERT-0084	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_19
+CONVERT-0085	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_20
+CONVERT-0086	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_21
+CONVERT-0087	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_22
+CONVERT-0088	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_23
+CONVERT-0089	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_24
+CONVERT-0090	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_25
+CONVERT-0091	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_26
+CONVERT-0092	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_27
+CONVERT-0093	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_28
+CONVERT-0094	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_29
+CONVERT-0095	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_30
+CONVERT-0096	converter	fixture-3	converter-3	cases/converter/converter_3.c	Convert and execute C function qa_c_3_31
+NEG-0001	negative-diagnostic	undefined-base	negative	cases/negative/undefined_base_00.cmot.txt	Compiler rejects undefined base QaMissing0
+NEG-0002	negative-diagnostic	undefined-base	negative	cases/negative/undefined_base_01.cmot.txt	Compiler rejects undefined base QaMissing1
+NEG-0003	negative-diagnostic	undefined-base	negative	cases/negative/undefined_base_02.cmot.txt	Compiler rejects undefined base QaMissing2
+NEG-0004	negative-diagnostic	undefined-base	negative	cases/negative/undefined_base_03.cmot.txt	Compiler rejects undefined base QaMissing3
+NEG-0005	negative-diagnostic	undefined-base	negative	cases/negative/undefined_base_04.cmot.txt	Compiler rejects undefined base QaMissing4
+NEG-0006	negative-diagnostic	undefined-base	negative	cases/negative/undefined_base_05.cmot.txt	Compiler rejects undefined base QaMissing5
+NEG-0007	negative-diagnostic	undefined-base	negative	cases/negative/undefined_base_06.cmot.txt	Compiler rejects undefined base QaMissing6
+NEG-0008	negative-diagnostic	undefined-base	negative	cases/negative/undefined_base_07.cmot.txt	Compiler rejects undefined base QaMissing7
+NEG-0009	negative-diagnostic	undefined-base	negative	cases/negative/undefined_base_08.cmot.txt	Compiler rejects undefined base QaMissing8
+NEG-0010	negative-diagnostic	undefined-base	negative	cases/negative/undefined_base_09.cmot.txt	Compiler rejects undefined base QaMissing9
+NEG-0011	negative-diagnostic	undefined-base	negative	cases/negative/undefined_base_10.cmot.txt	Compiler rejects undefined base QaMissing10
+NEG-0012	negative-diagnostic	undefined-base	negative	cases/negative/undefined_base_11.cmot.txt	Compiler rejects undefined base QaMissing11
+NEG-0013	negative-diagnostic	undefined-base	negative	cases/negative/undefined_base_12.cmot.txt	Compiler rejects undefined base QaMissing12
+NEG-0014	negative-diagnostic	undefined-base	negative	cases/negative/undefined_base_13.cmot.txt	Compiler rejects undefined base QaMissing13
+NEG-0015	negative-diagnostic	undefined-base	negative	cases/negative/undefined_base_14.cmot.txt	Compiler rejects undefined base QaMissing14
+NEG-0016	negative-diagnostic	undefined-base	negative	cases/negative/undefined_base_15.cmot.txt	Compiler rejects undefined base QaMissing15
+NEG-0017	negative-diagnostic	missing-input	negative	cases/negative/missing_input_00.path	Compiler rejects missing source path 0
+NEG-0018	negative-diagnostic	missing-input	negative	cases/negative/missing_input_01.path	Compiler rejects missing source path 1
+NEG-0019	negative-diagnostic	missing-input	negative	cases/negative/missing_input_02.path	Compiler rejects missing source path 2
+NEG-0020	negative-diagnostic	missing-input	negative	cases/negative/missing_input_03.path	Compiler rejects missing source path 3
+NEG-0021	negative-diagnostic	missing-input	negative	cases/negative/missing_input_04.path	Compiler rejects missing source path 4
+NEG-0022	negative-diagnostic	missing-input	negative	cases/negative/missing_input_05.path	Compiler rejects missing source path 5
+NEG-0023	negative-diagnostic	missing-input	negative	cases/negative/missing_input_06.path	Compiler rejects missing source path 6
+NEG-0024	negative-diagnostic	missing-input	negative	cases/negative/missing_input_07.path	Compiler rejects missing source path 7
+NEG-0025	negative-diagnostic	missing-input	negative	cases/negative/missing_input_08.path	Compiler rejects missing source path 8
+NEG-0026	negative-diagnostic	missing-input	negative	cases/negative/missing_input_09.path	Compiler rejects missing source path 9
+NEG-0027	negative-diagnostic	missing-input	negative	cases/negative/missing_input_10.path	Compiler rejects missing source path 10
+NEG-0028	negative-diagnostic	missing-input	negative	cases/negative/missing_input_11.path	Compiler rejects missing source path 11
+NEG-0029	negative-diagnostic	missing-input	negative	cases/negative/missing_input_12.path	Compiler rejects missing source path 12
+NEG-0030	negative-diagnostic	missing-input	negative	cases/negative/missing_input_13.path	Compiler rejects missing source path 13
+NEG-0031	negative-diagnostic	missing-input	negative	cases/negative/missing_input_14.path	Compiler rejects missing source path 14
+NEG-0032	negative-diagnostic	missing-input	negative	cases/negative/missing_input_15.path	Compiler rejects missing source path 15
+NEG-0033	negative-diagnostic	downstream-c-error	negative	cases/negative/c_error_00.cmot.txt	Compiler propagates generated C diagnostic 0
+NEG-0034	negative-diagnostic	downstream-c-error	negative	cases/negative/c_error_01.cmot.txt	Compiler propagates generated C diagnostic 1
+NEG-0035	negative-diagnostic	downstream-c-error	negative	cases/negative/c_error_02.cmot.txt	Compiler propagates generated C diagnostic 2
+NEG-0036	negative-diagnostic	downstream-c-error	negative	cases/negative/c_error_03.cmot.txt	Compiler propagates generated C diagnostic 3
+NEG-0037	negative-diagnostic	downstream-c-error	negative	cases/negative/c_error_04.cmot.txt	Compiler propagates generated C diagnostic 4
+NEG-0038	negative-diagnostic	downstream-c-error	negative	cases/negative/c_error_05.cmot.txt	Compiler propagates generated C diagnostic 5
+NEG-0039	negative-diagnostic	downstream-c-error	negative	cases/negative/c_error_06.cmot.txt	Compiler propagates generated C diagnostic 6
+NEG-0040	negative-diagnostic	downstream-c-error	negative	cases/negative/c_error_07.cmot.txt	Compiler propagates generated C diagnostic 7
+NEG-0041	negative-diagnostic	downstream-c-error	negative	cases/negative/c_error_08.cmot.txt	Compiler propagates generated C diagnostic 8
+NEG-0042	negative-diagnostic	downstream-c-error	negative	cases/negative/c_error_09.cmot.txt	Compiler propagates generated C diagnostic 9
+NEG-0043	negative-diagnostic	downstream-c-error	negative	cases/negative/c_error_10.cmot.txt	Compiler propagates generated C diagnostic 10
+NEG-0044	negative-diagnostic	downstream-c-error	negative	cases/negative/c_error_11.cmot.txt	Compiler propagates generated C diagnostic 11
+NEG-0045	negative-diagnostic	downstream-c-error	negative	cases/negative/c_error_12.cmot.txt	Compiler propagates generated C diagnostic 12
+NEG-0046	negative-diagnostic	downstream-c-error	negative	cases/negative/c_error_13.cmot.txt	Compiler propagates generated C diagnostic 13
+NEG-0047	negative-diagnostic	downstream-c-error	negative	cases/negative/c_error_14.cmot.txt	Compiler propagates generated C diagnostic 14
+NEG-0048	negative-diagnostic	downstream-c-error	negative	cases/negative/c_error_15.cmot.txt	Compiler propagates generated C diagnostic 15

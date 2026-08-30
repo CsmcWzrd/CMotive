@@ -1,0 +1,241 @@
+Plugin Sys::IO
+
+I32
+main
+()
+{
+    c0: Char = 'A';
+    // QA-TEST: LANG-0417
+    If ( !(c0 == 'A') )
+    {
+        Sys::IO::println("FAIL LANG-0417");
+        Return 1;
+    }
+    c1: Char16 = (Char16)66;
+    // QA-TEST: LANG-0418
+    If ( !(c1 == 66) )
+    {
+        Sys::IO::println("FAIL LANG-0418");
+        Return 1;
+    }
+    x2: I32 = 2;
+    s2: U64 = Sizeof(x2);
+    // QA-TEST: LANG-0419
+    If ( !(s2 >= 2) )
+    {
+        Sys::IO::println("FAIL LANG-0419");
+        Return 1;
+    }
+    p3: Void* = Null;
+    // QA-TEST: LANG-0420
+    If ( !(p3 == Null) )
+    {
+        Sys::IO::println("FAIL LANG-0420");
+        Return 1;
+    }
+    c4: Char = 'E';
+    // QA-TEST: LANG-0421
+    If ( !(c4 == 'E') )
+    {
+        Sys::IO::println("FAIL LANG-0421");
+        Return 1;
+    }
+    c5: Char16 = (Char16)70;
+    // QA-TEST: LANG-0422
+    If ( !(c5 == 70) )
+    {
+        Sys::IO::println("FAIL LANG-0422");
+        Return 1;
+    }
+    x6: I32 = 6;
+    s6: U64 = Sizeof(x6);
+    // QA-TEST: LANG-0423
+    If ( !(s6 >= 2) )
+    {
+        Sys::IO::println("FAIL LANG-0423");
+        Return 1;
+    }
+    p7: Void* = Null;
+    // QA-TEST: LANG-0424
+    If ( !(p7 == Null) )
+    {
+        Sys::IO::println("FAIL LANG-0424");
+        Return 1;
+    }
+    c8: Char = 'I';
+    // QA-TEST: LANG-0425
+    If ( !(c8 == 'I') )
+    {
+        Sys::IO::println("FAIL LANG-0425");
+        Return 1;
+    }
+    c9: Char16 = (Char16)74;
+    // QA-TEST: LANG-0426
+    If ( !(c9 == 74) )
+    {
+        Sys::IO::println("FAIL LANG-0426");
+        Return 1;
+    }
+    x10: I32 = 10;
+    s10: U64 = Sizeof(x10);
+    // QA-TEST: LANG-0427
+    If ( !(s10 >= 2) )
+    {
+        Sys::IO::println("FAIL LANG-0427");
+        Return 1;
+    }
+    p11: Void* = Null;
+    // QA-TEST: LANG-0428
+    If ( !(p11 == Null) )
+    {
+        Sys::IO::println("FAIL LANG-0428");
+        Return 1;
+    }
+    c12: Char = 'M';
+    // QA-TEST: LANG-0429
+    If ( !(c12 == 'M') )
+    {
+        Sys::IO::println("FAIL LANG-0429");
+        Return 1;
+    }
+    c13: Char16 = (Char16)78;
+    // QA-TEST: LANG-0430
+    If ( !(c13 == 78) )
+    {
+        Sys::IO::println("FAIL LANG-0430");
+        Return 1;
+    }
+    x14: I32 = 14;
+    s14: U64 = Sizeof(x14);
+    // QA-TEST: LANG-0431
+    If ( !(s14 >= 2) )
+    {
+        Sys::IO::println("FAIL LANG-0431");
+        Return 1;
+    }
+    p15: Void* = Null;
+    // QA-TEST: LANG-0432
+    If ( !(p15 == Null) )
+    {
+        Sys::IO::println("FAIL LANG-0432");
+        Return 1;
+    }
+    c16: Char = 'Q';
+    // QA-TEST: LANG-0433
+    If ( !(c16 == 'Q') )
+    {
+        Sys::IO::println("FAIL LANG-0433");
+        Return 1;
+    }
+    c17: Char16 = (Char16)82;
+    // QA-TEST: LANG-0434
+    If ( !(c17 == 82) )
+    {
+        Sys::IO::println("FAIL LANG-0434");
+        Return 1;
+    }
+    x18: I32 = 18;
+    s18: U64 = Sizeof(x18);
+    // QA-TEST: LANG-0435
+    If ( !(s18 >= 2) )
+    {
+        Sys::IO::println("FAIL LANG-0435");
+        Return 1;
+    }
+    p19: Void* = Null;
+    // QA-TEST: LANG-0436
+    If ( !(p19 == Null) )
+    {
+        Sys::IO::println("FAIL LANG-0436");
+        Return 1;
+    }
+    c20: Char = 'U';
+    // QA-TEST: LANG-0437
+    If ( !(c20 == 'U') )
+    {
+        Sys::IO::println("FAIL LANG-0437");
+        Return 1;
+    }
+    c21: Char16 = (Char16)66;
+    // QA-TEST: LANG-0438
+    If ( !(c21 == 66) )
+    {
+        Sys::IO::println("FAIL LANG-0438");
+        Return 1;
+    }
+    x22: I32 = 22;
+    s22: U64 = Sizeof(x22);
+    // QA-TEST: LANG-0439
+    If ( !(s22 >= 2) )
+    {
+        Sys::IO::println("FAIL LANG-0439");
+        Return 1;
+    }
+    p23: Void* = Null;
+    // QA-TEST: LANG-0440
+    If ( !(p23 == Null) )
+    {
+        Sys::IO::println("FAIL LANG-0440");
+        Return 1;
+    }
+    c24: Char = 'Y';
+    // QA-TEST: LANG-0441
+    If ( !(c24 == 'Y') )
+    {
+        Sys::IO::println("FAIL LANG-0441");
+        Return 1;
+    }
+    c25: Char16 = (Char16)70;
+    // QA-TEST: LANG-0442
+    If ( !(c25 == 70) )
+    {
+        Sys::IO::println("FAIL LANG-0442");
+        Return 1;
+    }
+    x26: I32 = 26;
+    s26: U64 = Sizeof(x26);
+    // QA-TEST: LANG-0443
+    If ( !(s26 >= 2) )
+    {
+        Sys::IO::println("FAIL LANG-0443");
+        Return 1;
+    }
+    p27: Void* = Null;
+    // QA-TEST: LANG-0444
+    If ( !(p27 == Null) )
+    {
+        Sys::IO::println("FAIL LANG-0444");
+        Return 1;
+    }
+    c28: Char = 'C';
+    // QA-TEST: LANG-0445
+    If ( !(c28 == 'C') )
+    {
+        Sys::IO::println("FAIL LANG-0445");
+        Return 1;
+    }
+    c29: Char16 = (Char16)74;
+    // QA-TEST: LANG-0446
+    If ( !(c29 == 74) )
+    {
+        Sys::IO::println("FAIL LANG-0446");
+        Return 1;
+    }
+    x30: I32 = 30;
+    s30: U64 = Sizeof(x30);
+    // QA-TEST: LANG-0447
+    If ( !(s30 >= 2) )
+    {
+        Sys::IO::println("FAIL LANG-0447");
+        Return 1;
+    }
+    p31: Void* = Null;
+    // QA-TEST: LANG-0448
+    If ( !(p31 == Null) )
+    {
+        Sys::IO::println("FAIL LANG-0448");
+        Return 1;
+    }
+    Sys::IO::println("PASS LANG-GROUP-14 32");
+    Return 0;
+}

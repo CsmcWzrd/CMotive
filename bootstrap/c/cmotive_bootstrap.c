@@ -138,7 +138,152 @@ typedef struct Tok { TokKind kind; char *v; int line, col; } Tok;
 typedef struct TokVec { Tok *v; int n, cap; } TokVec;
 static void tv_push(TokVec *a, TokKind k, const char *s, size_t n, int line, int col) { if (a->n == a->cap) { a->cap = a->cap ? a->cap * 2 : 256; a->v = (Tok*)xrealloc(a->v, (size_t)a->cap * sizeof(Tok)); } a->v[a->n].kind = k; a->v[a->n].v = (char*)xmalloc(n + 1u); memcpy(a->v[a->n].v, s, n); a->v[a->n].v[n] = 0; a->v[a->n].line = line; a->v[a->n].col = col; a->n++; }
 static int is_multi_op(const char *p, const char **op) { static const char *ops[] = {">>>","<<<","==","!=","<=",">=","->","::","++","--","&&","||","<<",">>","+=","-=","*=","/=","%=","&=","|=","^=","##","...",NULL}; int i; for (i=0; ops[i]; ++i) if (starts_with(p, ops[i])) { *op = ops[i]; return 1; } return 0; }
-static TokVec lex_text(const char *text) { TokVec tv = {0}; int line = 1, col = 1; const char *p = text; while (*p) { const char *start = p; int sc = col; if (*p == '\r' || *p == '\n') { if (*p == '\r' && p[1] == '\n') p++; tv_push(&tv, TK_EOL, "\n", 1, line, col); p++; line++; col = 1; continue; } if (isspace((unsigned char)*p)) { while (*p && *p != '\n' && *p != '\r' && isspace((unsigned char)*p)) { p++; col++; } continue; } if (starts_with(p, "//")) { while (*p && *p != '\n' && *p != '\r') { p++; col++; } continue; } if (starts_with(p, "/*")) { p += 2; col += 2; while (*p && !starts_with(p, "*/")) { if (*p == '\n') { line++; col = 1; p++; } else { p++; col++; } } if (*p) { p += 2; col += 2; } continue; } if (*p == '"' || *p == '\'') { char quote = *p++; col++; while (*p) { if (*p == '\\' && p[1]) { p += 2; col += 2; continue; } if (*p == quote) { p++; col++; break; } if (*p == '\n') { line++; col = 1; p++; } else { p++; col++; } } tv_push(&tv, quote == '"' ? TK_STR : TK_CHAR, start, (size_t)(p-start), line, sc); continue; } if (is_ident_start((unsigned char)*p)) { p++; col++; while (is_ident_part((unsigned char)*p)) { p++; col++; } tv_push(&tv, TK_ID, start, (size_t)(p-start), line, sc); continue; } if (isdigit((unsigned char)*p)) { p++; col++; while (isalnum((unsigned char)*p) || *p == '.' || *p == '_' || *p == '+' || *p == '-') { if ((*p == '+' || *p == '-') && !(p[-1] == 'e' || p[-1] == 'E')) break; p++; col++; } tv_push(&tv, TK_NUM, start, (size_t)(p-start), line, sc); continue; } { const char *op = NULL; if (is_multi_op(p, &op)) { tv_push(&tv, TK_OP, op, strlen(op), line, col); p += strlen(op); col += (int)strlen(op); } else { tv_push(&tv, TK_OP, p, 1, line, col); p++; col++; } } } tv_push(&tv, TK_EOF, "", 0, line, col); return tv; }
+static char *contains_literal(const char *text, size_t n) {
+    Str out;
+    size_t i;
+    sb_init(&out);
+    sb_ch(&out, '"');
+    for (i = 0; i < n; ++i) {
+        unsigned char c = (unsigned char)text[i];
+        if (c == '/' && i + 1 < n && (text[i+1] == '{' || text[i+1] == '}' || text[i+1] == '/')) c = (unsigned char)text[++i];
+        if (c == '"') sb_add(&out, "\\\"");
+        else if (c == '\\') sb_add(&out, "\\\\");
+        else if (c == '\n') sb_add(&out, "\\n");
+        else if (c == '\r') sb_add(&out, "\\r");
+        else if (c == '\t') sb_add(&out, "\\t");
+        else if (c < 32 || c == 127) sb_printf(&out, "\\%03o", (unsigned)c);
+        else sb_ch(&out, (char)c);
+    }
+    sb_ch(&out, '"');
+    return sb_take(&out);
+}
+
+static TokVec lex_text(const char *text) {
+    TokVec tv = {0};
+    int line = 1, col = 1;
+    const char *p = text;
+    while (*p) {
+        const char *start = p;
+        int sl = line, sc = col;
+        if (*p == '\r' || *p == '\n') {
+            if (*p == '\r' && p[1] == '\n') p++;
+            tv_push(&tv, TK_EOL, "\n", 1, line, col);
+            p++;
+            line++;
+            col = 1;
+            continue;
+        }
+        if (isspace((unsigned char)*p)) {
+            while (*p && *p != '\n' && *p != '\r' && isspace((unsigned char)*p)) { p++; col++; }
+            continue;
+        }
+        if (starts_with(p, "//")) {
+            while (*p && *p != '\n' && *p != '\r') { p++; col++; }
+            continue;
+        }
+        if (starts_with(p, "/*")) {
+            p += 2;
+            col += 2;
+            while (*p && !starts_with(p, "*/")) {
+                if (*p == '\r' || *p == '\n') {
+                    if (*p == '\r' && p[1] == '\n') p++;
+                    p++;
+                    line++;
+                    col = 1;
+                } else {
+                    p++;
+                    col++;
+                }
+            }
+            if (*p) { p += 2; col += 2; }
+            continue;
+        }
+        if (*p == '"' || *p == '\'') {
+            char quote = *p++;
+            col++;
+            while (*p) {
+                if (*p == '\\' && p[1]) { p += 2; col += 2; continue; }
+                if (*p == quote) { p++; col++; break; }
+                if (*p == '\r' || *p == '\n') {
+                    if (*p == '\r' && p[1] == '\n') p++;
+                    p++;
+                    line++;
+                    col = 1;
+                } else {
+                    p++;
+                    col++;
+                }
+            }
+            tv_push(&tv, quote == '"' ? TK_STR : TK_CHAR, start, (size_t)(p-start), sl, sc);
+            continue;
+        }
+        if (is_ident_start((unsigned char)*p)) {
+            p++;
+            col++;
+            while (is_ident_part((unsigned char)*p)) { p++; col++; }
+            if ((size_t)(p-start) == 8u && strncmp(start, "Contains", 8u) == 0) {
+                const char *open = p;
+                while (*open && isspace((unsigned char)*open)) open++;
+                if (*open == '{') {
+                    const char *q = open + 1;
+                    int depth = 1;
+                    while (*q && depth > 0) {
+                        if (*q == '/' && q[1] && (q[1] == '{' || q[1] == '}' || q[1] == '/')) { q += 2; continue; }
+                        if (*q == '{') depth++;
+                        else if (*q == '}') { depth--; if (depth == 0) break; }
+                        q++;
+                    }
+                    if (depth == 0) {
+                        char *literal = contains_literal(open + 1, (size_t)(q - open - 1));
+                        const char *scan = p;
+                        tv_push(&tv, TK_STR, literal, strlen(literal), sl, sc);
+                        free(literal);
+                        while (scan <= q) {
+                            if (*scan == '\r' || *scan == '\n') {
+                                if (*scan == '\r' && scan < q && scan[1] == '\n') scan++;
+                                scan++;
+                                line++;
+                                col = 1;
+                            } else {
+                                scan++;
+                                col++;
+                            }
+                        }
+                        p = scan;
+                        continue;
+                    }
+                }
+            }
+            tv_push(&tv, TK_ID, start, (size_t)(p-start), sl, sc);
+            continue;
+        }
+        if (isdigit((unsigned char)*p)) {
+            p++;
+            col++;
+            while (isalnum((unsigned char)*p) || *p == '.' || *p == '_' || *p == '+' || *p == '-') {
+                if ((*p == '+' || *p == '-') && !(p[-1] == 'e' || p[-1] == 'E')) break;
+                p++;
+                col++;
+            }
+            tv_push(&tv, TK_NUM, start, (size_t)(p-start), sl, sc);
+            continue;
+        }
+        {
+            const char *op = NULL;
+            if (is_multi_op(p, &op)) {
+                tv_push(&tv, TK_OP, op, strlen(op), line, col);
+                p += strlen(op);
+                col += (int)strlen(op);
+            } else {
+                tv_push(&tv, TK_OP, p, 1, line, col);
+                p++;
+                col++;
+            }
+        }
+    }
+    tv_push(&tv, TK_EOF, "", 0, line, col);
+    return tv;
+}
 
 /* AST */
 typedef struct Param { char *name, *type; } Param;
@@ -487,7 +632,8 @@ static char *map_builtin_method(const char *type, const char *method) { Str b; s
  else if (streq(type,"Filesystem")) { sb_add(&b,"CMFilesystem_"); sb_add(&b,method); }
  else if (streq(type,"Socket")) { sb_add(&b,"CMSocket_"); sb_add(&b,method); }
  else if (streq(type,"Net")) { sb_add(&b,"CMNet_"); sb_add(&b,method); }
- else if (streq(type,"Thread") || streq(type,"Threading")) { sb_add(&b,"CMThread_"); sb_add(&b,method); }
+ else if (streq(type,"Thread")) { sb_add(&b,"CMThread_"); sb_add(&b,method); }
+ else if (streq(type,"Threading")) { sb_add(&b,"CMThreading_"); sb_add(&b,method); }
  else if (streq(type,"Algorithms")) { sb_add(&b,"CMAlgorithms_"); sb_add(&b,method); }
  else if (starts_with(type,"Vector") || starts_with(type,"List") || starts_with(type,"Dlist")) { sb_add(&b,"CMVector_"); sb_add(&b,method); }
  else if (starts_with(type,"Map") || starts_with(type,"Dict") || starts_with(type,"HashDict") || starts_with(type,"MultiDict") || starts_with(type,"MultiHashDict")) { sb_add(&b,"CMMap_"); sb_add(&b,method); }
@@ -786,7 +932,8 @@ static void emit_local_decl(BodyCtx *bc, const char *name, const char *type, con
     }
     emit_indent(bc->out, bc->indent);
     if (arrsz > 0) {
-        sb_printf(bc->out, "%s %s[%d]; memset(%s, 0, sizeof(%s));\n", ct, name, arrsz, name, name);
+        if (init && *init) sb_printf(bc->out, "%s %s[%d] = %s;\n", ct, name, arrsz, expr && *expr ? expr : "{0}");
+        else sb_printf(bc->out, "%s %s[%d]; memset(%s, 0, sizeof(%s));\n", ct, name, arrsz, name, name);
         vt_add(&bc->vars, name, ntype, 1);
     } else if (init_is_zero(init)) {
         sb_printf(bc->out, "%s %s; memset(&%s, 0, sizeof(%s));\n", ct, name, name, name);
@@ -1275,7 +1422,7 @@ static void emit_body_range(BodyCtx *bc, Tok *t, int n)
     }
 }
 static void emit_runtime_prelude(Program *prog, Str *out, const char *target_arch) { int ni; sb_add(out,"/* Generated by the CMotive frontend. */\n"); sb_printf(out,"/* target-arch: %s */\n", target_arch?target_arch:"native"); sb_add(out,"#if !defined(_WIN32)\n#ifndef _DEFAULT_SOURCE\n#define _DEFAULT_SOURCE 1\n#endif\n#ifndef _DARWIN_C_SOURCE\n#define _DARWIN_C_SOURCE 1\n#endif\n#endif\n"); for(ni=0;prog && ni<prog->native_includes.n;ni++) sb_printf(out,"#include \"%s\"\n",prog->native_includes.v[ni]); sb_add(out,"#include <stdio.h>\n#include <stdlib.h>\n#include <stdint.h>\n#include <stddef.h>\n#include <string.h>\n#include <stdarg.h>\n#include <setjmp.h>\n#include <math.h>\n#include <ctype.h>\n#include <time.h>\n#if defined(_WIN32)\n#include <windows.h>\n#else\n#include <unistd.h>\n#include <sched.h>\n#include <pthread.h>\n#endif\n#include \"runtime.c\"\ntypedef struct CMotive_ExceptionFrame { jmp_buf env; const char *message; struct CMotive_ExceptionFrame *prev; } CMotive_ExceptionFrame;\nstatic CMotive_ExceptionFrame *__cmotive_exception_stack = NULL;\ntypedef void (*CMotive_CleanupFn)(void*);\ntypedef struct CMotive_CleanupEntry { void *object; CMotive_CleanupFn cleanup; struct CMotive_CleanupEntry *prev; } CMotive_CleanupEntry;\nstatic CMotive_CleanupEntry *__cmotive_cleanup_stack = NULL;\nstatic void CMotive_Cleanup_Push(void *object, CMotive_CleanupFn cleanup){CMotive_CleanupEntry*e=(CMotive_CleanupEntry*)malloc(sizeof(CMotive_CleanupEntry)); if(!e) exit(72); e->object=object; e->cleanup=cleanup; e->prev=__cmotive_cleanup_stack; __cmotive_cleanup_stack=e;}\nstatic void CMotive_Cleanup_RunTo(CMotive_CleanupEntry *mark){while(__cmotive_cleanup_stack!=mark){CMotive_CleanupEntry*e=__cmotive_cleanup_stack; if(!e)break; __cmotive_cleanup_stack=e->prev; if(e->cleanup&&e->object)e->cleanup(e->object); free(e);}}\nstatic void CMotive_Cleanup_DiscardTo(CMotive_CleanupEntry *mark){while(__cmotive_cleanup_stack!=mark){CMotive_CleanupEntry*e=__cmotive_cleanup_stack; if(!e)break; __cmotive_cleanup_stack=e->prev; free(e);}}\nstatic void CMotive_Throw(const char*msg){CMotive_ExceptionFrame*f=__cmotive_exception_stack; if(!f){fprintf(stderr,\"CMotive unhandled exception: %s\\n\",msg?msg:\"<null>\"); exit(70);} f->message=msg?msg:\"CMotive exception\"; longjmp(f->env,1);}\n#define CMOTIVE_EXCEPTION_POP(frameptr) do{ if(__cmotive_exception_stack==(frameptr)) __cmotive_exception_stack=(frameptr)->prev; }while(0)\nstatic void CMotive_UnresolvedTarget(const char*s,uint64_t id){fprintf(stderr,\"CMotive unresolved Target: %s %llu\\n\",s?s:\"\",(unsigned long long)id); exit(73);}\nstatic uint64_t CMotive_Ror64(uint64_t v,unsigned s){s&=63u;return s?((v>>s)|(v<<(64u-s))):v;}\nstatic uint64_t CMotive_Rol64(uint64_t v,unsigned s){s&=63u;return s?((v<<s)|(v>>(64u-s))):v;}\n");
- sb_add(out,"typedef struct { const char *fmt; void *handle; } OStream; static void CMOStream_Expect(OStream*s,const char*f){s->fmt=f?f:\"%s\";} static int CMOStream_Write(OStream*s,...){va_list ap; int r; va_start(ap,s); r=vprintf(s&&s->fmt?s->fmt:\"%s\",ap); va_end(ap); return r;}\ntypedef struct { int unused; } Formatter; static int CMFormatter_Println(Formatter*f,const char*s){(void)f; return cmotive_sys_stdio_println(s);}\ntypedef struct { char *path; } Path; static void CMPath_Set(Path*p,char*v){p->path=v;} static char* CMPath_Get(Path*p){return p->path;} static int CMPath_Exists(Path*p){return cmotive_sys_filesystem_exists(p->path);} static int CMPath_IsFile(Path*p){return cmotive_sys_filesystem_is_file(p->path);} static int CMPath_IsDirectory(Path*p){return cmotive_sys_filesystem_is_directory(p->path);}\ntypedef struct { int unused; } Filesystem; static int CMFilesystem_Exists(Filesystem*f,char*p){(void)f;return cmotive_sys_filesystem_exists(p);} static int CMFilesystem_IsFile(Filesystem*f,char*p){(void)f;return cmotive_sys_filesystem_is_file(p);} static int CMFilesystem_IsDirectory(Filesystem*f,char*p){(void)f;return cmotive_sys_filesystem_is_directory(p);} static char* CMFilesystem_CurrentPath(Filesystem*f){(void)f;return cmotive_sys_filesystem_current_path();}\ntypedef struct { int fd; } Socket; static int CMSocket_OpenTcpIPv4(Socket*s){s->fd=cmotive_sys_net_socket_tcp_ipv4();return s->fd;} static int CMSocket_IsOpen(Socket*s){return s->fd>=0;} static void CMSocket_Close(Socket*s){if(s->fd>=0)cmotive_sys_net_socket_close(s->fd);s->fd=-1;} typedef struct { int unused; } Net; static int CMNet_TcpIPv4(Net*n){(void)n;return cmotive_sys_net_socket_tcp_ipv4();} static void CMNet_Close(Net*n,int fd){(void)n;cmotive_sys_net_socket_close(fd);}\ntypedef struct { void *handle; } Thread; typedef struct { int unused; } Threading; static void* CMThread_Current(void*x){(void)x;return cmotive_sys_thread_current();} static int CMThread_Yield(void*x){(void)x;return cmotive_sys_thread_yield();} static void CMThread_SleepMs(void*x,uint32_t ms){(void)x;cmotive_sys_thread_sleep_ms(ms);} static void CMThread_MicroSleep(void*x,uint64_t us){(void)x;cmotive_sys_thread_sleep_us(us);} static void CMThread_NanoSleep(void*x,uint64_t ns){(void)x;cmotive_sys_thread_sleep_ns(ns);}\ntypedef struct { int unused; } Algorithms; static void CMAlgorithms_QuickSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_quick_i64(d,n);} static int CMAlgorithms_IsSorted(Algorithms*a,int64_t*d,uint64_t n){(void)a;return cmotive_sys_algorithms_is_sorted_i64(d,n);} static int64_t CMAlgorithms_BinarySearch(Algorithms*a,int64_t*d,uint64_t n,int64_t v){(void)a;return cmotive_sys_algorithms_binary_search_i64(d,n,v);} static void CMAlgorithms_Reverse(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_reverse_i64(d,n);} static void CMAlgorithms_MergeSort(Algorithms*a,int64_t*d,uint64_t n){CMAlgorithms_QuickSort(a,d,n);} static void CMAlgorithms_HeapSort(Algorithms*a,int64_t*d,uint64_t n){CMAlgorithms_QuickSort(a,d,n);} static void CMAlgorithms_BubbleSort(Algorithms*a,int64_t*d,uint64_t n){CMAlgorithms_QuickSort(a,d,n);}\ntypedef struct { void *h; } CMotive_Vector_Int; static void CMVector_ensure(CMotive_Vector_Int*v){if(!v->h)v->h=cmotive_sys_stl_vector_create();} static void CMVector_PushBack(CMotive_Vector_Int*v,int64_t x){CMVector_ensure(v);cmotive_sys_stl_vector_push_i64(v->h,x);} static uint64_t CMVector_Size(CMotive_Vector_Int*v){CMVector_ensure(v);return cmotive_sys_stl_vector_size(v->h);} static int64_t CMVector_At(CMotive_Vector_Int*v,uint64_t i){CMVector_ensure(v);return cmotive_sys_stl_vector_get_i64(v->h,i);} static void CMVector_Sort(CMotive_Vector_Int*v){CMVector_ensure(v);cmotive_sys_stl_vector_sort_i64(v->h);}\ntypedef struct { void *h; } CMotive_Map_CharPtr_Int; static void CMMap_ensure(CMotive_Map_CharPtr_Int*m){if(!m->h)m->h=cmotive_sys_stl_map_create();} static void CMMap_Put(CMotive_Map_CharPtr_Int*m,char*k,int64_t v){CMMap_ensure(m);cmotive_sys_stl_map_put_i64(m->h,k,v);} static int64_t CMMap_Get(CMotive_Map_CharPtr_Int*m,char*k,int64_t fb){CMMap_ensure(m);return cmotive_sys_stl_map_get_i64(m->h,k,fb);} static int CMMap_Contains(CMotive_Map_CharPtr_Int*m,char*k){CMMap_ensure(m);return cmotive_sys_stl_map_contains(m->h,k);}\ntypedef struct { void *h; } CMotive_Tree_Int; static void CMTree_ensure(CMotive_Tree_Int*t){if(!t->h)t->h=cmotive_sys_stl_binary_search_tree_create();} static void CMTree_Insert(CMotive_Tree_Int*t,int64_t v){CMTree_ensure(t);cmotive_sys_stl_binary_search_tree_insert_i64(t->h,v);} static int CMTree_Contains(CMotive_Tree_Int*t,int64_t v){CMTree_ensure(t);return cmotive_sys_stl_binary_search_tree_contains_i64(t->h,v);}\ntypedef struct { char *value; } CString; static void CMCString_Set(CString*s,char*v){s->value=v;} static char* CMCString_Get(CString*s){return s->value;} static uint64_t CMCString_Length(CString*s){return cmotive_sys_string_strlen(s->value);} static int CMCString_Contains(CString*s,char*n){return cmotive_sys_string_strstr(s->value,n)!=NULL;} static int CMCString_Compare(CString*s,char*o){return cmotive_sys_string_strcmp(s->value,o);}\ntypedef struct { int unused; } Character; static int CMCharacter_IsDigit(Character*c,int ch){(void)c;return isdigit((unsigned char)ch)!=0;}\ntypedef struct { void *table; } StringParser; static void CMStringParser_Parse(StringParser*p,char*i,char*r,char*f,char e){p->table=cmotive_sys_string_str_parse(i,r,f,e);} static uint64_t CMStringParser_Rows(StringParser*p){return cmotive_sys_string_str_parse_rows(p->table);} static uint64_t CMStringParser_Cols(StringParser*p,uint64_t r){return cmotive_sys_string_str_parse_cols(p->table,r);}\ntypedef struct { uint16_t *value; } Wide16String; typedef struct { uint32_t *value; } Wide32String; static uint64_t CMWide16_Length(Wide16String*w){return cmotive_sys_wide16_len(w->value);} static uint64_t CMWide32_Length(Wide32String*w){return cmotive_sys_wide32_len(w->value);}\ntypedef struct { void *handle; } Mutex; static void CMMutex_init(Mutex*m){if(!m->handle)m->handle=cmotive_sys_locks_mutex_create();} static void CMMutex_lock(Mutex*m){CMMutex_init(m);cmotive_sys_locks_mutex_lock(m->handle);} static void CMMutex_unlock(Mutex*m){CMMutex_init(m);cmotive_sys_locks_mutex_unlock(m->handle);}\nstatic int32_t Identity_I32(int32_t x){return x;}\n"); }
+ sb_add(out,"typedef struct { const char *fmt; void *handle; } OStream; static void CMOStream_Expect(OStream*s,const char*f){s->fmt=f?f:\"%s\";} static int CMOStream_Write(OStream*s,...){va_list ap; int r; va_start(ap,s); r=vprintf(s&&s->fmt?s->fmt:\"%s\",ap); va_end(ap); return r;}\ntypedef struct { int unused; } Formatter; static int CMFormatter_Println(Formatter*f,const char*s){(void)f; return cmotive_sys_stdio_println(s);}\ntypedef struct { char *path; } Path; static void CMPath_Set(Path*p,char*v){p->path=v;} static char* CMPath_Get(Path*p){return p->path;} static int CMPath_Exists(Path*p){return cmotive_sys_filesystem_exists(p->path);} static int CMPath_IsFile(Path*p){return cmotive_sys_filesystem_is_file(p->path);} static int CMPath_IsDirectory(Path*p){return cmotive_sys_filesystem_is_directory(p->path);}\ntypedef struct { int unused; } Filesystem; static int CMFilesystem_Exists(Filesystem*f,char*p){(void)f;return cmotive_sys_filesystem_exists(p);} static int CMFilesystem_IsFile(Filesystem*f,char*p){(void)f;return cmotive_sys_filesystem_is_file(p);} static int CMFilesystem_IsDirectory(Filesystem*f,char*p){(void)f;return cmotive_sys_filesystem_is_directory(p);} static char* CMFilesystem_CurrentPath(Filesystem*f){(void)f;return cmotive_sys_filesystem_current_path();}\ntypedef struct { int fd; } Socket; static int CMSocket_OpenTcpIPv4(Socket*s){s->fd=cmotive_sys_net_socket_tcp_ipv4();return s->fd;} static int CMSocket_OpenTcpIPv6(Socket*s){s->fd=cmotive_sys_net_socket_tcp_ipv6();return s->fd;} static int CMSocket_OpenUdpIPv4(Socket*s){s->fd=cmotive_sys_net_socket_udp_ipv4();return s->fd;} static int CMSocket_OpenUdpIPv6(Socket*s){s->fd=cmotive_sys_net_socket_udp_ipv6();return s->fd;} static int CMSocket_OpenRawIPv4(Socket*s){s->fd=cmotive_sys_net_socket_raw_ipv4();return s->fd;} static int CMSocket_OpenRawIPv6(Socket*s){s->fd=cmotive_sys_net_socket_raw_ipv6();return s->fd;} static int CMSocket_OpenIcmpIPv4(Socket*s){s->fd=cmotive_sys_net_socket_icmp_ipv4();return s->fd;} static int CMSocket_OpenIcmpIPv6(Socket*s){s->fd=cmotive_sys_net_socket_icmp_ipv6();return s->fd;} static int CMSocket_Attach(Socket*s,int fd){s->fd=fd;return fd;} static int CMSocket_Fd(Socket*s){return s->fd;} static int CMSocket_IsOpen(Socket*s){return s->fd>=0;} static int CMSocket_Close(Socket*s){int r=0;if(s->fd>=0){r=cmotive_sys_net_socket_close(s->fd);s->fd=-1;}return r;} static int CMSocket_Send(Socket*s,void*b,uint64_t n){return cmotive_sys_net_send(s->fd,b,n);} static int CMSocket_Recv(Socket*s,void*b,uint64_t n){return cmotive_sys_net_recv(s->fd,b,n);} static int CMSocket_BindIPv4(Socket*s,char*ip,uint16_t port){return cmotive_sys_net_bind_ipv4(s->fd,ip,port);} static int CMSocket_ConnectIPv4(Socket*s,char*ip,uint16_t port){return cmotive_sys_net_connect_ipv4(s->fd,ip,port);} static int CMSocket_Listen(Socket*s,int backlog){return cmotive_sys_net_listen(s->fd,backlog);} static int CMSocket_Accept(Socket*s){return cmotive_sys_net_accept(s->fd);} typedef struct { int unused; } Net; static int CMNet_TcpIPv4(Net*n){(void)n;return cmotive_sys_net_socket_tcp_ipv4();} static int CMNet_TcpIPv6(Net*n){(void)n;return cmotive_sys_net_socket_tcp_ipv6();} static int CMNet_UdpIPv4(Net*n){(void)n;return cmotive_sys_net_socket_udp_ipv4();} static int CMNet_UdpIPv6(Net*n){(void)n;return cmotive_sys_net_socket_udp_ipv6();} static int CMNet_RawIPv4(Net*n){(void)n;return cmotive_sys_net_socket_raw_ipv4();} static int CMNet_RawIPv6(Net*n){(void)n;return cmotive_sys_net_socket_raw_ipv6();} static int CMNet_IcmpIPv4(Net*n){(void)n;return cmotive_sys_net_socket_icmp_ipv4();} static int CMNet_IcmpIPv6(Net*n){(void)n;return cmotive_sys_net_socket_icmp_ipv6();} static int CMNet_Close(Net*n,int fd){(void)n;return cmotive_sys_net_socket_close(fd);}\ntypedef struct { void *handle; } Thread; typedef struct { int unused; } Threading; static void* CMThread_Start(Thread*t,void*entry,void*userdata){t->handle=cmotive_sys_thread_start(entry,userdata);return t->handle;} static int CMThread_Join(Thread*t){int r=cmotive_sys_thread_join(t->handle);t->handle=NULL;return r;} static int CMThread_Detach(Thread*t){int r=cmotive_sys_thread_detach(t->handle);t->handle=NULL;return r;} static void* CMThread_Current(void*x){(void)x;return cmotive_sys_thread_current();} static int CMThread_Yield(void*x){(void)x;return cmotive_sys_thread_yield();} static void CMThread_SleepMs(void*x,uint32_t ms){(void)x;cmotive_sys_thread_sleep_ms(ms);} static void CMThread_MilliSleep(void*x,uint32_t ms){(void)x;cmotive_sys_thread_sleep_ms(ms);} static void CMThread_MicroSleep(void*x,uint64_t us){(void)x;cmotive_sys_thread_sleep_us(us);} static void CMThread_NanoSleep(void*x,uint64_t ns){(void)x;cmotive_sys_thread_sleep_ns(ns);} static void* CMThreading_Start(Threading*t,void*entry,void*userdata){(void)t;return cmotive_sys_thread_start(entry,userdata);} static int CMThreading_Join(Threading*t,void*h){(void)t;return cmotive_sys_thread_join(h);} static int CMThreading_Detach(Threading*t,void*h){(void)t;return cmotive_sys_thread_detach(h);} static void* CMThreading_Current(void*x){(void)x;return cmotive_sys_thread_current();} static int CMThreading_Yield(void*x){(void)x;return cmotive_sys_thread_yield();} static void CMThreading_SleepMs(void*x,uint32_t ms){(void)x;cmotive_sys_thread_sleep_ms(ms);} static void CMThreading_MicroSleep(void*x,uint64_t us){(void)x;cmotive_sys_thread_sleep_us(us);} static void CMThreading_NanoSleep(void*x,uint64_t ns){(void)x;cmotive_sys_thread_sleep_ns(ns);}\ntypedef struct { int unused; } Algorithms; static void CMAlgorithms_QuickSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_quick_i64(d,n);} static void CMAlgorithms_HeapSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_heap_i64(d,n);} static void CMAlgorithms_MergeSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_merge_i64(d,n);} static void CMAlgorithms_InsertionSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_insertion_i64(d,n);} static void CMAlgorithms_SelectionSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_selection_i64(d,n);} static void CMAlgorithms_BubbleSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_bubble_i64(d,n);} static void CMAlgorithms_ShellSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_shell_i64(d,n);} static void CMAlgorithms_CombSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_comb_i64(d,n);} static void CMAlgorithms_GnomeSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_gnome_i64(d,n);} static void CMAlgorithms_RadixSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_radix_i64(d,n);} static void CMAlgorithms_CountingSort(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_sort_counting_i64(d,n);} static int64_t CMAlgorithms_BinarySearch(Algorithms*a,int64_t*d,uint64_t n,int64_t v){(void)a;return cmotive_sys_algorithms_binary_search_i64(d,n,v);} static int64_t CMAlgorithms_LinearSearch(Algorithms*a,int64_t*d,uint64_t n,int64_t v){(void)a;return cmotive_sys_algorithms_linear_search_i64(d,n,v);} static int64_t CMAlgorithms_JumpSearch(Algorithms*a,int64_t*d,uint64_t n,int64_t v){(void)a;return cmotive_sys_algorithms_jump_search_i64(d,n,v);} static int64_t CMAlgorithms_ExponentialSearch(Algorithms*a,int64_t*d,uint64_t n,int64_t v){(void)a;return cmotive_sys_algorithms_exponential_search_i64(d,n,v);} static int64_t CMAlgorithms_InterpolationSearch(Algorithms*a,int64_t*d,uint64_t n,int64_t v){(void)a;return cmotive_sys_algorithms_interpolation_search_i64(d,n,v);} static int CMAlgorithms_IsSorted(Algorithms*a,int64_t*d,uint64_t n){(void)a;return cmotive_sys_algorithms_is_sorted_i64(d,n);} static void CMAlgorithms_Reverse(Algorithms*a,int64_t*d,uint64_t n){(void)a;cmotive_sys_algorithms_reverse_i64(d,n);} static void CMAlgorithms_RotateLeft(Algorithms*a,int64_t*d,uint64_t n,uint64_t by){(void)a;cmotive_sys_algorithms_rotate_left_i64(d,n,by);} static uint64_t CMAlgorithms_Unique(Algorithms*a,int64_t*d,uint64_t n){(void)a;return cmotive_sys_algorithms_unique_i64(d,n);} static int64_t CMAlgorithms_Min(Algorithms*a,int64_t x,int64_t y){(void)a;return cmotive_sys_algorithms_min_i64(x,y);} static int64_t CMAlgorithms_Max(Algorithms*a,int64_t x,int64_t y){(void)a;return cmotive_sys_algorithms_max_i64(x,y);} static int CMAlgorithms_Compare(Algorithms*a,int x,int y){(void)a;return cmotive_sys_algorithms_compare_i32(x,y);}\ntypedef struct { void *h; } CMotive_Vector_Int; static void CMVector_ensure(CMotive_Vector_Int*v){if(!v->h)v->h=cmotive_sys_stl_vector_create();} static void CMVector_PushBack(CMotive_Vector_Int*v,int64_t x){CMVector_ensure(v);cmotive_sys_stl_vector_push_i64(v->h,x);} static uint64_t CMVector_Size(CMotive_Vector_Int*v){CMVector_ensure(v);return cmotive_sys_stl_vector_size(v->h);} static int64_t CMVector_At(CMotive_Vector_Int*v,uint64_t i){CMVector_ensure(v);return cmotive_sys_stl_vector_get_i64(v->h,i);} static void CMVector_Sort(CMotive_Vector_Int*v){CMVector_ensure(v);cmotive_sys_stl_vector_sort_i64(v->h);}\ntypedef struct { void *h; } CMotive_Map_CharPtr_Int; static void CMMap_ensure(CMotive_Map_CharPtr_Int*m){if(!m->h)m->h=cmotive_sys_stl_map_create();} static void CMMap_Put(CMotive_Map_CharPtr_Int*m,char*k,int64_t v){CMMap_ensure(m);cmotive_sys_stl_map_put_i64(m->h,k,v);} static int64_t CMMap_Get(CMotive_Map_CharPtr_Int*m,char*k,int64_t fb){CMMap_ensure(m);return cmotive_sys_stl_map_get_i64(m->h,k,fb);} static int CMMap_Contains(CMotive_Map_CharPtr_Int*m,char*k){CMMap_ensure(m);return cmotive_sys_stl_map_contains(m->h,k);}\ntypedef struct { void *h; } CMotive_Tree_Int; static void CMTree_ensure(CMotive_Tree_Int*t){if(!t->h)t->h=cmotive_sys_stl_binary_search_tree_create();} static void CMTree_Insert(CMotive_Tree_Int*t,int64_t v){CMTree_ensure(t);cmotive_sys_stl_binary_search_tree_insert_i64(t->h,v);} static int CMTree_Contains(CMotive_Tree_Int*t,int64_t v){CMTree_ensure(t);return cmotive_sys_stl_binary_search_tree_contains_i64(t->h,v);}\ntypedef struct { char *value; } CString; static void CMCString_Set(CString*s,char*v){s->value=v;} static char* CMCString_Get(CString*s){return s->value;} static uint64_t CMCString_Length(CString*s){return cmotive_sys_string_strlen(s->value);} static int CMCString_Contains(CString*s,char*n){return cmotive_sys_string_strstr(s->value,n)!=NULL;} static int CMCString_Compare(CString*s,char*o){return cmotive_sys_string_strcmp(s->value,o);}\ntypedef struct { int unused; } Character; static int CMCharacter_IsDigit(Character*c,int ch){(void)c;return isdigit((unsigned char)ch)!=0;}\ntypedef struct { void *table; } StringParser; static void CMStringParser_Parse(StringParser*p,char*i,char*r,char*f,char e){p->table=cmotive_sys_string_str_parse(i,r,f,e);} static uint64_t CMStringParser_Rows(StringParser*p){return cmotive_sys_string_str_parse_rows(p->table);} static uint64_t CMStringParser_Cols(StringParser*p,uint64_t r){return cmotive_sys_string_str_parse_cols(p->table,r);}\ntypedef struct { uint16_t *value; } Wide16String; typedef struct { uint32_t *value; } Wide32String; static uint64_t CMWide16_Length(Wide16String*w){return cmotive_sys_wide16_len(w->value);} static uint64_t CMWide32_Length(Wide32String*w){return cmotive_sys_wide32_len(w->value);}\ntypedef struct { void *handle; } Mutex; static void CMMutex_init(Mutex*m){if(!m->handle)m->handle=cmotive_sys_locks_mutex_create();} static void CMMutex_lock(Mutex*m){CMMutex_init(m);cmotive_sys_locks_mutex_lock(m->handle);} static void CMMutex_unlock(Mutex*m){CMMutex_init(m);cmotive_sys_locks_mutex_unlock(m->handle);}\nstatic int32_t Identity_I32(int32_t x){return x;}\n"); }
 static void emit_structs(Program *p, Str *out)
 {
     int i, j;

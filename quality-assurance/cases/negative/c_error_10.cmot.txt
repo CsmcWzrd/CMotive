@@ -1,0 +1,1 @@
+I32 main() { qa_unknown_symbol_10 = 10; Return 0; }
