@@ -1,0 +1,38 @@
+Class
+Base
+{
+    Public
+    {
+        Overridable
+        I32
+        Value
+        ()
+        {
+            Return 1;
+        }
+    }
+};
+
+Class
+Child
+Inherits
+Base Public
+{
+    Public
+    {
+        Overridable
+        I32
+        Value
+        ()
+        {
+            Return 2;
+        }
+    }
+};
+
+I32
+main
+()
+{
+    Return 0;
+}

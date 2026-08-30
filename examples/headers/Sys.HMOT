@@ -1,0 +1,10 @@
+Package Sys;
+
+Class
+ExampleSysHeader
+{
+    Public
+    {
+        value : I32 = 0; Block
+    }
+};

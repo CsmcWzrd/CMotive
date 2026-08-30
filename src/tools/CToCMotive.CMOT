@@ -1,0 +1,892 @@
+/*
+ * c2cmotive - C11/C17 source-to-CMotive conversion tool.
+ *
+ * The converter keeps ABI declarations in a companion native support header
+ * and translates portable function definitions into CMotive `func` units.
+ * Function bodies are preserved semantically, with CMotive keyword spelling
+ * and qualifier normalization.  Variadic or preprocessor-bearing functions
+ * stay in the support header because those constructs are native ABI details.
+ */
+NativeInclude "src/tools/c2cmotive_support.h";
+Package StartPackage;
+
+func c2m_fail(message : Char*) : Void
+{
+    fprintf(stderr, "c2cmotive: %s\n", message ? message : "conversion failed");
+    exit(2);
+}
+
+func c2m_alloc(bytes : size_t) : Void*
+{
+    void *p = malloc(bytes ? bytes : 1u);
+    if (!p) c2m_fail("out of memory");
+    return p;
+}
+
+func c2m_realloc(ptr : Void*, bytes : size_t) : Void*
+{
+    void *p = realloc(ptr, bytes ? bytes : 1u);
+    if (!p) c2m_fail("out of memory");
+    return p;
+}
+
+func c2m_dup(text : Char*) : Char*
+{
+    size_t n = text ? strlen(text) : 0u;
+    char *copy = (char*)c2m_alloc(n + 1u);
+    if (n) memcpy(copy, text, n);
+    copy[n] = 0;
+    return copy;
+}
+
+func c2m_slice(text : Char*, begin : size_t, end : size_t) : Char*
+{
+    size_t n = end > begin ? end - begin : 0u;
+    char *copy = (char*)c2m_alloc(n + 1u);
+    if (n) memcpy(copy, text + begin, n);
+    copy[n] = 0;
+    return copy;
+}
+
+func c2m_buffer_init(buffer : C2MBuffer*) : Void
+{
+    buffer->capacity = 4096u;
+    buffer->length = 0u;
+    buffer->data = (char*)c2m_alloc(buffer->capacity);
+    buffer->data[0] = 0;
+}
+
+func c2m_buffer_reserve(buffer : C2MBuffer*, additional : size_t) : Void
+{
+    size_t need = buffer->length + additional + 1u;
+    while (need > buffer->capacity) buffer->capacity *= 2u;
+    buffer->data = (char*)c2m_realloc(buffer->data, buffer->capacity);
+}
+
+func c2m_buffer_addn(buffer : C2MBuffer*, text : Char*, count : size_t) : Void
+{
+    if (!text || !count) return;
+    c2m_buffer_reserve(buffer, count);
+    memcpy(buffer->data + buffer->length, text, count);
+    buffer->length += count;
+    buffer->data[buffer->length] = 0;
+}
+
+func c2m_buffer_add(buffer : C2MBuffer*, text : Char*) : Void
+{
+    if (text) c2m_buffer_addn(buffer, text, strlen(text));
+}
+
+func c2m_buffer_char(buffer : C2MBuffer*, value : Char) : Void
+{
+    c2m_buffer_reserve(buffer, 1u);
+    buffer->data[buffer->length++] = value;
+    buffer->data[buffer->length] = 0;
+}
+
+func c2m_read_file(path : Char*) : Char*
+{
+    FILE *file = fopen(path, "rb");
+    long length;
+    char *data;
+    if (!file) {
+        fprintf(stderr, "c2cmotive: cannot read %s: %s\n", path, strerror(errno));
+        return NULL;
+    }
+    fseek(file, 0, SEEK_END);
+    length = ftell(file);
+    fseek(file, 0, SEEK_SET);
+    if (length < 0) length = 0;
+    data = (char*)c2m_alloc((size_t)length + 1u);
+    if (length && fread(data, 1u, (size_t)length, file) != (size_t)length) {
+        fclose(file);
+        free(data);
+        fprintf(stderr, "c2cmotive: short read from %s\n", path);
+        return NULL;
+    }
+    fclose(file);
+    data[length] = 0;
+    return data;
+}
+
+func c2m_path_dir(path : Char*) : Char*
+{
+    size_t i;
+    size_t last = (size_t)-1;
+    size_t n = path ? strlen(path) : 0u;
+    for (i = 0u; i < n; ++i) if (path[i] == '/' || path[i] == '\\') last = i;
+    if (last == (size_t)-1) return c2m_dup(".");
+    if (last == 0u) return c2m_dup("/");
+    return c2m_slice(path, 0u, last);
+}
+
+func c2m_make_dirs(path : Char*) : Void
+{
+    char *dir = c2m_path_dir(path);
+    size_t i;
+    size_t n = strlen(dir);
+    if (!strcmp(dir, ".")) { free(dir); return; }
+    for (i = 1u; i < n; ++i) {
+        if (dir[i] == '/' || dir[i] == '\\') {
+            char saved = dir[i];
+            dir[i] = 0;
+            if (*dir) c2m_native_mkdir(dir);
+            dir[i] = saved;
+        }
+    }
+    c2m_native_mkdir(dir);
+    free(dir);
+}
+
+func c2m_write_file(path : Char*, text : Char*) : I32
+{
+    FILE *file;
+    c2m_make_dirs(path);
+    file = fopen(path, "wb");
+    if (!file) {
+        fprintf(stderr, "c2cmotive: cannot write %s: %s\n", path, strerror(errno));
+        return 1;
+    }
+    if (text && fputs(text, file) < 0) { fclose(file); return 1; }
+    return fclose(file) != 0;
+}
+
+func c2m_is_id_start(value : I32) : I32
+{
+    return isalpha((unsigned char)value) || value == '_';
+}
+
+func c2m_is_id_part(value : I32) : I32
+{
+    return isalnum((unsigned char)value) || value == '_';
+}
+
+func c2m_skip_space(text : Char*, index : size_t, limit : size_t) : size_t
+{
+    while (index < limit && isspace((unsigned char)text[index])) ++index;
+    return index;
+}
+
+func c2m_rskip_space(text : Char*, begin : size_t, index : size_t) : size_t
+{
+    while (index > begin && isspace((unsigned char)text[index - 1u])) --index;
+    return index;
+}
+
+func c2m_skip_literal(text : Char*, length : size_t, index : size_t) : size_t
+{
+    char quote = text[index++];
+    while (index < length) {
+        if (text[index] == '\\' && index + 1u < length) { index += 2u; continue; }
+        if (text[index++] == quote) break;
+    }
+    return index;
+}
+
+func c2m_skip_comment(text : Char*, length : size_t, index : size_t) : size_t
+{
+    if (index + 1u >= length || text[index] != '/') return index;
+    if (text[index + 1u] == '/') {
+        index += 2u;
+        while (index < length && text[index] != '\n') ++index;
+        return index;
+    }
+    if (text[index + 1u] == '*') {
+        index += 2u;
+        while (index + 1u < length && !(text[index] == '*' && text[index + 1u] == '/')) ++index;
+        return index + (index + 1u < length ? 2u : 0u);
+    }
+    return index;
+}
+
+func c2m_match_forward(text : Char*, length : size_t, open_index : size_t, open_char : Char, close_char : Char) : size_t
+{
+    size_t index = open_index;
+    int depth = 0;
+    while (index < length) {
+        if (text[index] == '"' || text[index] == '\'') { index = c2m_skip_literal(text, length, index); continue; }
+        if (text[index] == '/' && index + 1u < length && (text[index + 1u] == '/' || text[index + 1u] == '*')) {
+            index = c2m_skip_comment(text, length, index);
+            continue;
+        }
+        if (text[index] == open_char) ++depth;
+        else if (text[index] == close_char) {
+            --depth;
+            if (depth == 0) return index;
+        }
+        ++index;
+    }
+    return length;
+}
+
+func c2m_match_backward_paren(text : Char*, begin : size_t, close_index : size_t) : size_t
+{
+    size_t index = close_index + 1u;
+    int depth = 0;
+    while (index > begin) {
+        --index;
+        if (text[index] == ')') ++depth;
+        else if (text[index] == '(') {
+            --depth;
+            if (depth == 0) return index;
+        }
+    }
+    return begin;
+}
+
+func c2m_word_equals(text : Char*, begin : size_t, end : size_t, word : Char*) : I32
+{
+    size_t n = strlen(word);
+    return end - begin == n && !memcmp(text + begin, word, n);
+}
+
+func c2m_has_preprocessor(text : Char*, begin : size_t, end : size_t) : I32
+{
+    size_t i = begin;
+    int line_start = 1;
+    while (i < end) {
+        if (text[i] == '"' || text[i] == '\'') { i = c2m_skip_literal(text, end, i); line_start = 0; continue; }
+        if (text[i] == '/' && i + 1u < end && (text[i + 1u] == '/' || text[i + 1u] == '*')) {
+            i = c2m_skip_comment(text, end, i);
+            continue;
+        }
+        if (text[i] == '\n' || text[i] == '\r') { line_start = 1; ++i; continue; }
+        if (line_start && isspace((unsigned char)text[i])) { ++i; continue; }
+        if (line_start && text[i] == '#') return 1;
+        line_start = 0;
+        ++i;
+    }
+    return 0;
+}
+
+func c2m_contains_word(text : Char*, word : Char*) : I32
+{
+    size_t i = 0u;
+    size_t n = strlen(text);
+    while (i < n) {
+        if (text[i] == '"' || text[i] == '\'') { i = c2m_skip_literal(text, n, i); continue; }
+        if (text[i] == '/' && i + 1u < n && (text[i + 1u] == '/' || text[i + 1u] == '*')) { i = c2m_skip_comment(text, n, i); continue; }
+        if (c2m_is_id_start((unsigned char)text[i])) {
+            size_t begin = i++;
+            while (i < n && c2m_is_id_part((unsigned char)text[i])) ++i;
+            if (c2m_word_equals(text, begin, i, word)) return 1;
+            continue;
+        }
+        ++i;
+    }
+    return 0;
+}
+
+func c2m_trim_copy(text : Char*) : Char*
+{
+    size_t begin = 0u;
+    size_t end = strlen(text);
+    while (begin < end && isspace((unsigned char)text[begin])) ++begin;
+    while (end > begin && isspace((unsigned char)text[end - 1u])) --end;
+    return c2m_slice(text, begin, end);
+}
+
+func c2m_remove_word(text : Char*, word : Char*) : Char*
+{
+    C2MBuffer out;
+    size_t i = 0u;
+    size_t n = strlen(text);
+    c2m_buffer_init(&out);
+    while (i < n) {
+        if (c2m_is_id_start((unsigned char)text[i])) {
+            size_t begin = i++;
+            while (i < n && c2m_is_id_part((unsigned char)text[i])) ++i;
+            if (!c2m_word_equals(text, begin, i, word)) c2m_buffer_addn(&out, text + begin, i - begin);
+            else c2m_buffer_char(&out, ' ');
+        } else c2m_buffer_char(&out, text[i++]);
+    }
+    return out.data;
+}
+
+func c2m_collapse_space(text : Char*) : Char*
+{
+    C2MBuffer out;
+    size_t i = 0u;
+    size_t n = strlen(text);
+    int pending = 0;
+    c2m_buffer_init(&out);
+    while (i < n) {
+        if (isspace((unsigned char)text[i])) { pending = out.length != 0u; ++i; continue; }
+        if (pending && text[i] != '*') c2m_buffer_char(&out, ' ');
+        pending = 0;
+        if (text[i] == '*') {
+            while (out.length && out.data[out.length - 1u] == ' ') out.data[--out.length] = 0;
+            c2m_buffer_char(&out, '*');
+            ++i;
+            while (i < n && isspace((unsigned char)text[i])) ++i;
+        } else c2m_buffer_char(&out, text[i++]);
+    }
+    return out.data;
+}
+
+func c2m_map_type(c_type : Char*) : Char*
+{
+    char *a = c2m_remove_word(c_type, "const");
+    char *b = c2m_remove_word(a, "volatile");
+    char *c = c2m_remove_word(b, "restrict");
+    char *d = c2m_remove_word(c, "static");
+    char *e = c2m_remove_word(d, "inline");
+    char *f = c2m_remove_word(e, "extern");
+    char *g = c2m_remove_word(f, "register");
+    char *h = c2m_remove_word(g, "struct");
+    char *collapsed = c2m_collapse_space(h);
+    char *trimmed = c2m_trim_copy(collapsed);
+    size_t length = strlen(trimmed);
+    size_t stars = 0u;
+    C2MBuffer result;
+    char *base;
+    while (length && trimmed[length - 1u] == '*') { ++stars; trimmed[--length] = 0; }
+    base = c2m_trim_copy(trimmed);
+    c2m_buffer_init(&result);
+    if (!strcmp(base, "void")) c2m_buffer_add(&result, "Void");
+    else if (!strcmp(base, "char") || !strcmp(base, "signed char")) c2m_buffer_add(&result, "Char");
+    else if (!strcmp(base, "unsigned char")) c2m_buffer_add(&result, "Uchar");
+    else if (!strcmp(base, "short") || !strcmp(base, "short int") || !strcmp(base, "signed short") || !strcmp(base, "signed short int")) c2m_buffer_add(&result, "I16");
+    else if (!strcmp(base, "unsigned short") || !strcmp(base, "unsigned short int")) c2m_buffer_add(&result, "U16");
+    else if (!strcmp(base, "int") || !strcmp(base, "signed") || !strcmp(base, "signed int")) c2m_buffer_add(&result, "I32");
+    else if (!strcmp(base, "unsigned") || !strcmp(base, "unsigned int")) c2m_buffer_add(&result, "U32");
+    else if (!strcmp(base, "long long") || !strcmp(base, "long long int") || !strcmp(base, "int64_t")) c2m_buffer_add(&result, "I64");
+    else if (!strcmp(base, "unsigned long long") || !strcmp(base, "unsigned long long int") || !strcmp(base, "uint64_t")) c2m_buffer_add(&result, "U64");
+    else if (!strcmp(base, "int16_t")) c2m_buffer_add(&result, "I16");
+    else if (!strcmp(base, "int32_t")) c2m_buffer_add(&result, "I32");
+    else if (!strcmp(base, "uint16_t")) c2m_buffer_add(&result, "U16");
+    else if (!strcmp(base, "uint32_t")) c2m_buffer_add(&result, "U32");
+    else if (!strcmp(base, "float")) c2m_buffer_add(&result, "Float");
+    else if (!strcmp(base, "double")) c2m_buffer_add(&result, "Double");
+    else if (!strcmp(base, "long double")) c2m_buffer_add(&result, "Ldouble");
+    else if (!strcmp(base, "_Bool") || !strcmp(base, "bool")) c2m_buffer_add(&result, "Bool");
+    else c2m_buffer_add(&result, base);
+    while (stars--) c2m_buffer_char(&result, '*');
+    free(a); free(b); free(c); free(d); free(e); free(f); free(g); free(h); free(collapsed); free(trimmed); free(base);
+    return result.data;
+}
+
+func c2m_cmotive_type_to_c(cmotive_type : Char*) : Char*
+{
+    char *trimmed = c2m_trim_copy(cmotive_type);
+    size_t length = strlen(trimmed);
+    size_t stars = 0u;
+    C2MBuffer result;
+    char *base;
+    while (length && trimmed[length - 1u] == '*') { ++stars; trimmed[--length] = 0; }
+    base = c2m_trim_copy(trimmed);
+    c2m_buffer_init(&result);
+    if (!strcmp(base, "Void")) c2m_buffer_add(&result, "void");
+    else if (!strcmp(base, "Char")) c2m_buffer_add(&result, "char");
+    else if (!strcmp(base, "Uchar")) c2m_buffer_add(&result, "unsigned char");
+    else if (!strcmp(base, "I16")) c2m_buffer_add(&result, "int16_t");
+    else if (!strcmp(base, "I32")) c2m_buffer_add(&result, "int32_t");
+    else if (!strcmp(base, "I64")) c2m_buffer_add(&result, "int64_t");
+    else if (!strcmp(base, "U16")) c2m_buffer_add(&result, "uint16_t");
+    else if (!strcmp(base, "U32")) c2m_buffer_add(&result, "uint32_t");
+    else if (!strcmp(base, "U64")) c2m_buffer_add(&result, "uint64_t");
+    else if (!strcmp(base, "Float")) c2m_buffer_add(&result, "float");
+    else if (!strcmp(base, "Double")) c2m_buffer_add(&result, "double");
+    else if (!strcmp(base, "Ldouble")) c2m_buffer_add(&result, "long double");
+    else if (!strcmp(base, "Bool")) c2m_buffer_add(&result, "int");
+    else c2m_buffer_add(&result, base);
+    while (stars--) c2m_buffer_char(&result, '*');
+    free(trimmed); free(base);
+    return result.data;
+}
+
+func c2m_keyword(word : Char*) : Char*
+{
+    if (!strcmp(word, "if")) return "If";
+    if (!strcmp(word, "else")) return "Else";
+    if (!strcmp(word, "while")) return "While";
+    if (!strcmp(word, "for")) return "For";
+    if (!strcmp(word, "do")) return "Do";
+    if (!strcmp(word, "switch")) return "Switch";
+    if (!strcmp(word, "case")) return "Case";
+    if (!strcmp(word, "default")) return "Default";
+    if (!strcmp(word, "return")) return "Return";
+    if (!strcmp(word, "break")) return "Break";
+    if (!strcmp(word, "continue")) return "Continue";
+    if (!strcmp(word, "sizeof")) return "Sizeof";
+    if (!strcmp(word, "NULL")) return "Null";
+    if (!strcmp(word, "true")) return "True";
+    if (!strcmp(word, "false")) return "False";
+    return word;
+}
+
+func c2m_transform_body(text : Char*, keyword_case : I32) : Char*
+{
+    C2MBuffer out;
+    size_t i = 0u;
+    size_t n = strlen(text);
+    c2m_buffer_init(&out);
+    while (i < n) {
+        if (text[i] == '"' || text[i] == '\'') {
+            size_t end = c2m_skip_literal(text, n, i);
+            c2m_buffer_addn(&out, text + i, end - i);
+            i = end;
+            continue;
+        }
+        if (text[i] == '/' && i + 1u < n && (text[i + 1u] == '/' || text[i + 1u] == '*')) {
+            size_t end = c2m_skip_comment(text, n, i);
+            c2m_buffer_addn(&out, text + i, end - i);
+            i = end;
+            continue;
+        }
+        if (c2m_is_id_start((unsigned char)text[i])) {
+            size_t begin = i++;
+            char *word;
+            char *mapped;
+            while (i < n && c2m_is_id_part((unsigned char)text[i])) ++i;
+            word = c2m_slice(text, begin, i);
+            if (!strcmp(word, "const")) { free(word); continue; }
+            mapped = keyword_case ? c2m_keyword(word) : word;
+            c2m_buffer_add(&out, mapped);
+            free(word);
+            continue;
+        }
+        c2m_buffer_char(&out, text[i++]);
+    }
+    return out.data;
+}
+
+func c2m_signature_start(text : Char*, begin : size_t, open_brace : size_t) : size_t
+{
+    size_t line = begin;
+    size_t index = begin;
+    size_t candidate = begin;
+    while (index < open_brace) {
+        if (text[index] == '\n') { line = index + 1u; ++index; continue; }
+        if (index == line) {
+            size_t p = c2m_skip_space(text, line, open_brace);
+            if (p < open_brace && text[p] == '#') {
+                while (index < open_brace && text[index] != '\n') ++index;
+                candidate = index < open_brace ? index + 1u : index;
+                line = candidate;
+                continue;
+            }
+        }
+        ++index;
+    }
+    return c2m_skip_space(text, candidate, open_brace);
+}
+
+func c2m_find_name(text : Char*, begin : size_t, open_paren : size_t, name_begin : size_t*, name_end : size_t*) : I32
+{
+    size_t end = c2m_rskip_space(text, begin, open_paren);
+    size_t start = end;
+    while (start > begin && c2m_is_id_part((unsigned char)text[start - 1u])) --start;
+    if (start == end || !c2m_is_id_start((unsigned char)text[start])) return 0;
+    *name_begin = start;
+    *name_end = end;
+    return 1;
+}
+
+func c2m_split_parameter(parameter : Char*, index : I32, output : C2MBuffer*) : I32
+{
+    char *trimmed = c2m_trim_copy(parameter);
+    size_t n = strlen(trimmed);
+    size_t end;
+    size_t begin;
+    char *name;
+    char *type_text;
+    char *type;
+    int array_parameter = 0;
+    if (!n || !strcmp(trimmed, "void")) { free(trimmed); return 0; }
+    if (strstr(trimmed, "...") || strstr(trimmed, "(*")) { free(trimmed); return -1; }
+    end = n;
+    while (end && isspace((unsigned char)trimmed[end - 1u])) --end;
+    if (end && trimmed[end - 1u] == ']') {
+        size_t bracket = end - 1u;
+        int depth = 1;
+        while (bracket && depth) {
+            --bracket;
+            if (trimmed[bracket] == ']') ++depth;
+            else if (trimmed[bracket] == '[') --depth;
+        }
+        end = bracket;
+        array_parameter = 1;
+        while (end && isspace((unsigned char)trimmed[end - 1u])) --end;
+    }
+    begin = end;
+    while (begin && c2m_is_id_part((unsigned char)trimmed[begin - 1u])) --begin;
+    if (begin == end) {
+        char fallback[64];
+        snprintf(fallback, sizeof(fallback), "arg%d", index);
+        name = c2m_dup(fallback);
+        type_text = c2m_dup(trimmed);
+    } else {
+        name = c2m_slice(trimmed, begin, end);
+        type_text = c2m_slice(trimmed, 0u, begin);
+    }
+    if (array_parameter) {
+        C2MBuffer array_type;
+        c2m_buffer_init(&array_type);
+        c2m_buffer_add(&array_type, type_text);
+        c2m_buffer_char(&array_type, '*');
+        free(type_text);
+        type_text = array_type.data;
+    }
+    type = c2m_map_type(type_text);
+    if (output->length) c2m_buffer_add(output, ", ");
+    c2m_buffer_add(output, name);
+    c2m_buffer_add(output, " : ");
+    c2m_buffer_add(output, type);
+    free(trimmed); free(name); free(type_text); free(type);
+    return 1;
+}
+
+func c2m_convert_parameters(text : Char*, begin : size_t, end : size_t, output : C2MBuffer*) : I32
+{
+    size_t part = begin;
+    size_t index = begin;
+    int paren = 0;
+    int bracket = 0;
+    int count = 0;
+    while (index <= end) {
+        int split = index == end;
+        if (!split && (text[index] == '"' || text[index] == '\'')) { index = c2m_skip_literal(text, end, index); continue; }
+        if (!split && text[index] == '(') ++paren;
+        else if (!split && text[index] == ')') --paren;
+        else if (!split && text[index] == '[') ++bracket;
+        else if (!split && text[index] == ']') --bracket;
+        else if (!split && text[index] == ',' && paren == 0 && bracket == 0) split = 1;
+        if (split) {
+            char *parameter = c2m_slice(text, part, index);
+            int rc = c2m_split_parameter(parameter, count, output);
+            free(parameter);
+            if (rc < 0) return -1;
+            if (rc > 0) ++count;
+            part = index + 1u;
+        }
+        ++index;
+    }
+    return count;
+}
+
+func c2m_emit_c_bridge_parameter(parameter : Char*, index : I32, output : C2MBuffer*) : I32
+{
+    char *trimmed = c2m_trim_copy(parameter);
+    size_t n = strlen(trimmed);
+    size_t end;
+    size_t begin;
+    char *name;
+    char *type_text;
+    char *mapped;
+    char *c_type;
+    int array_parameter = 0;
+    if (!n || !strcmp(trimmed, "void")) { free(trimmed); return 0; }
+    if (strstr(trimmed, "...") || strstr(trimmed, "(*")) { free(trimmed); return -1; }
+    end = n;
+    while (end && isspace((unsigned char)trimmed[end - 1u])) --end;
+    if (end && trimmed[end - 1u] == ']') {
+        size_t bracket = end - 1u;
+        int depth = 1;
+        while (bracket && depth) {
+            --bracket;
+            if (trimmed[bracket] == ']') ++depth;
+            else if (trimmed[bracket] == '[') --depth;
+        }
+        end = bracket;
+        array_parameter = 1;
+        while (end && isspace((unsigned char)trimmed[end - 1u])) --end;
+    }
+    begin = end;
+    while (begin && c2m_is_id_part((unsigned char)trimmed[begin - 1u])) --begin;
+    if (begin == end) {
+        char fallback[64];
+        snprintf(fallback, sizeof(fallback), "arg%d", index);
+        name = c2m_dup(fallback);
+        type_text = c2m_dup(trimmed);
+    } else {
+        name = c2m_slice(trimmed, begin, end);
+        type_text = c2m_slice(trimmed, 0u, begin);
+    }
+    if (array_parameter) {
+        C2MBuffer array_type;
+        c2m_buffer_init(&array_type);
+        c2m_buffer_add(&array_type, type_text);
+        c2m_buffer_char(&array_type, '*');
+        free(type_text);
+        type_text = array_type.data;
+    }
+    mapped = c2m_map_type(type_text);
+    c_type = c2m_cmotive_type_to_c(mapped);
+    if (output->length) c2m_buffer_add(output, ", ");
+    c2m_buffer_add(output, c_type);
+    c2m_buffer_char(output, ' ');
+    c2m_buffer_add(output, name);
+    free(trimmed); free(name); free(type_text); free(mapped); free(c_type);
+    return 1;
+}
+
+func c2m_emit_c_bridge_parameters(text : Char*, begin : size_t, end : size_t, output : C2MBuffer*) : I32
+{
+    size_t part = begin;
+    size_t index = begin;
+    int paren = 0;
+    int bracket = 0;
+    int count = 0;
+    while (index <= end) {
+        int split = index == end;
+        if (!split && (text[index] == '"' || text[index] == '\'')) { index = c2m_skip_literal(text, end, index); continue; }
+        if (!split && text[index] == '(') ++paren;
+        else if (!split && text[index] == ')') --paren;
+        else if (!split && text[index] == '[') ++bracket;
+        else if (!split && text[index] == ']') --bracket;
+        else if (!split && text[index] == ',' && paren == 0 && bracket == 0) split = 1;
+        if (split) {
+            char *parameter = c2m_slice(text, part, index);
+            int rc = c2m_emit_c_bridge_parameter(parameter, count, output);
+            free(parameter);
+            if (rc < 0) return -1;
+            if (rc > 0) ++count;
+            part = index + 1u;
+        }
+        ++index;
+    }
+    return count;
+}
+
+func c2m_is_function_candidate(text : Char*, signature_begin : size_t, open_brace : size_t, open_paren : size_t*, close_paren : size_t*, name_begin : size_t*, name_end : size_t*) : I32
+{
+    size_t end = c2m_rskip_space(text, signature_begin, open_brace);
+    size_t close;
+    size_t open;
+    char *prefix;
+    if (end <= signature_begin || text[end - 1u] != ')') return 0;
+    close = end - 1u;
+    open = c2m_match_backward_paren(text, signature_begin, close);
+    if (open >= close || !c2m_find_name(text, signature_begin, open, name_begin, name_end)) return 0;
+    prefix = c2m_slice(text, signature_begin, *name_begin);
+    if (c2m_contains_word(prefix, "typedef") || c2m_contains_word(prefix, "struct") || c2m_contains_word(prefix, "enum") || c2m_contains_word(prefix, "union")) { free(prefix); return 0; }
+    free(prefix);
+    *open_paren = open;
+    *close_paren = close;
+    return 1;
+}
+
+func c2m_emit_function(text : Char*, signature_begin : size_t, open_brace : size_t, close_brace : size_t, open_paren : size_t, close_paren : size_t, name_begin : size_t, name_end : size_t, keyword_case : I32, cmotive : C2MBuffer*, native_functions : C2MBuffer*, bridges : C2MBuffer*, converted : I32*, native_count : I32*) : Void
+{
+    char *name = c2m_slice(text, name_begin, name_end);
+    char *return_text = c2m_slice(text, signature_begin, name_begin);
+    char *return_type = c2m_map_type(return_text);
+    char *body = c2m_slice(text, open_brace, close_brace + 1u);
+    C2MBuffer parameters;
+    C2MBuffer bridge_parameters;
+    int parameter_count;
+    int native_function;
+    c2m_buffer_init(&parameters);
+    c2m_buffer_init(&bridge_parameters);
+    parameter_count = c2m_convert_parameters(text, open_paren + 1u, close_paren, &parameters);
+    native_function = parameter_count < 0 || c2m_has_preprocessor(text, open_brace, close_brace + 1u);
+    if (native_function) {
+        c2m_buffer_addn(native_functions, text + signature_begin, close_brace + 1u - signature_begin);
+        c2m_buffer_add(native_functions, "\n\n");
+        c2m_buffer_add(cmotive, "// Native ABI function retained in support header: ");
+        c2m_buffer_add(cmotive, name);
+        c2m_buffer_add(cmotive, "\n");
+        ++*native_count;
+    } else {
+        char *converted_body = c2m_transform_body(body, keyword_case);
+        char *return_c = c2m_cmotive_type_to_c(return_type);
+        int bridge_count = c2m_emit_c_bridge_parameters(text, open_paren + 1u, close_paren, &bridge_parameters);
+        c2m_buffer_add(cmotive, "func ");
+        c2m_buffer_add(cmotive, name);
+        c2m_buffer_char(cmotive, '(');
+        c2m_buffer_add(cmotive, parameters.data);
+        c2m_buffer_add(cmotive, ") : ");
+        c2m_buffer_add(cmotive, return_type);
+        c2m_buffer_char(cmotive, '\n');
+        c2m_buffer_add(cmotive, converted_body);
+        c2m_buffer_add(cmotive, "\n\n");
+        if (strcmp(name, "main") && bridge_count >= 0) {
+            c2m_buffer_add(bridges, return_c);
+            c2m_buffer_add(bridges, " StartPackage__");
+            c2m_buffer_add(bridges, name);
+            c2m_buffer_char(bridges, '(');
+            if (bridge_count) c2m_buffer_add(bridges, bridge_parameters.data);
+            else c2m_buffer_add(bridges, "void");
+            c2m_buffer_add(bridges, ");\n#define ");
+            c2m_buffer_add(bridges, name);
+            c2m_buffer_add(bridges, " StartPackage__");
+            c2m_buffer_add(bridges, name);
+            c2m_buffer_char(bridges, '\n');
+        }
+        free(converted_body);
+        free(return_c);
+        ++*converted;
+    }
+    free(name); free(return_text); free(return_type); free(body); free(parameters.data); free(bridge_parameters.data);
+}
+
+func c2m_guard_name(path : Char*) : Char*
+{
+    C2MBuffer guard;
+    size_t i;
+    c2m_buffer_init(&guard);
+    c2m_buffer_add(&guard, "C2CMOTIVE_GENERATED_");
+    for (i = 0u; path && path[i]; ++i) {
+        char c = path[i];
+        c2m_buffer_char(&guard, c2m_is_id_part((unsigned char)c) ? (char)toupper((unsigned char)c) : '_');
+    }
+    c2m_buffer_add(&guard, "_H");
+    return guard.data;
+}
+
+func c2m_convert_source(source : Char*, options : C2MOptions*, converted_count : I32*, native_count : I32*) : I32
+{
+    size_t length = strlen(source);
+    size_t index = 0u;
+    size_t cursor = 0u;
+    size_t boundary = 0u;
+    C2MBuffer cmotive;
+    C2MBuffer native_declarations;
+    C2MBuffer native_functions;
+    C2MBuffer bridges;
+    C2MBuffer support;
+    char *guard;
+    c2m_buffer_init(&cmotive);
+    c2m_buffer_init(&native_declarations);
+    c2m_buffer_init(&native_functions);
+    c2m_buffer_init(&bridges);
+    c2m_buffer_init(&support);
+    c2m_buffer_add(&cmotive, "/* Generated by c2cmotive from ");
+    c2m_buffer_add(&cmotive, options->input);
+    c2m_buffer_add(&cmotive, ". */\nNativeInclude \"");
+    c2m_buffer_add(&cmotive, options->include_name);
+    c2m_buffer_add(&cmotive, "\";\nPackage StartPackage;\n\n");
+    while (index < length) {
+        if (source[index] == '"' || source[index] == '\'') { index = c2m_skip_literal(source, length, index); continue; }
+        if (source[index] == '/' && index + 1u < length && (source[index + 1u] == '/' || source[index + 1u] == '*')) { index = c2m_skip_comment(source, length, index); continue; }
+        if (source[index] == ';') { boundary = index + 1u; ++index; continue; }
+        if (source[index] == '{') {
+            size_t close = c2m_match_forward(source, length, index, '{', '}');
+            size_t signature_begin = c2m_signature_start(source, boundary, index);
+            size_t open_paren = 0u, close_paren = 0u, name_begin = 0u, name_end = 0u;
+            if (close < length && c2m_is_function_candidate(source, signature_begin, index, &open_paren, &close_paren, &name_begin, &name_end)) {
+                if (signature_begin > cursor) c2m_buffer_addn(&native_declarations, source + cursor, signature_begin - cursor);
+                c2m_emit_function(source, signature_begin, index, close, open_paren, close_paren, name_begin, name_end, options->keyword_case, &cmotive, &native_functions, &bridges, converted_count, native_count);
+                cursor = close + 1u;
+                boundary = cursor;
+                index = cursor;
+                continue;
+            }
+            if (close >= length) { fprintf(stderr, "c2cmotive: unmatched top-level brace\n"); free(cmotive.data); free(native_declarations.data); free(native_functions.data); free(bridges.data); free(support.data); return 1; }
+            index = close + 1u;
+            continue;
+        }
+        ++index;
+    }
+    if (cursor < length) c2m_buffer_addn(&native_declarations, source + cursor, length - cursor);
+    guard = c2m_guard_name(options->support);
+    c2m_buffer_add(&support, "#ifndef "); c2m_buffer_add(&support, guard); c2m_buffer_char(&support, '\n');
+    c2m_buffer_add(&support, "#define "); c2m_buffer_add(&support, guard); c2m_buffer_add(&support, "\n\n");
+    c2m_buffer_add(&support, "#include <stdint.h>\n#include <stddef.h>\n\n");
+    c2m_buffer_add(&support, "/* Native ABI declarations retained by c2cmotive. */\n");
+    c2m_buffer_add(&support, native_declarations.data);
+    c2m_buffer_add(&support, "\n/* Bridges from retained native functions to converted CMotive functions. */\n");
+    c2m_buffer_add(&support, bridges.data);
+    c2m_buffer_add(&support, "\n/* Native ABI functions retained because CMotive cannot express them portably yet. */\n");
+    c2m_buffer_add(&support, native_functions.data);
+    c2m_buffer_add(&support, "\n#endif /* "); c2m_buffer_add(&support, guard); c2m_buffer_add(&support, " */\n");
+    if (c2m_write_file(options->output, cmotive.data) || c2m_write_file(options->support, support.data)) {
+        free(cmotive.data); free(native_declarations.data); free(native_functions.data); free(bridges.data); free(support.data); free(guard);
+        return 1;
+    }
+    free(cmotive.data); free(native_declarations.data); free(native_functions.data); free(bridges.data); free(support.data); free(guard);
+    return 0;
+}
+
+func c2m_default_output(input : Char*) : Char*
+{
+    size_t n = strlen(input);
+    size_t dot = n;
+    C2MBuffer out;
+    while (dot && input[dot - 1u] != '.' && input[dot - 1u] != '/' && input[dot - 1u] != '\\') --dot;
+    if (dot && input[dot - 1u] == '.') --dot;
+    else dot = n;
+    c2m_buffer_init(&out);
+    c2m_buffer_addn(&out, input, dot);
+    c2m_buffer_add(&out, ".CMOT");
+    return out.data;
+}
+
+func c2m_default_support(input : Char*) : Char*
+{
+    size_t n = strlen(input);
+    size_t dot = n;
+    C2MBuffer out;
+    while (dot && input[dot - 1u] != '.' && input[dot - 1u] != '/' && input[dot - 1u] != '\\') --dot;
+    if (dot && input[dot - 1u] == '.') --dot;
+    else dot = n;
+    c2m_buffer_init(&out);
+    c2m_buffer_addn(&out, input, dot);
+    c2m_buffer_add(&out, "_native.h");
+    return out.data;
+}
+
+func c2m_basename(path : Char*) : Char*
+{
+    size_t i;
+    size_t start = 0u;
+    for (i = 0u; path && path[i]; ++i) if (path[i] == '/' || path[i] == '\\') start = i + 1u;
+    return c2m_dup(path + start);
+}
+
+func c2m_usage() : Void
+{
+    puts("Usage: c2cmotive [options] input.c");
+    puts("  -o FILE              CMotive output (default: input.CMOT)");
+    puts("  --support FILE       companion native header (default: input_native.h)");
+    puts("  --include NAME       NativeInclude spelling (default: support path)");
+    puts("  --preserve-keywords  keep lowercase C control-flow keywords");
+    puts("  --verbose            print conversion counts");
+    puts("  --version            print version");
+}
+
+func c2m_parse_options(argc : I32, argv : Char**, options : C2MOptions*) : I32
+{
+    int i;
+    memset(options, 0, sizeof(*options));
+    options->keyword_case = 1;
+    for (i = 1; i < argc; ++i) {
+        if (!strcmp(argv[i], "--version")) { puts("c2cmotive 0.3.0-selfhost"); return 1; }
+        if (!strcmp(argv[i], "--help") || !strcmp(argv[i], "-h")) { c2m_usage(); return 1; }
+        if (!strcmp(argv[i], "-o") && i + 1 < argc) options->output = c2m_dup(argv[++i]);
+        else if (!strcmp(argv[i], "--support") && i + 1 < argc) options->support = c2m_dup(argv[++i]);
+        else if (!strcmp(argv[i], "--include") && i + 1 < argc) options->include_name = c2m_dup(argv[++i]);
+        else if (!strcmp(argv[i], "--preserve-keywords")) options->keyword_case = 0;
+        else if (!strcmp(argv[i], "--verbose")) options->verbose = 1;
+        else if (argv[i][0] == '-') { fprintf(stderr, "c2cmotive: unknown option %s\n", argv[i]); return -1; }
+        else if (!options->input) options->input = c2m_dup(argv[i]);
+        else { fprintf(stderr, "c2cmotive: multiple input files are not supported in one invocation\n"); return -1; }
+    }
+    if (!options->input) { c2m_usage(); return -1; }
+    if (!options->output) options->output = c2m_default_output(options->input);
+    if (!options->support) options->support = c2m_default_support(options->input);
+    if (!options->include_name) options->include_name = c2m_dup(options->support);
+    return 0;
+}
+
+func main(argc : I32, argv : Char**) : I32
+{
+    C2MOptions options;
+    char *source;
+    int converted = 0;
+    int native_count = 0;
+    int parse_result = c2m_parse_options(argc, argv, &options);
+    int result;
+    if (parse_result > 0) return 0;
+    if (parse_result < 0) return 2;
+    source = c2m_read_file(options.input);
+    if (!source) return 1;
+    result = c2m_convert_source(source, &options, &converted, &native_count);
+    if (!result && options.verbose) {
+        printf("c2cmotive: converted %d function(s), retained %d native ABI function(s)\n", converted, native_count);
+        printf("c2cmotive: wrote %s and %s\n", options.output, options.support);
+    }
+    free(source);
+    return result;
+}

@@ -1,0 +1,8 @@
+#include "sample.HMOT"
+
+I32
+main
+()
+{
+    Return SAMPLE_VALUE;
+}

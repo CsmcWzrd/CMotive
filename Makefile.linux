@@ -1,0 +1,10 @@
+CC ?= cc
+CFLAGS ?= -O2 -std=c11 -Wall -Wextra
+LDFLAGS ?=
+SELFHOST_LIBS ?= -pthread -lm
+EXEEXT ?=
+
+include mk/selfhost.mk
+
+# Linux: stage-0 is compiled from C, then the active frontend and converter are
+# compiled twice from CMotive source to establish a reproducible self-host.

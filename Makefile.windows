@@ -1,0 +1,10 @@
+CC ?= cc
+CFLAGS ?= -O2 -std=c11 -Wall -Wextra
+LDFLAGS ?=
+SELFHOST_LIBS ?= -lws2_32 -lm
+EXEEXT ?= .exe
+
+include mk/selfhost.mk
+
+# Windows POSIX/MinGW/clang shell: the isolated stage-0 C seed bootstraps the
+# active CMotive frontend. Override CC, CFLAGS and EXEEXT as needed.

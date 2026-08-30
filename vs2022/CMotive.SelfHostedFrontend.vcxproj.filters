@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Bootstrap"><UniqueIdentifier>{B8A94666-3CE6-46E0-8DE9-B9D55F23A701}</UniqueIdentifier></Filter>
+    <Filter Include="Self-hosted Frontend"><UniqueIdentifier>{56B26EA3-38BA-4B18-B926-C0988040B4D2}</UniqueIdentifier></Filter>
+    <Filter Include="C to CMotive Converter"><UniqueIdentifier>{4171DCFA-BD7C-41EF-8C88-1695C62E3A9E}</UniqueIdentifier></Filter>
+    <Filter Include="Build"><UniqueIdentifier>{1BE2201D-2A50-4F07-8104-80F594B9D58D}</UniqueIdentifier></Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\bootstrap\c\cmotive_bootstrap.c"><Filter>Bootstrap</Filter></None>
+    <None Include="..\src\frontend\selfhost\CMotiveFrontend.CMOT"><Filter>Self-hosted Frontend</Filter></None>
+    <None Include="..\src\frontend\selfhost\cmotive_frontend_support.h"><Filter>Self-hosted Frontend</Filter></None>
+    <None Include="..\src\tools\CToCMotive.CMOT"><Filter>C to CMotive Converter</Filter></None>
+    <None Include="..\src\tools\c2cmotive_support.h"><Filter>C to CMotive Converter</Filter></None>
+    <None Include="build-selfhost.cmd"><Filter>Build</Filter></None>
+  </ItemGroup>
+</Project>

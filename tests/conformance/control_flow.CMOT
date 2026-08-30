@@ -1,0 +1,14 @@
+I32
+main
+()
+{
+    x : I32 = 1;
+    If ( x == 1 )
+    {
+        Return 0;
+    }
+    Else
+    {
+        Return 2;
+    }
+}
