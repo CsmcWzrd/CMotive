@@ -1,6 +1,6 @@
 
 
-#Interoperability direction	Current status
+#  Interoperability direction	Current status
 CMotive → C	Supported directly through the C ABI
 C → CMotive	Supported by linking CMotive object files and calling exported symbols
 CMotive → C++	Supported through an extern "C" wrapper
