@@ -30,7 +30,7 @@ OStream
         value : Int
         ()
         {
-            Return cmotive_sys_io_printf("%lld", value);
+            Return cmotive_sys_io_print_int(value);
         }
         Int32
         Println

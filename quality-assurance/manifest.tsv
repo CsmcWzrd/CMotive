@@ -965,8 +965,8 @@ TOOL-0035	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests
 TOOL-0036	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	-o writes the exact requested output path
 TOOL-0037	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	--emit-c exits successfully
 TOOL-0038	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	--emit-c identifies generated CMotive C
-TOOL-0039	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	emitted C compiles in strict C11 mode
-TOOL-0040	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	strict-C11 compiled output executes successfully
+TOOL-0039	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	emitted C compiles in strict C11 mode with format warnings treated as errors
+TOOL-0040	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	strict-C11 output executes and portable 64-bit integer stream I/O round-trips
 TOOL-0041	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	-c object-only mode exits successfully
 TOOL-0042	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	-c object-only mode creates a nonempty object
 TOOL-0043	tool-cli	compiler-codegen-link-debug	tool-tests	scripts/run_tool_tests.sh	--keep-c compile-and-link mode exits successfully
@@ -1054,7 +1054,7 @@ TOOL-0124	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	
 TOOL-0125	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	Visual Studio project retains the self-hosted frontend source
 TOOL-0126	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	QA manifest contains exactly 1200 tests
 TOOL-0127	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	QA manifest contains no duplicate IDs
-TOOL-0128	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	release packaging preserves the QA manifest
+TOOL-0128	tool-cli	build-scripts-packaging	tool-tests	scripts/run_tool_tests.sh	release packaging preserves the QA manifest and complete MIT license
 CONVERT-0001	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_0
 CONVERT-0002	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_1
 CONVERT-0003	converter	fixture-1	converter-1	cases/converter/converter_1.c	Convert and execute C function qa_c_1_2

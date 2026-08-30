@@ -193,3 +193,8 @@ environment.
 - `docs/CMotive-v1-LanguageDefinition.md` — language definition
 - `quality-assurance/README.md` — 1,200-case suite inventory and execution
 - `VERIFY_SELFHOST_FRONTEND.md` — exact verification results for this release
+- `VERIFY_RUNTIME_IO_MIT_LICENSE.md` — portable 64-bit I/O and MIT-license verification
+
+## License
+
+CMotive is distributed under the MIT License. See `LICENSE` for the complete license text.

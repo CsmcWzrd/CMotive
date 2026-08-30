@@ -48,7 +48,7 @@ CMotive self-host fixed-point and behavior: PASS
 Stage-1, stage-2, and stage-3 generated frontend C outputs are byte-identical:
 
 ```text
-234844823a813797df9b3b234bb3aa3bc0991ef1e2a6091904fd8da1308565ff
+bd9c5c7ce209d0119472506941b5ab7ff7fff08f1b0c1cdafc5638ae7df9addf
 ```
 
 ### New QA catalog
@@ -100,11 +100,11 @@ Every example was preprocessed, compiled, linked, and executed.
 ### Whole-source language sweep
 
 ```sh
-CMOTIVE_VALIDATE_JOBS=8 sh scripts/validate_language_files.sh build/bin ""
+sh scripts/validate_language_files.sh build/bin ""
 ```
 
 ```text
-CMotive language files: PASS (311 files, 8 parallel jobs)
+CMotive language files: PASS (312 files, 4 parallel jobs)
 ```
 
 Every positive `.CMOT`, `.CMTV`, `.HMOT`, and `.HMTV` file outside generated,
@@ -137,3 +137,15 @@ Linux compilation and execution were performed directly. macOS and native
 Visual Studio 2022 execution were not available on this host; their Makefiles,
 wrapper, project XML, source references, and QA targets received static checks
 inside the 128 tool tests.
+
+## Portable 64-bit stream-I/O regression
+
+The generated runtime now uses `<inttypes.h>`, `SCNd64`, and `PRId64` instead
+of applying `%lld` to `int64_t`. On LP64 Linux this removes the invalid
+`long long *` versus `long *` format pairing. `TOOL-0039` promotes format
+warnings to errors for emitted C, and `TOOL-0040` verifies an exact signed
+64-bit `IStream.ReadInt`/`OStream.WriteInt` round trip. `TOOL-0128` also checks
+that release archives preserve the complete MIT License text.
+
+See `VERIFY_RUNTIME_IO_MIT_LICENSE.md` for the defect analysis and complete
+verification record.

@@ -1,3 +1,4 @@
+Plugin Sys::IO
 Plugin Sys::String
 Plugin Sys::Wide
 
@@ -59,5 +60,11 @@ second};
     {
         Return 8;
     }
+    out : OStream;
+    If ( out.WriteInt(64) < 0 )
+    {
+        Return 9;
+    }
+    out.Write("\n");
     Return 0;
 }

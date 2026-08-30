@@ -7,6 +7,8 @@ main
     out : OStream;
     out.Expect("%s");
     out.Write("CMotive Sys::IO object stream\n");
+    out.WriteInt(64);
+    out.Write("\n");
     fmt : Formatter;
     fmt.Println("CMotive formatter object");
     Return 0;

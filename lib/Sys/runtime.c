@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <inttypes.h>
 #include <stddef.h>
 #include <string.h>
 #include <errno.h>
@@ -299,6 +300,7 @@ void cmotive_sys_locks_semaphore_destroy(void *h) { free(h); }
 int cmotive_sys_io_print(const char *s) { return fputs(s ? s : "", stdout); }
 int cmotive_sys_io_println(const char *s) { int r = fputs(s ? s : "", stdout); fputc('\n', stdout); return r; }
 int cmotive_sys_io_printf(const char *fmt, ...) { va_list ap; int r; va_start(ap, fmt); r = vprintf(fmt ? fmt : "", ap); va_end(ap); return r; }
+int cmotive_sys_io_print_int(int64_t value) { return printf("%" PRId64, value); }
 int cmotive_sys_io_sprintf(char *dst, const char *fmt, ...) { va_list ap; int r; if (!dst) return -1; va_start(ap, fmt); r = vsprintf(dst, fmt ? fmt : "", ap); va_end(ap); return r; }
 int cmotive_sys_io_scanf(const char *fmt, ...) { va_list ap; int r; va_start(ap, fmt); r = vscanf(fmt ? fmt : "", ap); va_end(ap); return r; }
 
@@ -527,11 +529,17 @@ static void cmotive_sys_algorithms_rotate_left_i64(int64_t *a, uint64_t n, uint6
 static uint64_t cmotive_sys_algorithms_unique_i64(int64_t *a, uint64_t n) { uint64_t i,w=0; if(!a) return 0; for(i=0;i<n;i++) if(w==0||a[i]!=a[w-1]) a[w++]=a[i]; return w; }
 
 static const char *__cmotive_io_output_fmt = "%s";
-static const char *__cmotive_io_input_fmt = "%s";
+static const char *__cmotive_io_input_fmt = NULL;
 static void cmotive_sys_io_set_output_format(const char *fmt) { __cmotive_io_output_fmt = fmt ? fmt : "%s"; }
-static void cmotive_sys_io_set_input_format(const char *fmt) { __cmotive_io_input_fmt = fmt ? fmt : "%s"; }
+static void cmotive_sys_io_set_input_format(const char *fmt) { __cmotive_io_input_fmt = fmt; }
 static int cmotive_sys_io_flush(void) { return fflush(stdout); }
-static int cmotive_sys_io_scan_int(int64_t *out) { return scanf(__cmotive_io_input_fmt ? __cmotive_io_input_fmt : "%lld", out); }
-static int cmotive_sys_io_scan_string(char *out) { return scanf(__cmotive_io_input_fmt ? __cmotive_io_input_fmt : "%s", out); }
+static int cmotive_sys_io_scan_int(int64_t *out) {
+    if (!out) { errno = EINVAL; return EOF; }
+    return scanf(__cmotive_io_input_fmt ? __cmotive_io_input_fmt : "%" SCNd64, out);
+}
+static int cmotive_sys_io_scan_string(char *out) {
+    if (!out) { errno = EINVAL; return EOF; }
+    return scanf(__cmotive_io_input_fmt ? __cmotive_io_input_fmt : "%s", out);
+}
 /* ---- end CMotive object-model helpers ---- */
 

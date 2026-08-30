@@ -52,7 +52,7 @@ The stage-1, stage-2, and stage-3 generated frontend C files were compared
 byte-for-byte. All three have this SHA-256:
 
 ```text
-234844823a813797df9b3b234bb3aa3bc0991ef1e2a6091904fd8da1308565ff
+bd9c5c7ce209d0119472506941b5ab7ff7fff08f1b0c1cdafc5638ae7df9addf
 ```
 
 The behavioral self-host check also verified:
@@ -153,13 +153,13 @@ Each example was preprocessed, compiled with the final frontend, and executed.
 Command:
 
 ```sh
-CMOTIVE_VALIDATE_JOBS=8 make -f Makefile.linux language
+make -f Makefile.linux language
 ```
 
 Result:
 
 ```text
-CMotive language files: PASS (311 files, 8 parallel jobs)
+CMotive language files: PASS (312 files, 4 parallel jobs)
 ```
 
 Every `.CMOT`, `.CMTV`, `.HMOT`, and `.HMTV` file outside generated, legacy,
@@ -196,3 +196,16 @@ CMotive relocation and strict-C11 emitted-C test: PASS
 Linux builds and runtime tests were executed in this environment. macOS and
 native Visual Studio 2022 execution were not available here, so those platform
 files received static validation rather than a claimed native runtime pass.
+
+## Portable integer stream-I/O and license follow-up
+
+The compiler-generated runtime now formats `int64_t` through the C standard
+`SCNd64` and `PRId64` macros. This removes the `%lld`/`int64_t *` mismatch on
+LP64 targets. The self-hosted source, stage-0 bootstrap seed, standard-library
+object API, and legacy bootstrap copy were updated consistently. Strict emitted
+C is compiled with `-Werror=format`, and a signed 64-bit input/output round-trip
+is part of the permanent tool QA.
+
+The root `LICENSE` is now the complete MIT License, and release packaging is
+covered by a content-level license regression check. Detailed evidence is in
+`VERIFY_RUNTIME_IO_MIT_LICENSE.md`.
